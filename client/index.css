@@ -1,0 +1,11 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.carousel-container {
+    overflow-x: hidden;
+  }
+  
+  .carousel-container::-webkit-scrollbar {
+    display: none;
+  }
