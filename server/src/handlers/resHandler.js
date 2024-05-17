@@ -1,4 +1,4 @@
-import { getRestaurantData } from '../helpers/resHelper.js'
+import { getRestaurantData, getUpdatedData } from '../helpers/resHelper.js'
 const restaurantHandler = async (req, res, next) => {
     try {
 
@@ -10,8 +10,22 @@ const restaurantHandler = async (req, res, next) => {
         res.status(500).json({
             errorMessage: err.message
         })
-        console.log(res)
+
+    }
+}
+const updateHandler = async (req, res, next) => {
+    try {
+
+        const data = await getUpdatedData(req.body)
+
+        res.status(200).json(data)
+    } catch (err) {
+        
+        res.status(500).json({
+            errorMessage: err.message
+        })
+
     }
 }
 
-export { restaurantHandler }
+export { restaurantHandler, updateHandler }

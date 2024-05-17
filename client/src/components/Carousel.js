@@ -3,7 +3,6 @@ import { useState, useRef, useEffect } from 'react';
 const Carousal = ({ cardTitle, data, card, index , scrollIndex}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const carouselRef = useRef(null);
-    // console.log(data.length)
 
 
     const handleScroll = (direction) => {

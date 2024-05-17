@@ -6,7 +6,7 @@
   "proxy": "",
   "type": "module",
   "scripts": {
-    "start": "parcel index.html --no-cache",
+    "start": "parcel index.html --no-cache --port 3001",
     "build": "parcel build index.html",
     "test": ""
   },

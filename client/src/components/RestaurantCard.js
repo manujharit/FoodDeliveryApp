@@ -3,10 +3,8 @@ import Rating from "./Rating"
 const { CDN_URL } = Config
 
 const RestaurantCard = ({ data }) => {
-    // console.log(data)
     const { cloudinaryImageId, name, cuisines, avgRating, sla, aggregatedDiscountInfoV3, areaName } = data
-    // console.log(aggregatedDiscountInfoV3?.header)
-    console.log(data)
+    
     return (
         <div>
 

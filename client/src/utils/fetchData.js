@@ -9,9 +9,22 @@ const fetchData = async () => {
         'page_type': 'DESKTOP_WEB_LISTING'
     }
 
-    const data = axios.get(url, { params: params }).then((res) => res.data).catch((err) => console.log(err))
+    const data =await  axios.get(url, { params: params }).then((res) => res.data).catch((err) => console.log(err))
 
     return data
 }
 
-export default fetchData
+const fetchUpdateData = async(count) => {
+    const url="http://localhost:3000/update"
+    const body = {
+        lat: '26.9195875',
+        lng: '75.78796080000001',
+        collectionV5RestaurantListWidget_SimRestoRelevance_food_seo: `${count}`
+    }
+
+    const data =await axios.post(url,body).then((res)=> res.data).catch(err=> console.log(err))
+
+    return data
+}
+
+export  {fetchData,fetchUpdateData}
