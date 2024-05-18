@@ -2,13 +2,15 @@ import RestaurantCard from "./RestaurantCard"
 import { useState, useEffect, useRef } from "react"
 import { fetchUpdateData } from "../utils/fetchData"
 import { mergeData } from "../utils/utils"
+import CardShimmer from "./shimmers/CardShimmer"
 
 
 const RestaurantList = ({ data }) => {
   const [card, setCard] = useState(data)
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(0)
   const [loading, setLoading] = useState(false)
   const loaderRef = useRef(null)
+  const loadArray = Array.from({ length: 12 }, (_, index) => index + 1);
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -51,14 +53,13 @@ const RestaurantList = ({ data }) => {
     <div className="flex flex-col mt-[3%]">
       <label className="text-2xl font-bold mb-6">Restaurants with online food delivery</label>
 
-      <div className="flex flex-wrap justify-between items-center">
+      <div className="flex flex-wrap justify-between items-center"  >
         {card.map(card => <RestaurantCard key={card.id} data={card} />)}
+          <span ref={loaderRef}>{
+            loading && loadArray.map(item => <CardShimmer />)
+          }</span>
       </div>
-      <div ref={loaderRef}>
-        {
-          loading && <p>Loading...</p>
-        }
-      </div>
+
     </div>
   )
 }
