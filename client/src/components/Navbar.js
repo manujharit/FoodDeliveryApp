@@ -1,10 +1,10 @@
 import BrandLogo from '../../assets/BrandLogo.png'
 const Navbar = () => {
     return (
-        <div className=" fixed flex flex-row justify-between items-center px-[15%]  z-50 bg-white top-0 w-[100%] h-[7%] shadow-md shadow-gray-200">
+        <div className=" fixed flex flex-row justify-between items-center px-[13.5%]  z-50 bg-white top-0 w-[100%] h-[9%] shadow-md shadow-gray-200">
             <div className='w-[20%] flex flex-row items-center'>
                 <img src={BrandLogo} className='w-[30%]' />
-                <label className='w-[60%] ml-[35%] hover:underline hover:text-orange-400'>Location</label>
+                <label className='w-[60%] ml-[35%] hover:underline hover:text-orange-400'>Other <b className='text-orange-400'>˅</b></label>
             </div>
             <div className='flex flex-row w-[40%] h-[40%]'>
                 <input type="text" className='border rounded-s-xl border-solid border-gray-400 w-[90%] bg-gray-200 px-[5%]' placeholder={"Search for Restaurants"} />
@@ -16,8 +16,8 @@ const Navbar = () => {
                 </button>
             </div>
             <div className='flex flex-row justify-between w-[20%] text-center'>
-                <label className='text-md font-semibold text-gray-600 hover:text-orange-400'>Offers</label>
-                <label className='text-md font-semibold text-gray-600 hover:text-orange-400'>Help</label>
+                <label className='text-md font-semibold text-gray-600 hover:text-orange-400'>Home</label>
+                <label className='text-md font-semibold text-gray-600 hover:text-orange-400'>About</label>
                 <label className='text-md font-semibold text-gray-600 hover:text-orange-400'>Sign In</label>
                 <label className='text-md font-semibold text-gray-600 hover:text-orange-400'>Cart</label>
 
