@@ -4,7 +4,6 @@ import { fetchUpdateData } from "../utils/fetchData"
 import { mergeData } from "../utils/utils"
 import CardShimmer from "./shimmers/CardShimmer"
 
-
 const RestaurantList = ({ data }) => {
   const [card, setCard] = useState(data)
   const [page, setPage] = useState(0)
@@ -55,9 +54,9 @@ const RestaurantList = ({ data }) => {
 
       <div className="flex flex-wrap justify-between items-center"  >
         {card.map(card => <RestaurantCard key={card.id} data={card} />)}
-          <span ref={loaderRef}>{
-            loading && loadArray.map(item => <CardShimmer />)
-          }</span>
+        <span ref={loaderRef}>{
+          loading && loadArray.map(item => <CardShimmer />)
+        }</span>
       </div>
 
     </div>

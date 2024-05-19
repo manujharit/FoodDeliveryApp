@@ -1,10 +1,9 @@
 import ExploreSection from "./ExploreSection"
 
-const Explore = ({data}) => {
-    console.log(data)
+const Explore = ({ data }) => {
     return (
         <div className="my-[7%] flex flex-col">
-            {data.map(data=> <ExploreSection key ={data.text} data={data}/>)}
+            {data.map(data => <ExploreSection key={data.text} data={data} />)}
         </div>
     )
 }

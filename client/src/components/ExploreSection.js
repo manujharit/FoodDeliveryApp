@@ -18,7 +18,7 @@ const ExploreSection = ({ data }) => {
         else {
             setDisplayData(data.brands)
         }
-    },[])
+    }, [])
 
     return (
         <div className="mt-[5%] w-[100%] ">

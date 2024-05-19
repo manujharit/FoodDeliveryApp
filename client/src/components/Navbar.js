@@ -1,4 +1,5 @@
 import BrandLogo from '../../assets/BrandLogo.png'
+import { Link } from 'react-router-dom'
 const Navbar = () => {
     return (
         <div className=" fixed flex flex-row justify-between items-center px-[13.5%]  z-50 bg-white top-0 w-[100%] h-[9%] shadow-md shadow-gray-200">
@@ -16,10 +17,10 @@ const Navbar = () => {
                 </button>
             </div>
             <div className='flex flex-row justify-between w-[20%] text-center'>
-                <label className='text-md font-semibold text-gray-600 hover:text-orange-400'>Home</label>
-                <label className='text-md font-semibold text-gray-600 hover:text-orange-400'>About</label>
-                <label className='text-md font-semibold text-gray-600 hover:text-orange-400'>Sign In</label>
-                <label className='text-md font-semibold text-gray-600 hover:text-orange-400'>Cart</label>
+                <label className='text-md font-semibold text-gray-600 hover:text-orange-400'><Link to="/">Home</Link></label>
+                <label className='text-md font-semibold text-gray-600 hover:text-orange-400'><Link to="/about">About</Link></label>
+                <label className='text-md font-semibold text-gray-600 hover:text-orange-400'><Link to="/signin">Sign In</Link></label>
+                <label className='text-md font-semibold text-gray-600 hover:text-orange-400'><Link to="/cart">Cart</Link></label>
 
             </div>
         </div>
