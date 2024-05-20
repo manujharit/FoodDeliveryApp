@@ -5,7 +5,6 @@ import Location from './Location'
 
 const RestaurantInfo = ({ data }) => {
     const { name, cuisines, areaName, avgRatingString, totalRatingsString, sla, costForTwoMessage } = data
-    console.log(sla)
     return (
         <div className='flex flex-col'>
             <p className='text-gray-500'><Link to="/" className='text-xs text-gray-500 hover:text-gray-700 hover:underline'>Home</Link> {" > "} <label className='text-xs text-gray-500 hover:text-gray-700 hover:underline'>{name}</label></p>
