@@ -1,18 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client'
 import App from "./src/app"
-// import { lazy, Suspense } from "react"
+import { lazy, Suspense } from "react"
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import RestaurantMenu from "./src/components/RestaurantMenu"
-import Body from './src/components/Body';
-// import Loading from './src/components/Loading';
-import Error from './src/components/Error';
-import About from './src/components/About';
-import Cart from './src/components/Cart';
-import RestaurantMenu from './src/components/RestaurantMenu';
-// const About = lazy(() => import('./src/components/About'))
-// const Cart = lazy(() => import('./src/components/Cart'))
-// const RestaurantMenu = lazy(() => import('./src/components/RestaurantMenu'))
+import Loading from './src/components/Loading';
+const Body = lazy(()=>import('./src/components/Body'))
+const About = lazy(() => import('./src/components/About'))
+const Cart = lazy(() => import('./src/components/Cart'))
+const RestaurantMenu = lazy(() => import('./src/components/RestaurantMenu'))
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 
@@ -20,20 +16,19 @@ const appRouter = createBrowserRouter([
     {
         path: '/',
         element: <App />,
-        errorElement: <Error />,
         children: [
             {
                 path: '/',
-                element: <Body />
+                element: <Suspense fallback={<Loading />}><Body /></Suspense>
             }, {
                 path: '/about',
-                element: <About /> //<Suspense fallback={<Loading />}><About /></Suspense>
+                element:<Suspense fallback={<Loading />}><About /></Suspense>
             }, {
                 path: '/cart',
-                element: <Cart />//<Suspense fallback={<Loading />}><Cart /></Suspense>
+                element:<Suspense fallback={<Loading />}><Cart /></Suspense>
             }, {
                 path: '/restaurant/:id',
-                element: <RestaurantMenu /> //<Suspense fallback={<Loading />}><RestaurantMenu /></Suspense>
+                element: <Suspense fallback={<Loading />}><RestaurantMenu /></Suspense>
             }
         ]
     }
