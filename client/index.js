@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom/client'
 import App from "./src/app"
 import { lazy, Suspense } from "react"
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import RestaurantMenu from "./src/components/RestaurantMenu"
 import Loading from './src/components/Loading';
-const Body = lazy(()=>import('./src/components/Body'))
-const About = lazy(() => import('./src/components/About'))
-const Cart = lazy(() => import('./src/components/Cart'))
-const RestaurantMenu = lazy(() => import('./src/components/RestaurantMenu'))
+const Body = lazy(()=>import('./src/components/Body'));
+const About = lazy(() => import('./src/components/About'));
+const Cart = lazy(() => import('./src/components/Cart'));
+const RestaurantMenu = lazy(() => import('./src/components/RestaurantMenu'));
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 
