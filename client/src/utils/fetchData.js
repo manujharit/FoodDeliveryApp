@@ -5,7 +5,7 @@ import { configDotenv } from "dotenv"
 configDotenv()
 
 const API_URL = process.env.API_URL
-
+console.log(API_URL)
 
 const fetchData = async (lat, lng) => {
     const url = API_URL + '/data'
@@ -17,6 +17,7 @@ const fetchData = async (lat, lng) => {
     }
 
     if (lat, lng) {
+        console.log(API_URL)
         const data = await axios.get(url, { params: params }).then((res) => res.data).catch((err) => console.log(err))
 
         return data
