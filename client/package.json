@@ -2,7 +2,6 @@
   "name": "fooddeliveryapp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "proxy": "",
   "type": "module",
   "scripts": {
