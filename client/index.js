@@ -32,6 +32,7 @@ const appRouter = createBrowserRouter([
         ]
     }
 ])
+console.log(process.env)
 
 root.render(
     <React.StrictMode>
