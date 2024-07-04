@@ -4,8 +4,11 @@ import { getRestaurants, getRestaurantMenuData, getUpdates } from '../clients/sw
 const getRestaurantData = async (data) => {
     try {
         const apiData = await getRestaurants(data)
-        const resData = filterData(apiData)
-        return resData
+        if (Object.keys(apiData).length) {
+            const resData = filterData(apiData)
+            return resData
+        }
+        return {}
     } catch (err) {
         throw err
     }
@@ -14,8 +17,11 @@ const getRestaurantData = async (data) => {
 const getUpdatedData = async (data) => {
     try {
         const apiData = await getUpdates(data)
-        const resData = filterUpdateData(apiData)
-        return resData
+        if (Object.keys(apiData).length) {
+            const resData = filterUpdateData(apiData)
+            return resData
+        }
+        return []
     } catch (err) {
         throw err
     }
@@ -24,11 +30,14 @@ const getUpdatedData = async (data) => {
 const getRestaurantMenu = async (data) => {
     try {
         const apiData = await getRestaurantMenuData(data)
-        const menuData = {}
-        menuData['resDetails'] = apiData?.filter(card=> card?.card?.relevance?.sectionId === "POP_UP_CROUTON_MENU")[0]?.card?.card?.info
-        menuData['offers'] = apiData?.filter(card=> card?.card?.card?.id === "offerCollectionWidget_UX4")[0]?.card?.card?.gridElements?.infoWithStyle?.offers?.map(data => data.info)
-        menuData['menuData'] = filterMenuData(apiData)
-        return menuData
+        if (Object.keys(apiData).length) {
+            const menuData = {}
+            menuData['resDetails'] = apiData?.filter(card => card?.card?.relevance?.sectionId === "POP_UP_CROUTON_MENU")[0]?.card?.card?.info
+            menuData['offers'] = apiData?.filter(card => card?.card?.card?.id === "offerCollectionWidget_UX4")[0]?.card?.card?.gridElements?.infoWithStyle?.offers?.map(data => data.info)
+            menuData['menuData'] = filterMenuData(apiData)
+            return menuData
+        }
+        return {}
     } catch (err) {
         throw err
     }

@@ -1,44 +1,58 @@
 import axios from "axios"
+import { configDotenv } from "dotenv"
 
-const fetchData = async () => {
-    const url = 'http://localhost:3000/data'
+
+configDotenv()
+
+const API_URL = process.env.API_URL
+
+
+const fetchData = async (lat, lng) => {
+    const url = API_URL + '/data'
     const params = {
-        'lat': '26.9195875',
-        'lng': '75.78796080000001',
+        'lat': lat,
+        'lng': lng,
         'is-seo-homepage-enabled': 'true',
         'page_type': 'DESKTOP_WEB_LISTING'
     }
 
-    const data = await axios.get(url, { params: params }).then((res) => res.data).catch((err) => console.log(err))
+    if (lat, lng) {
+        const data = await axios.get(url, { params: params }).then((res) => res.data).catch((err) => console.log(err))
 
-    return data
+        return data
+    }
+    return {}
 }
 
-const fetchUpdateData = async (count) => {
-    const url = "http://localhost:3000/update"
+const fetchUpdateData = async (count, { lat, lng }) => {
+    const url = API_URL + "/update"
     const body = {
-        lat: '26.9195875',
-        lng: '75.78796080000001',
+        lat: lat,
+        lng: lng,
         collectionV5RestaurantListWidget_SimRestoRelevance_food_seo: `${count}`
     }
+    if (lat, lng) {
+        const data = await axios.post(url, body).then((res) => res.data).catch(err => console.log(err))
 
-    const data = await axios.post(url, body).then((res) => res.data).catch(err => console.log(err))
 
-    return data
+        return data
+    }
+    return {}
 }
 
-const fetchRestaurantMenu = async (id) => {
-    console.log(id)
-    const url = "http://localhost:3000/restaurantMenu"
+const fetchRestaurantMenu = async (id, { lat, lng }) => {
+    const url = API_URL + "/restaurantMenu"
     const params = {
-        lat: '26.9195875',
-        lng: '75.78796080000001',
+        lat: lat,
+        lng: lng,
         id: id
     }
-
+    if(lat,lng){
     const data = await axios.get(url, { params: params }).then(res => res.data).catch(err => console.log(err))
 
     return data
+    }
+    return {}
 }
 
 export { fetchData, fetchUpdateData, fetchRestaurantMenu }

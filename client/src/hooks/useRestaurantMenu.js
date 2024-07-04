@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react"
-import {fetchRestaurantMenu} from '../utils/fetchData'
+import { fetchRestaurantMenu } from '../utils/fetchData'
+import { useSelector } from "react-redux"
 
-const useRestaurantMenu = ({id}) => {
+const useRestaurantMenu = ({ id }) => {
   const [resMenu, setResMenu] = useState(null)
-  useEffect(()=>{
-    const fetchData = async(id) => {
-        const data = await fetchRestaurantMenu(id)
+  const { lat, lng } = useSelector(state => state.location.coords)
+  useEffect(() => {
+    const fetchData = async (id) => {
+        const data = await fetchRestaurantMenu(id, { lat, lng })
         setResMenu(data)
     }
     fetchData(id)
-  },[])
+  }, [])
 
   return resMenu
 }

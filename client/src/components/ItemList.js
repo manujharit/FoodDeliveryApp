@@ -1,8 +1,11 @@
 import Config from "../configs/configs"
-const {CDN_URL} = Config
+import MenuItemButton from "./MenuItemButton"
+
+const { CDN_URL } = Config
 
 
 const ItemList = ({ info }) => {
+
 
     return (
         <div className=" p-4 shadow drop-shadow-lg flex flex-row h-44">
@@ -13,9 +16,9 @@ const ItemList = ({ info }) => {
             </div>
             <div className="flex justify-center">
                 <div className="absolute mt-[110px]">
-                    <button className=" rounded-xl px-4 py-2 bg-white text-sm font-extrabold text-green-800" >ADD</button>
+                    <MenuItemButton info={info} />
                 </div>
-                <img src={CDN_URL + info.imageId} className="w-[250px] h-[120px] rounded-xl shadow-md" />
+                <img src={CDN_URL + info.imageId} className="w-[250px] h-[120px] rounded-xl shadow-md" alt="Food Item" />
             </div>
         </div>
     )
