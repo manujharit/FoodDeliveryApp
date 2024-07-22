@@ -4,7 +4,7 @@ const { LINKEDIN_URL, GMAIL, TWITTER_URL, GITHUB_URL } = Config
 
 const Footer = () => {
     return (
-        <div className="bg-orange-500 w-[100%] flex flex-col justify-center items-center py-[5%] h-[100%]  text-gray-50">
+        <div className=" bg-orange-500 w-[100%] flex flex-col justify-center items-center py-[5%] h-[100%]  text-gray-50">
             <div className='flex flex-row'>
                 <div className='flex justify-center items-center'>
                     <img src={BrandLogo} className='h-20 w-32' />

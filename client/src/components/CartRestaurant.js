@@ -1,27 +1,27 @@
-import React from 'react'
+import CartItems from './CartItems'
+import Config from '../configs/configs'
+const { CDN_URL } = Config
 
-const CartRestaurant = ({ info }) => {
-    const [showItems, setShowItems] = useState(false)
-    const handleDropDown = () => {
-        if (showItems) {
-            setShowItems(false)
-        } else {
-            setShowItems(true)
-        }
-    }
+const CartRestaurant = ({ restaurantId, restaurantData }) => {
+
     return (
-        <div className='m-4' >
-            <button className='p-4 w-full drop-shadow-lg bg-gray-200 flex justify-between' onClick={handleDropDown}>
-                <span className='font-bold'>
-                    {/* {data.title} */}
-                </span>
-                <span >
-                    {showItems ? '▲' : '▼'}
-                </span>
+        <div className="border mt-4 border-gray-300" key={restaurantId}>
+            <button className='px-4 py-2 w-full drop-shadow-lg bg-gray-200 flex flex-row items-start'>
+                <div>
+                    <img src={CDN_URL + restaurantData.info.cloudinaryImageId} className="w-[60px] h-[50px] rounded-xl shadow-md" alt="Food Item" />
+                </div>
+                <div className='flex flex-col mr-4'>
+                    <span className='font-bold text-lg'>
+                        {restaurantData.info.name}
+                    </span>
+                    <span className='pl-2 text-sm text-black font-semibold'>
+                        {restaurantData.info.areaName}
+                    </span>
+                </div>
             </button>
-            {/* {showItems && <div>
-                {data.itemCards.map(card => < key={card.card.info.id} info={card.card.info} />)}
-            </div>} */}
+            {(Object.values(restaurantData.items).map((item) => (
+                <CartItems key={item.id} info={item} restaurantId={restaurantId} />
+            )))}
         </div>
     )
 }

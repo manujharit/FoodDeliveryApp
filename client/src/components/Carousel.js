@@ -47,7 +47,7 @@ const Carousal = ({ cardTitle, data, card, index, scrollIndex }) => {
             </div>
             <button
                 onClick={() => handleScroll('left')}
-                className="relative left-[49%] mt-[2%] h-8 w-8 transform -translate-y-1/2 bg-orange-500 text-xl text-white rounded-full p-2"
+                className="relative left-[45%] mt-[2%] h-8 w-8 transform -translate-y-1/2 bg-orange-500 text-xl text-white rounded-full p-2"
             >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
@@ -55,7 +55,7 @@ const Carousal = ({ cardTitle, data, card, index, scrollIndex }) => {
             </button>
             <button
                 onClick={() => handleScroll('right')}
-                className="relative left-[51%] mt-[2%] h-8 w-8 transform -translate-y-1/2 bg-orange-500 text-xl text-white rounded-full p-2"
+                className="relative left-[48%] mt-[2%] h-8 w-8 transform -translate-y-1/2 bg-orange-500 text-xl text-white rounded-full p-2"
             >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
