@@ -24,6 +24,15 @@ const RestaurantMenu = () => {
             }
         }))
     }
+    const handleUpdateItem =(item, quantity) => {
+        if (quantity >= 0) {
+            if (quantity === 0) {
+                dispatch(removeItem({ restaurantId: resMenu["resDetails"].id, itemId: item.id }))
+            } else {
+                dispatch(updateQuantity({ restaurantId: resMenu["resDetails"].id, itemId: item.id, quantity: quantity }));
+            }
+        }
+    }
 
     if (!resMenu) return <Loading />
     return (
@@ -31,7 +40,7 @@ const RestaurantMenu = () => {
             {resMenu["resDetails"] && <RestaurantInfo data={resMenu["resDetails"]} />}
             {resMenu["offers"] && <Carousel cardTitle={"Deals for you"} data={resMenu["offers"]} card={MenuOffersCard} index={0} scrollIndex={-2} />}
             {resMenu["top_picks"] && <Loading/>}
-            {resMenu["menuData"] && resMenu["menuData"].map((data) => <RestaurantCarousel key={data.id} data={data} onAddItem={handleAddItem} />)}
+            {resMenu["menuData"] && resMenu["menuData"].map((data,index) => <RestaurantCarousel key={index} data={data} onAddItem={handleAddItem} onSubItem={handleUpdateItem} />)}
         </div>
     )
 }

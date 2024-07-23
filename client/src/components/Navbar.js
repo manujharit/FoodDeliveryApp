@@ -1,9 +1,13 @@
 import BrandLogo from '../../assets/BrandLogo.png'
 import { Link } from 'react-router-dom'
 import useLocationData from "../hooks/useLocationData"
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
     useLocationData()
+
+    const qty = useSelector(state => state.cart.totalQuantity)
+
     return (
         <div className=" fixed flex flex-row justify-between items-center px-[20%]  z-50 bg-white top-0 w-[100%] h-[9%] shadow-md shadow-gray-200">
             <div className=' flex flex-row justify-center items-center w-[20%]'>
@@ -21,7 +25,13 @@ const Navbar = () => {
             <div className='flex flex-row justify-between text-center w-[25%] px-[2%]'>
                 <label className='text-md font-semibold text-gray-600 hover:text-orange-400'><Link to="/">Home</Link></label>
                 <label className='text-md font-semibold text-gray-600 hover:text-orange-400'><Link to="/about">About</Link></label>
-                <label className='text-md font-semibold text-gray-600 hover:text-orange-400'><Link to="/cart">Cart</Link></label>
+                <label className='text-md font-semibold text-gray-600 hover:text-orange-400'><Link className='flex flex-row' to="/cart">
+                    Cart
+                    <svg width="30" height="15" className='ml-2 mt-1'>
+                        <polygon points="0,0 30,0 25,15 5,15" fill="orange" />
+                        <text x="15" y="12" textAnchor="middle" fill="white" fontSize="10">{qty}</text>
+                    </svg>
+                </Link></label>
 
             </div>
         </div>

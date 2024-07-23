@@ -2,7 +2,7 @@ import { useState } from "react"
 import ItemList from './ItemList'
 
 
-const RestaurantCarousel = ({ data , onAddItem}) => {
+const RestaurantCarousel = ({ data , onAddItem, onSubItem}) => {
     const index = data.itemCards.length
     const [showItems, setShowItems] = useState(index)
     
@@ -25,7 +25,7 @@ const RestaurantCarousel = ({ data , onAddItem}) => {
                 </span>
             </button>
             {showItems && <div>
-                {data.itemCards.map(card => <ItemList key={card.card.info.id} info={card.card.info} onAddItem={() => onAddItem(card.card.info)}/>)}
+                {data.itemCards.map((card,index) => <ItemList key={index} info={card.card.info} onAddItem={() => onAddItem(card.card.info)} onSubItem={onSubItem}/>)}
             </div>}
         </div>
     )

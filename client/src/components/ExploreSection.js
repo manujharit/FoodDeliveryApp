@@ -24,7 +24,7 @@ const ExploreSection = ({ data }) => {
         <div className="mt-[5%] w-[100%] ">
             <label className="text-2xl font-bold text-black">{data.title}</label>
             <div className="flex mt-[2%] items-center  text-center flex-wrap">
-                {displayData.map(brand => <ExploreCards key={brand.text} data={brand} />)}
+                {displayData.map((brand,index) => <ExploreCards key={index} data={brand} />)}
                 {count >= 5 && <div className=" w-[30%] mx-[1.6%] my-[2%]" onClick={() => handleShowMore()}><label className="border flex justify-center items-center h-[50px] text-md shadow font-semibold text-gray-600">Show More ˅</label></div>}
             </div>
         </div>

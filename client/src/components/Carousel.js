@@ -38,8 +38,8 @@ const Carousal = ({ cardTitle, data, card, index, scrollIndex }) => {
                     className="flex transition-transform duration-500 "
                     style={{ transform: `translateX(-${currentIndex * (100 / data.length)}%)` }}
                 >
-                    {data.map((data) => (
-                        <div key={data.id}>
+                    {data.map((data, index) => (
+                        <div key={index}>
                             {card({ data })}
                         </div>
                     ))}

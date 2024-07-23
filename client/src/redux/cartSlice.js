@@ -4,7 +4,8 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         restaurants: {},
-        totalAmount: 0
+        totalAmount: 0,
+        totalQuantity: 0
     },
     reducers: {
         addItem: (state, action) => {
@@ -21,12 +22,14 @@ const cartSlice = createSlice({
                 state.restaurants[restaurantId].items[item.id] = { ...item, quantity: 1 };
             }
             state.totalAmount += (item.price / 100 || item.defaultPrice / 100);
+            state.totalQuantity++
         },
         removeItem: (state, action) => {
             const { restaurantId, itemId } = action.payload;
             if (state.restaurants[restaurantId] && state.restaurants[restaurantId].items[itemId]) {
                 const item = state.restaurants[restaurantId].items[itemId];
-                state.totalAmount -= (item.price / 100 || item.defaultPrice / 100) * item.quantity; 
+                state.totalAmount -= (item.price / 100 || item.defaultPrice / 100) * item.quantity;
+                state.totalQuantity -= item.quantity
                 delete state.restaurants[restaurantId].items[itemId];
                 if (Object.keys(state.restaurants[restaurantId].items).length === 0) {
                     delete state.restaurants[restaurantId];
@@ -37,8 +40,11 @@ const cartSlice = createSlice({
             const { restaurantId, itemId, quantity } = action.payload;
             if (state.restaurants[restaurantId] && state.restaurants[restaurantId].items[itemId]) {
                 const item = state.restaurants[restaurantId].items[itemId];
-                if (item.price || item.defaultPrice) { 
-                    state.totalAmount += (quantity - item.quantity) * (item.price / 100 || item.defaultPrice / 100); 
+                const previousQuantity = item.quantity;
+                item.quantity = quantity;
+                state.totalQuantity += (quantity - previousQuantity);
+                if (item.price || item.defaultPrice) {
+                    state.totalAmount += (quantity * (item.price / 100 || item.defaultPrice / 100)) - (previousQuantity * (item.price / 100 || item.defaultPrice / 100));
                 }
                 item.quantity = quantity;
                 if (quantity === 0) {
@@ -50,8 +56,9 @@ const cartSlice = createSlice({
             }
         },
         clearCart: (state) => {
-            state.totalAmount = 0; 
+            state.totalAmount = 0;
             state.restaurants = {};
+            state.totalQuantity = 0
         }
     }
 });

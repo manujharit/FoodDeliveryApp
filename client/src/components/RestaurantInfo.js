@@ -13,7 +13,7 @@ const RestaurantInfo = ({ data }) => {
                 <div className='bg-white border rounded-3xl w-[95%] h-[85%] m-[2.5%] '>
                     <div className='p-[2%]'>
                         <label className='font-semibold flex flex-row'><Rating rating={avgRatingString + ' (' + totalRatingsString + ')'} /> {costForTwoMessage}</label>
-                        <label>{cuisines.map((cuisine, index) => <label>&nbsp;<label className='text-orange-500 underline'>{cuisine}{index !== (cuisines.length - 1) ? "," : ''}</label>&nbsp;</label>)}</label>
+                        <label>{cuisines.map((cuisine, index) => <label key={index}>&nbsp;<label className='text-orange-500 underline'>{cuisine}{index !== (cuisines.length - 1) ? "," : ''}</label>&nbsp;</label>)}</label>
                         <div className='flex flex-row ml-[1%]'>
                             <div className='flex flex-col font-extrabold text-sm text-gray-400'>
                                 <label>&#183;</label>

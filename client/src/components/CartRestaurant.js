@@ -10,17 +10,17 @@ const CartRestaurant = ({ restaurantId, restaurantData }) => {
                 <div>
                     <img src={CDN_URL + restaurantData.info.cloudinaryImageId} className="w-[60px] h-[50px] rounded-xl shadow-md" alt="Food Item" />
                 </div>
-                <div className='flex flex-col mr-4'>
+                <div className='flex flex-col items-center justify-start ml-4'>
                     <span className='font-bold text-lg'>
                         {restaurantData.info.name}
                     </span>
-                    <span className='pl-2 text-sm text-black font-semibold'>
+                    <span className=' text-xs text-black font-semibold'>
                         {restaurantData.info.areaName}
                     </span>
                 </div>
             </button>
-            {(Object.values(restaurantData.items).map((item) => (
-                <CartItems key={item.id} info={item} restaurantId={restaurantId} />
+            {(Object.values(restaurantData.items).map((item, index) => (
+                <CartItems key={index} info={item} restaurantId={restaurantId} />
             )))}
         </div>
     )

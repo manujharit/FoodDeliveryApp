@@ -7,10 +7,14 @@ const useRestaurantMenu = ({ id }) => {
   const { lat, lng } = useSelector(state => state.location.coords)
   useEffect(() => {
     const fetchData = async (id) => {
-        const data = await fetchRestaurantMenu(id, { lat, lng })
-        setResMenu(data)
+      const data = await fetchRestaurantMenu(id, { lat, lng })
+      setResMenu(data)
     }
-    fetchData(id)
+    if (!(lat && lng)) {
+      useLocationData()
+    } else {
+      fetchData(id)
+    }
   }, [])
 
   return resMenu

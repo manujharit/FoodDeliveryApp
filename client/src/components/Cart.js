@@ -17,8 +17,8 @@ const Cart = () => {
             {Object.keys(cart.restaurants).length === 0 ? (
                 <h1>No items in cart</h1>
             ) : (
-                Object.entries(cart.restaurants).map(([restaurantId, restaurantData]) => (
-                    <CartRestaurant key={restaurantId} restaurantId={restaurantId} restaurantData={restaurantData} />
+                Object.entries(cart.restaurants).map(([restaurantId, restaurantData], index) => (
+                    <CartRestaurant key={index} restaurantId={restaurantId} restaurantData={restaurantData} />
                 ))
             )}
             <div className="my-4 px-6 flex flex-row justify-between items-center text-xl font-bold">
