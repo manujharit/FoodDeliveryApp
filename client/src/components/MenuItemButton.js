@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addItem, removeItem, updateQuantity } from '../redux/cartSlice'
 
-const MenuItemButton = ({ info, onAddItem, onSubItem }) => {
-    const [quantity, setQuantity] = useState(0)
+const MenuItemButton = ({qty, info, onAddItem, onSubItem }) => {
+    const [quantity, setQuantity] = useState(qty)
     const dispatch = useDispatch()
 
     const handleAdd = () => {
