@@ -7,9 +7,6 @@ const useRestaurantData = () => {
   const [resData, setResData] = useState({})
   const { lat, lng } = useSelector(state => state.location.coords)
 
-  if (!(lat && lng)) {
-    useLocationData()
-  }
 
   useEffect(() => {
       fetchResData(lat, lng)

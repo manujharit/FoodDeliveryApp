@@ -4,7 +4,8 @@ import App from "./src/app"
 import { lazy, Suspense } from "react"
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Loading from './src/components/Loading';
-const Body = lazy(()=>import('./src/components/Body'));
+import Body from './src/components/Body';
+// const Body = lazy(()=>import('./src/components/Body'));
 const About = lazy(() => import('./src/components/About'));
 const Cart = lazy(() => import('./src/components/Cart'));
 const RestaurantMenu = lazy(() => import('./src/components/RestaurantMenu'));
@@ -18,7 +19,7 @@ const appRouter = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Suspense fallback={<Loading />}><Body /></Suspense>
+                element: <Body />
             }, {
                 path: '/about',
                 element:<Suspense fallback={<Loading />}><About /></Suspense>
