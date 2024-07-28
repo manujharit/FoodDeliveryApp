@@ -5,7 +5,7 @@ import { lazy, Suspense } from "react"
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Loading from './src/components/Loading';
 import Body from './src/components/Body';
-// const Body = lazy(()=>import('./src/components/Body'));
+import WhatsOnMindPage from './src/components/WhatsOnMindPage'; 
 const About = lazy(() => import('./src/components/About'));
 const Cart = lazy(() => import('./src/components/Cart'));
 const RestaurantMenu = lazy(() => import('./src/components/RestaurantMenu'));
@@ -22,13 +22,16 @@ const appRouter = createBrowserRouter([
                 element: <Body />
             }, {
                 path: '/about',
-                element:<Suspense fallback={<Loading />}><About /></Suspense>
+                element: <Suspense fallback={<Loading />}><About /></Suspense>
             }, {
                 path: '/cart',
-                element:<Suspense fallback={<Loading />}><Cart /></Suspense>
+                element: <Suspense fallback={<Loading />}><Cart /></Suspense>
             }, {
                 path: '/restaurant/:id',
                 element: <Suspense fallback={<Loading />}><RestaurantMenu /></Suspense>
+            }, {
+                path: '/whatsonmind/',
+                element: <Suspense fallback={<Loading />}><WhatsOnMindPage /></Suspense>
             }
         ]
     }

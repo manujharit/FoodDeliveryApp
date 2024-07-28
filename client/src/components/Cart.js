@@ -1,17 +1,19 @@
 import { useSelector, useDispatch } from "react-redux"
 import { clearCart } from "../redux/cartSlice"
 import { useDispatch } from "react-redux"
-import CartItems from "./CartItems";
+import { useNavigate } from "react-router-dom";
 import CartRestaurant from "./CartRestaurant";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
     const cart = useSelector(state => state.cart);
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     const orderNowHandler = () => {
         alert(`Order Placed!!! Thank You from ordering with us. Total Amount:₹${cart.totalAmount} /-`)
         dispatch(clearCart())
+        navigate('/')
     }
 
     return (

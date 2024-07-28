@@ -1,11 +1,14 @@
-import { filterData, filterUpdateData, filterMenuData } from "../utils/utils.js"
+import { filterData, filterUpdateData, filterMenuData, filterDataByTags } from "../utils/utils.js"
 import { getRestaurants, getRestaurantMenuData, getUpdates } from '../clients/swiggyClient.js'
 
 const getRestaurantData = async (data) => {
     try {
         const apiData = await getRestaurants(data)
-        if (Object.keys(apiData).length) {
+        if (Object.keys(apiData).length && data.page_type === "DESKTOP_WEB_LISTING") {
             const resData = filterData(apiData)
+            return resData
+        } else if (apiData.length && data.page_type) {
+            const resData = filterDataByTags(apiData)
             return resData
         }
         return {}
@@ -23,7 +26,7 @@ const getUpdatedData = async (data) => {
         }
         return []
     } catch (err) {
-        throw err
+        return []
     }
 }
 

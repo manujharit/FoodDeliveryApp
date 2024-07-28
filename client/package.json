@@ -7,7 +7,8 @@
   "scripts": {
     "start": "parcel index.html --no-cache --port 3001",
     "build": "parcel build index.html",
-    "test": ""
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix "
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +24,9 @@
   "devDependencies": {
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
     "events": "^3.3.0",
     "os-browserify": "^0.3.0",
     "parcel": "^2.12.0",

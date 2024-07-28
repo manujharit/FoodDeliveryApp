@@ -6,7 +6,7 @@ const About = () => {
 
             <p>
                 <br />
-                <label className="text-3xl font-bold">Food Delivery App (<a href={SOURCE_CODE_URL} target="_blank" className="text-lg hover:underline text-gray-700 px-2">View Source Code</a>)</label>
+                <label className="text-3xl font-bold">Food Delivery App (<a href={SOURCE_CODE_URL} target="_blank" className="text-lg hover:underline text-gray-700 px-2" rel="noreferrer">View Source Code</a>)</label>
                 <br />
                 <br />
                 <label className="text-xl font-bold">Overview</label>

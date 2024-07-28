@@ -51,7 +51,8 @@ const getUpdates = async (data) => {
             "_csrf": "VJovqzo3Xne8-tlhx6YklA9Ck3knWB3l_VIFqnis"
         }
 
-        const updateData = await axios.post(url, body, { headers: headers }).then(res => res.data.data.cards[0].card.card.gridElements.infoWithStyle.restaurants).catch(err => err)
+        const updateData = await axios.post(url, data, { headers: headers }).then(res => res.data.data.cards).catch(err => err)
+        
         return updateData
     }
     return {}
