@@ -1,10 +1,10 @@
-import React from 'react'; 
-import Navbar from "./components/Navbar"
-import Footer from "./components/Footer"
-import { Outlet, useLocation } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import appStore from "./redux/appStore"
-import { useEffect } from 'react'
+import React from 'react';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import { Outlet, useLocation } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import appStore from './redux/appStore';
+import { useEffect } from 'react';
 
 const App = () => {
   const location = useLocation();
@@ -21,7 +21,7 @@ const App = () => {
         <Footer />
       </div>
     </Provider>
-  )
-}
+  );
+};
 
-export default App
+export default App;

@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
+  "type":"module",
   "scripts": {
     "start": "node index.js",
     "start-dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint index.js src/**/*.{js,jsx}",
+    "lint:fix": "eslint index.js src/**/*.{js,jsx} --fix"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +18,10 @@
     "express": "^4.19.2"
   },
   "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-define-config": "^2.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
     "nodemon": "^3.1.0"
   }
 }

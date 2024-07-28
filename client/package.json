@@ -7,8 +7,8 @@
   "scripts": {
     "start": "parcel index.html --no-cache --port 3001",
     "build": "parcel build index.html",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix "
+    "lint": "eslint index.js src/**/*.{js,jsx}",
+    "lint:fix": "eslint index.js src/**/*.{js,jsx} --fix"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +25,8 @@
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",
     "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "events": "^3.3.0",
@@ -32,6 +34,7 @@
     "parcel": "^2.12.0",
     "path-browserify": "^1.0.1",
     "postcss": "^8.4.38",
+    "prettier": "^3.3.3",
     "process": "^0.11.10",
     "stream-browserify": "^3.0.0",
     "string_decoder": "^1.3.0",

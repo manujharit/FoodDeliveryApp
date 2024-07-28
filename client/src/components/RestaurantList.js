@@ -1,29 +1,30 @@
-import RestaurantCard from "./RestaurantCard"
-import { useState, useEffect, useRef } from "react"
-import { fetchUpdateData } from "../utils/fetchData"
-import { mergeData } from "../utils/utils"
-import CardShimmer from "./shimmers/CardShimmer"
-import { useSelector } from "react-redux"
+import React, { useState, useEffect, useRef } from 'react';
+import RestaurantCard from './RestaurantCard';
+import { fetchUpdateData } from '../utils/fetchData';
+import { mergeData } from '../utils/utils';
+import CardShimmer from './shimmers/CardShimmer';
+import { useSelector } from 'react-redux';
 
 const RestaurantList = ({ data }) => {
-  const [card, setCard] = useState(data)
-  const [page, setPage] = useState(0)
-  const [loading, setLoading] = useState(false)
-  const [loadMore, setLoadMore] = useState(true)
+  const [card, setCard] = useState(data);
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [loadMore, setLoadMore] = useState(true);
 
-  const loaderRef = useRef(null)
+  const loaderRef = useRef(null);
   const loadArray = Array.from({ length: 12 }, (_, index) => index + 1);
-  const { lat, lng } = useSelector(state => state.location.coords)
+  const { lat, lng } = useSelector((state) => state.location.coords);
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         if (page > 0) {
           const newData = await fetchUpdateData(page * 10, { lat, lng });
-          if(newData.length) {
-          setCard(mergeData(card, newData));
+          if (newData.length) {
+            setCard(mergeData(card, newData));
           } else {
-            setLoadMore(false)
+            setLoadMore(false);
           }
         }
       } catch (error) {
@@ -60,17 +61,25 @@ const RestaurantList = ({ data }) => {
 
   return (
     <div className="flex flex-col mt-[3%]">
-      <label className="text-2xl font-bold mb-6">Restaurants with online food delivery</label>
+      <label className="text-2xl font-bold mb-6">
+        Restaurants with online food delivery
+      </label>
 
-      <div className="flex flex-wrap justify-between items-center"  >
-        {card.map((card, index) => <RestaurantCard key={index} data={card} />)}
-        {loadMore ? (<span ref={loaderRef}>{
-          loading && loadArray.map((item, index) => <CardShimmer key={index} />)
-        }</span>) : ''}
+      <div className="flex flex-wrap justify-between items-center">
+        {card.map((card, index) => (
+          <RestaurantCard key={index} data={card} />
+        ))}
+        {loadMore ? (
+          <span ref={loaderRef}>
+            {loading &&
+              loadArray.map((item, index) => <CardShimmer key={index} />)}
+          </span>
+        ) : (
+          ''
+        )}
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default RestaurantList
+export default RestaurantList;
