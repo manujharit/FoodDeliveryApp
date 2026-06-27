@@ -8,11 +8,13 @@
     "start-client": "cd client && npm start",
     "start-server": "cd server && npm run start-dev",
     "start": "concurrently \"npm run start-client\" \"npm run start-server\" ",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf node_modules client/node_modules server/node_modules && npm cache clean --force"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "rimraf": "^6.1.3"
   }
 }

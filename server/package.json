@@ -3,25 +3,29 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "start-dev": "nodemon index.js",
     "lint": "eslint index.js src/**/*.{js,jsx}",
     "lint:fix": "eslint index.js src/**/*.{js,jsx} --fix"
   },
+  "imports": {
+    "#src/*": "./src/*"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.6.8",
-    "body-parser": "^1.20.2",
-    "express": "^4.19.2"
+    "axios": "^1.18.1",
+    "body-parser": "^2.3.0",
+    "express": "^5.2.1"
   },
   "devDependencies": {
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-define-config": "^2.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "nodemon": "^3.1.0"
+    "eslint-plugin-prettier": "^5.5.6",
+    "eslint-plugin-unused-imports": "^4.4.1",
+    "nodemon": "^3.1.14"
   }
 }

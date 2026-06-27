@@ -1,5 +1,7 @@
+import eslintPluginPrettier from 'eslint-plugin-prettier';
+import eslintPluginUnusedImports from 'eslint-plugin-unused-imports';
 
-module.exports = [
+export default [
     {
         languageOptions: {
             ecmaVersion: 12,
@@ -8,14 +10,16 @@ module.exports = [
                 process: 'readonly',
             },
         },
-        files: ['*.js', '*.jsx'],
+        files: ['**/*.js', '**/*.jsx'],
         plugins: {
-            prettier: require('eslint-plugin-prettier'),
+            prettier: eslintPluginPrettier,
+            'unused-imports': eslintPluginUnusedImports,
         },
         rules: {
             "prettier/prettier": "error",
             'no-console': 'warn',
             'no-unused-vars': 'warn',
+            'unused-imports/no-unused-imports': 'error',
         },
     }
 ];
