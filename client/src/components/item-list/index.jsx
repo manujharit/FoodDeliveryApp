@@ -10,6 +10,7 @@ const ItemList = ({ info, onAddItem, onSubItem }) => {
   const { id } = useParams();
   const resItems = useSelector((state) => state?.cart?.restaurants[id]?.items);
   const qty = getResItemQuantity(resItems, info);
+
   return (
     <div className=" p-4 shadow drop-shadow-lg flex flex-row h-44">
       <div className="flex flex-col px-2 w-[1000px]">

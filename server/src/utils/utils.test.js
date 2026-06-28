@@ -49,6 +49,7 @@ describe('utils', () => {
       ];
 
       const result = filterData(mockData);
+
       expect(result.whats_on_your_mind).toEqual([{ id: 1 }]);
       expect(result.top_brands_for_you).toEqual([{ name: 'Brand A' }]);
       expect(result.restaurant_grid_listing).toEqual([{ name: 'Res A' }]);
@@ -59,6 +60,7 @@ describe('utils', () => {
 
     it('should handle empty or malformed data safely', () => {
       const result = filterData([]);
+
       expect(result.whats_on_your_mind).toBeUndefined();
       expect(result.top_brands_for_you).toBeUndefined();
       expect(result.restaurant_grid_listing).toBeUndefined();
@@ -67,6 +69,7 @@ describe('utils', () => {
 
     it('should handle undefined data safely', () => {
       const result = filterData();
+
       expect(result.whats_on_your_mind).toBeUndefined();
     });
   });
@@ -103,6 +106,7 @@ describe('utils', () => {
       ];
 
       const result = filterDataByTags(mockData);
+
       expect(result.count).toBe(10);
       expect(result.title.title).toBe('Some title');
       expect(result.restaurants).toEqual([{ name: 'Res T' }]);
@@ -110,6 +114,7 @@ describe('utils', () => {
 
     it('should handle undefined data safely', () => {
       const result = filterDataByTags();
+
       expect(result.count).toBeUndefined();
     });
   });
@@ -129,6 +134,7 @@ describe('utils', () => {
           },
         },
       ];
+
       expect(filterUpdateData(mockData)).toEqual([{ id: 1 }]);
     });
 
@@ -142,6 +148,7 @@ describe('utils', () => {
           },
         },
       ];
+
       expect(filterUpdateData(mockData)).toEqual([{ id: 2 }]);
     });
   });
@@ -170,6 +177,7 @@ describe('utils', () => {
           },
         },
       ];
+
       expect(filterMenuData(mockData)).toEqual([
         { title: 'Category A', itemCards: [{ id: 1 }] },
       ]);

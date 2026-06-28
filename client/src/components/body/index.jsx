@@ -8,6 +8,7 @@ import useRestaurantData from '@/hooks/useRestaurantData';
 
 const Body = () => {
   const resData = useRestaurantData();
+
   if (!resData || !Object.keys(resData).length) {
     return <HomeShimmer />;
   }

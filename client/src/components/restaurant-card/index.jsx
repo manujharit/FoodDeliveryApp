@@ -14,7 +14,9 @@ const RestaurantCard = ({ data }) => {
     aggregatedDiscountInfoV3,
     areaName,
   } = data;
+
   const navigate = useNavigate();
+
   return (
     <div>
       <div

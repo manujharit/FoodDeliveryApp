@@ -1,7 +1,10 @@
 import Config from '@/configs/configs';
+
 const { CDN_URL } = Config;
+
 const MenuOffersCard = ({ data }) => {
   const { header, couponCode, offerLogo } = data;
+
   return (
     <div className="min-w-[350px] max-w-[350px] min-h-[80px] max-h-[80px] mx-[10px] my-[20px] p-[10px] border rounded-2xl  transition-all duration-300 hover:shadow-lg hover:scale-95">
       <div className=" flex flex-row">

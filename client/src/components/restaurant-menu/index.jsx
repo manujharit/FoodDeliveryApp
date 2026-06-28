@@ -24,6 +24,7 @@ const RestaurantMenu = () => {
       })
     );
   };
+
   const handleUpdateItem = (item, quantity) => {
     if (quantity >= 0) {
       if (quantity === 0) {
@@ -48,6 +49,7 @@ const RestaurantMenu = () => {
   if (!resMenu) {
     return <Loading />;
   }
+
   return (
     <div className="my-[5%] mx-[25%] ">
       {resMenu['resDetails'] && <RestaurantInfo data={resMenu['resDetails']} />}

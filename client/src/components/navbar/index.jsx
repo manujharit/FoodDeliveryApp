@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   useLocationData();
+
   const [showSearch, setShowSearch] = useState(false);
   const inputRef = useRef(null);
 
@@ -17,6 +18,7 @@ const Navbar = () => {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };

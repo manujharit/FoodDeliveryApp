@@ -35,10 +35,12 @@ const Carousal = ({ cardTitle, data, card, index, scrollIndex }) => {
         data.length -
         index * Math.floor(containerWidth / cardWidth) +
         scrollIndex;
+
       setCurrentIndex(Math.min(currentIndex, maxIndex));
     };
 
     window.addEventListener('resize', handleResize);
+
     return () => window.removeEventListener('resize', handleResize);
   }, [currentIndex, data.length, index, scrollIndex]);
 

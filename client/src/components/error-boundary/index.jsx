@@ -3,7 +3,6 @@ import ovenImage from '../../../assets/oven_power_cut.png';
 
 const ErrorBoundary = () => {
   const error = useRouteError();
-
   const isNoDataError = error?.message?.includes('No data');
 
   return (

@@ -11,7 +11,6 @@ const RestaurantList = ({ data }) => {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [loadMore, setLoadMore] = useState(true);
-
   const loaderRef = useRef(null);
   const loadArray = Array.from({ length: 12 }, (_, index) => index + 1);
   const { lat, lng } = useSelector((state) => state.location.coords);
@@ -19,9 +18,11 @@ const RestaurantList = ({ data }) => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
+
       try {
         if (page > 0) {
           const newData = await fetchUpdateData(page * 10, { lat, lng });
+
           if (newData.length) {
             setCard((prev) => mergeData(prev, newData));
           } else {
@@ -31,6 +32,7 @@ const RestaurantList = ({ data }) => {
       } catch (error) {
         console.error('Error fetching data:', error);
       }
+
       setLoading(false);
     };
 
@@ -38,15 +40,18 @@ const RestaurantList = ({ data }) => {
   }, [page, lat, lng]);
 
   const loadingRef = useRef(loading);
+
   useEffect(() => {
     loadingRef.current = loading;
   }, [loading]);
 
   const hasCards = card.length > 0;
+
   useEffect(() => {
     if (!loaderRef.current) {
       return;
     }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -70,7 +75,6 @@ const RestaurantList = ({ data }) => {
       <label className="text-2xl font-bold mb-6">
         Restaurants with online food delivery
       </label>
-
       <div className="flex flex-wrap md:justify-between justify-center items-center">
         {card.map((card, index) => (
           <RestaurantCard key={index} data={card} />

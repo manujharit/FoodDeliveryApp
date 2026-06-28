@@ -10,12 +10,14 @@ const useRestaurantMenu = (id) => {
   useEffect(() => {
     const fetchData = async (id) => {
       const data = await fetchRestaurantMenu(id, { lat, lng });
+
       if (!data || Object.keys(data).length === 0) {
         setError(true);
       } else {
         setResMenu(data);
       }
     };
+
     if (lat && lng) {
       fetchData(id);
     }

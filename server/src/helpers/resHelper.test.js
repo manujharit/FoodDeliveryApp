@@ -31,7 +31,9 @@ describe('resHelper', () => {
           },
         },
       ]);
+
       const res = await getRestaurantData({ page_type: 'DESKTOP_WEB_LISTING' });
+
       expect(res.restaurant_grid_listing).toBeDefined();
       expect(res.restaurant_grid_listing[0].name).toBe('Res 1');
     });
@@ -48,14 +50,18 @@ describe('resHelper', () => {
           },
         },
       ]);
+
       const res = await getRestaurantData({ page_type: 'MOBILE' });
+
       expect(res.restaurants).toBeDefined();
       expect(res.restaurants[0].name).toBe('Res 2');
     });
 
     it('should return empty object if API fails or returns empty', async () => {
       getRestaurants.mockResolvedValue([]);
+
       const res = await getRestaurantData({});
+
       expect(res).toEqual({});
     });
   });
@@ -63,7 +69,9 @@ describe('resHelper', () => {
   describe('getUpdatedData', () => {
     it('should return updated data directly if API returns valid updates', async () => {
       getUpdates.mockResolvedValue([{ card: { card: { info: { id: 1 } } } }]);
+
       const res = await getUpdatedData({});
+
       expect(res).toEqual([{ id: 1 }]);
     });
 
@@ -81,7 +89,9 @@ describe('resHelper', () => {
           },
         },
       ]);
+
       const res = await getUpdatedData({});
+
       expect(res.length).toBe(1);
       // It should randomize the ID
       expect(res[0].id).not.toBe(99);
@@ -101,7 +111,9 @@ describe('resHelper', () => {
           },
         },
       ]);
+
       const res = await getUpdatedData({ collection: '123' });
+
       expect(res.length).toBe(1);
       expect(String(res[0].id).startsWith('88_')).toBe(true);
     });
@@ -139,6 +151,7 @@ describe('resHelper', () => {
       ]);
 
       const res = await getRestaurantMenu({});
+
       expect(res.resDetails).toEqual({ name: 'Res Details' });
       expect(res.menuData.length).toBe(1);
       expect(res.menuData[0].title).toBe('Category 1');
@@ -146,7 +159,9 @@ describe('resHelper', () => {
 
     it('should return empty object if API returns empty', async () => {
       getRestaurantMenuData.mockResolvedValue([]);
+
       const res = await getRestaurantMenu({});
+
       expect(res).toEqual({});
     });
   });

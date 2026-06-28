@@ -17,8 +17,10 @@ const fetchData = async (lat, lng) => {
       .then((res) => res.data)
       .catch((err) => {
         console.log(err);
+
         return {};
       });
+
     return data;
   }
   return {};
@@ -47,18 +49,22 @@ const fetchUpdateData = async (count, { lat, lng }) => {
     page_type: 'DESKTOP_WEB_LISTING',
     _csrf: 'VJovqzo3Xne8-tlhx6YklA9Ck3knWB3l_VIFqnis',
   };
+
   if (lat && lng) {
     try {
       const res = await axios.post(url, body);
+
       if (res.data && Array.isArray(res.data) && res.data.length > 0) {
         return res.data;
       }
+
       return [];
     } catch (err) {
       console.error(err);
       return [];
     }
   }
+
   return [];
 };
 
@@ -69,6 +75,7 @@ const fetchRestaurantMenu = async (id, { lat, lng }) => {
     lng: lng,
     id: id,
   };
+
   if (lat && lng) {
     const data = await axios
       .get(url, { params: params })
@@ -80,6 +87,7 @@ const fetchRestaurantMenu = async (id, { lat, lng }) => {
 
     return data;
   }
+
   return {};
 };
 
@@ -111,8 +119,10 @@ const fetchWhatsOnMindRestaurants = async ({
         console.log(err);
         return {};
       });
+
     return data;
   }
+
   return {};
 };
 
@@ -143,21 +153,28 @@ const fetchWhatsOnMindUpdateData = async ({
     page_type: null,
     _csrf: 'VSIfTlSrzgBl-DoVEXaxruKEiUJiGlcq9EQD_dNI',
   };
+
   setTimeout(() => {}, 200);
+
   if (lat && lng) {
     try {
       const res = await axios.post(url, body);
+
       if (res.data && Array.isArray(res.data) && res.data.length > 0) {
         return res.data;
       }
+
       return [];
     } catch (err) {
       console.error(err);
+
       return [];
     }
   }
+
   return [];
 };
+
 export {
   fetchData,
   fetchUpdateData,

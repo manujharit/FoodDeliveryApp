@@ -7,6 +7,7 @@ import {
 const restaurantHandler = async (req, res) => {
   try {
     const data = await getRestaurantData(req.query);
+
     res.status(200).json(data);
   } catch (err) {
     res.status(500).json({
@@ -14,9 +15,11 @@ const restaurantHandler = async (req, res) => {
     });
   }
 };
+
 const updateHandler = async (req, res) => {
   try {
     const data = await getUpdatedData(req.body);
+
     res.status(200).json(data);
   } catch (err) {
     res.status(500).json({
@@ -28,6 +31,7 @@ const updateHandler = async (req, res) => {
 const restaurantMenuHandler = async (req, res) => {
   try {
     const data = await getRestaurantMenu(req.query);
+
     res.status(200).json(data);
   } catch (err) {
     res.status(500).json({

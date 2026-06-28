@@ -27,6 +27,7 @@ const RestaurantByTags = ({ params }) => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
+
       try {
         if (page === 0 && collection_id) {
           const newData = await fetchWhatsOnMindRestaurants({
@@ -36,6 +37,7 @@ const RestaurantByTags = ({ params }) => {
             tags,
             type,
           });
+
           if (!newData || !newData.restaurants) {
             setError(true);
           } else {
@@ -50,6 +52,7 @@ const RestaurantByTags = ({ params }) => {
             type,
             count: page * 10,
           });
+
           if (newData.length) {
             setCard((prev) => mergeData(prev, newData));
           } else {
@@ -59,6 +62,7 @@ const RestaurantByTags = ({ params }) => {
       } catch (error) {
         console.error('Error fetching data:', error);
       }
+
       setLoading(false);
     };
 
@@ -66,15 +70,18 @@ const RestaurantByTags = ({ params }) => {
   }, [page, collection_id, lat, lng, tags, type]);
 
   const loadingRef = useRef(loading);
+
   useEffect(() => {
     loadingRef.current = loading;
   }, [loading]);
 
   const hasCards = card.length > 0;
+
   useEffect(() => {
     if (!loaderRef.current) {
       return;
     }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

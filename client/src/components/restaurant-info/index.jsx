@@ -12,6 +12,7 @@ const RestaurantInfo = ({ data }) => {
     sla,
     costForTwoMessage,
   } = data;
+
   return (
     <div className="flex flex-col">
       <p className="text-gray-500">

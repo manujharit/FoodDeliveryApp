@@ -1,76 +1,142 @@
+const findNodesByKeyAndValue = (node, key, value, results = []) => {
+  if (node === null || typeof node !== 'object') {
+    return results;
+  }
+
+  if (node[key] === value) {
+    results.push(node);
+  }
+
+  if (Array.isArray(node)) {
+    for (let i = 0; i < node.length; i++) {
+      findNodesByKeyAndValue(node[i], key, value, results);
+    }
+  } else {
+    for (const k in node) {
+      findNodesByKeyAndValue(node[k], key, value, results);
+    }
+  }
+  return results;
+};
+
 const filterData = (data) => {
   const restaurantsData = {};
+  const whatsOnYourMindNode = findNodesByKeyAndValue(
+    data,
+    'id',
+    'whats_on_your_mind'
+  )[0];
+  const topBrandsNode = findNodesByKeyAndValue(
+    data,
+    'id',
+    'top_brands_for_you'
+  )[0];
+  let gridListingNode = findNodesByKeyAndValue(
+    data,
+    'id',
+    'restaurant_grid_listing'
+  )[0];
 
-  restaurantsData['whats_on_your_mind'] = data?.filter(
-    (card) => card.card.card.id === 'whats_on_your_mind'
-  )[0]?.card?.card?.gridElements?.infoWithStyle?.info;
-  restaurantsData['top_brands_for_you'] = data
-    ?.filter((card) => card.card.card.id === 'top_brands_for_you')[0]
-    ?.card?.card?.gridElements?.infoWithStyle?.restaurants?.map(
-      (card) => card.info
+  if (!gridListingNode) {
+    gridListingNode = findNodesByKeyAndValue(
+      data,
+      'id',
+      'restaurant_grid_listing_v2'
+    )[0];
+  }
+
+  const nearMeNodes = findNodesByKeyAndValue(
+    data,
+    'id',
+    'restaurant_near_me_links'
+  );
+
+  restaurantsData['whats_on_your_mind'] =
+    whatsOnYourMindNode?.gridElements?.infoWithStyle?.info;
+  restaurantsData['top_brands_for_you'] =
+    topBrandsNode?.gridElements?.infoWithStyle?.restaurants?.map((c) => c.info);
+  restaurantsData['restaurant_grid_listing'] =
+    gridListingNode?.gridElements?.infoWithStyle?.restaurants?.map(
+      (c) => c.info
     );
-  restaurantsData['restaurant_grid_listing'] = data
-    ?.filter(
-      (card) =>
-        card.card.card.id === 'restaurant_grid_listing' ||
-        card.card.card.id === 'restaurant_grid_listing_v2'
-    )[0]
-    ?.card?.card?.gridElements?.infoWithStyle?.restaurants?.map(
-      (card) => card.info
-    );
-  restaurantsData['restaurant_near_me_links'] = data
-    ?.filter((card) => card.card.card.id === 'restaurant_near_me_links')
-    ?.map((res) => {
-      return { title: res.card.card.title, brands: res.card.card.brands };
-    });
+  restaurantsData['restaurant_near_me_links'] = nearMeNodes.map((node) => ({
+    title: node.title,
+    brands: node.brands,
+  }));
 
   return restaurantsData;
 };
 
 const filterDataByTags = (data) => {
   const restaurantData = {};
-  restaurantData['count'] = data?.filter(
-    (card) =>
-      card?.card?.card['@type'] ===
-      'type.googleapis.com/swiggy.gandalf.widgets.v2.InlineViewFilterSortWidget'
-  )[0]?.card?.card?.restaurantCount;
-  restaurantData['title'] = data?.filter(
-    (card) =>
-      card?.card?.card?.type === 'COLLECTION_MASTHEAD_TYPE_IMAGE_WITH_TEXT'
-  )[0]?.card?.card;
-  restaurantData['restaurants'] = data
-    ?.filter(
-      (card) =>
-        card?.card?.card['@type'] ===
-        'type.googleapis.com/swiggy.presentation.food.v2.Restaurant'
-    )
-    ?.map((card) => card?.card?.card?.info);
+  const sortWidgetNode = findNodesByKeyAndValue(
+    data,
+    '@type',
+    'type.googleapis.com/swiggy.gandalf.widgets.v2.InlineViewFilterSortWidget'
+  )[0];
+  const mastheadNode = findNodesByKeyAndValue(
+    data,
+    'type',
+    'COLLECTION_MASTHEAD_TYPE_IMAGE_WITH_TEXT'
+  )[0];
+  const restaurantNodes = findNodesByKeyAndValue(
+    data,
+    '@type',
+    'type.googleapis.com/swiggy.presentation.food.v2.Restaurant'
+  );
+
+  restaurantData['count'] = sortWidgetNode?.restaurantCount;
+  restaurantData['title'] = mastheadNode;
+  restaurantData['restaurants'] = restaurantNodes
+    .map((node) => node.info)
+    .filter(Boolean);
+
   return restaurantData;
 };
 
 const filterUpdateData = (data) => {
+  // Directly search for all Restaurant type nodes which holds the info
+  const restaurantNodes = findNodesByKeyAndValue(
+    data,
+    '@type',
+    'type.googleapis.com/swiggy.presentation.food.v2.Restaurant'
+  );
+
+  if (restaurantNodes.length > 0) {
+    return restaurantNodes.map((node) => node.info).filter(Boolean);
+  }
+
+  // Fallback for different update formats (e.g. nested infos directly)
   let resData =
     data[0]?.card?.card?.gridElements?.infoWithStyle?.restaurants?.map(
-      (data) => data.info
+      (d) => d.info
     );
+
   if (!resData) {
-    resData = data.map((card) => card?.card?.card?.info);
+    resData = data.map((card) => card?.card?.card?.info).filter(Boolean);
   }
+
   return resData;
 };
+
 const filterMenuData = (data) => {
-  const menuData = data
-    ?.filter((card) => card.groupedCard)[0]
-    .groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
-      (card) =>
-        card?.card?.card?.['@type'] ===
-        'type.googleapis.com/swiggy.presentation.food.v2.ItemCategory'
-    )
-    ?.map((data) => ({
-      title: data.card.card.title,
-      itemCards: data.card.card.itemCards,
-    }));
+  const categories = findNodesByKeyAndValue(
+    data,
+    '@type',
+    'type.googleapis.com/swiggy.presentation.food.v2.ItemCategory'
+  );
+  const menuData = categories.map((node) => ({
+    title: node.title,
+    itemCards: node.itemCards,
+  }));
+
   return menuData;
 };
 
-export { filterData, filterUpdateData, filterMenuData, filterDataByTags };
+export {
+  filterData,
+  filterUpdateData,
+  filterMenuData,
+  filterDataByTags,
+  findNodesByKeyAndValue,
+};

@@ -10,12 +10,14 @@ const useRestaurantData = () => {
   useEffect(() => {
     const fetchResData = async (lat, lng) => {
       const data = await fetchData(lat, lng);
+
       if (!data || Object.keys(data).length === 0) {
         setError(true);
       } else {
         setResData(data);
       }
     };
+
     if (lat && lng) {
       fetchResData(lat, lng);
     }

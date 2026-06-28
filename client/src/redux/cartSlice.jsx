@@ -10,12 +10,14 @@ const cartSlice = createSlice({
   reducers: {
     addItem: (state, action) => {
       const { restaurantId, item } = action.payload;
+
       if (!state.restaurants[restaurantId]) {
         state.restaurants[restaurantId] = {
           info: item.restaurantInfo || {},
           items: {},
         };
       }
+
       if (state.restaurants[restaurantId].items[item.id]) {
         state.restaurants[restaurantId].items[item.id].quantity++;
       } else {
@@ -24,20 +26,25 @@ const cartSlice = createSlice({
           quantity: 1,
         };
       }
+
       state.totalAmount += item.price / 100 || item.defaultPrice / 100;
       state.totalQuantity++;
     },
     removeItem: (state, action) => {
       const { restaurantId, itemId } = action.payload;
+
       if (
         state.restaurants[restaurantId] &&
         state.restaurants[restaurantId].items[itemId]
       ) {
         const item = state.restaurants[restaurantId].items[itemId];
+
         state.totalAmount -=
           (item.price / 100 || item.defaultPrice / 100) * item.quantity;
         state.totalQuantity -= item.quantity;
+
         delete state.restaurants[restaurantId].items[itemId];
+
         if (Object.keys(state.restaurants[restaurantId].items).length === 0) {
           delete state.restaurants[restaurantId];
         }
@@ -45,22 +52,28 @@ const cartSlice = createSlice({
     },
     updateQuantity: (state, action) => {
       const { restaurantId, itemId, quantity } = action.payload;
+
       if (
         state.restaurants[restaurantId] &&
         state.restaurants[restaurantId].items[itemId]
       ) {
         const item = state.restaurants[restaurantId].items[itemId];
         const previousQuantity = item.quantity;
+
         item.quantity = quantity;
         state.totalQuantity += quantity - previousQuantity;
+
         if (item.price || item.defaultPrice) {
           state.totalAmount +=
             quantity * (item.price / 100 || item.defaultPrice / 100) -
             previousQuantity * (item.price / 100 || item.defaultPrice / 100);
         }
+
         item.quantity = quantity;
+
         if (quantity === 0) {
           delete state.restaurants[restaurantId].items[itemId];
+
           if (Object.keys(state.restaurants[restaurantId].items).length === 0) {
             delete state.restaurants[restaurantId];
           }

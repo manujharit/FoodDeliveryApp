@@ -19,9 +19,7 @@ const useUrlParams = () => {
 
     window.addEventListener('popstate', parseParams);
 
-    return () => {
-      window.removeEventListener('popstate', parseParams);
-    };
+    return () => window.removeEventListener('popstate', parseParams);
   }, []);
 
   return params;

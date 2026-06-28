@@ -1,5 +1,7 @@
 import Config from '@/configs/configs';
+
 const { SOURCE_CODE_URL } = Config;
+
 const About = () => {
   return (
     <div className="my-[5%] mx-[13.5%] text-orange-400">

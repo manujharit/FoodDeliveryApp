@@ -13,10 +13,12 @@ const mergeData = (oldData, newData) => {
 const getResItemQuantity = (resItems, info) => {
   if (resItems) {
     const quantity = resItems[info.id]?.quantity;
+
     if (quantity) {
       return quantity;
     }
   }
+
   return 0;
 };
 
@@ -30,18 +32,22 @@ const parseParamsAndReturnPath = (urlString, title) => {
   }
 
   const { tags, collection_id, type } = result;
-
   const newParams = new URLSearchParams();
+
   if (tags) {
     newParams.append('tags', tags);
   }
+
   if (collection_id) {
     newParams.append('collection_id', collection_id);
   }
+
   if (type) {
     newParams.append('type', type);
   }
+
   const capitalizedTitle = title.charAt(0).toUpperCase() + title.slice(1);
+
   newParams.append('title', capitalizedTitle);
 
   return `/whatsonmind?${newParams.toString()}`;

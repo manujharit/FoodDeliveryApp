@@ -18,6 +18,7 @@ const getRestaurants = async (data) => {
 
     return resData;
   }
+
   return {};
 };
 
@@ -30,13 +31,16 @@ const getUpdates = async (data) => {
       Cookie:
         '__SW=P5nSGJK0LqJcqDUWi558fb9DZSg67dDb; _device_id=b857ce9e-4919-2615-0d8e-a34c27ed439a; fontsLoaded=1; userLocation={%22lat%22:%2226.95250%22%2C%22lng%22:%2275.71050%22%2C%22address%22:%22%22%2C%22area%22:%22%22%2C%22showUserDefaultAddressHint%22:false}; _guest_tid=d76c9da3-ae45-4a50-b237-ab566bb899c5; _sid=duj0d9ae-c4cb-4c26-867f-d663b8476046',
     };
+
     try {
       const res = await axios.post(url, data, { headers: headers });
+
       if (res.data && res.data.data && res.data.data.cards) {
         return res.data.data.cards;
       } else if (res.data && Array.isArray(res.data.cards)) {
         return res.data.cards;
       }
+
       return [];
     } catch (err) {
       // eslint-disable-next-line no-console
@@ -44,6 +48,7 @@ const getUpdates = async (data) => {
       return [];
     }
   }
+
   return {};
 };
 
@@ -73,6 +78,7 @@ const getRestaurantMenuData = async ({ lat, lng, id }) => {
 
     return resMenu;
   }
+
   return {};
 };
 
