@@ -44,7 +44,9 @@ const RestaurantList = ({ data }) => {
 
   const hasCards = card.length > 0;
   useEffect(() => {
-    if (!loaderRef.current) return;
+    if (!loaderRef.current) {
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

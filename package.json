@@ -8,13 +8,27 @@
     "start-client": "cd client && npm start",
     "start-server": "cd server && npm run start-dev",
     "start": "concurrently \"npm run start-client\" \"npm run start-server\" ",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rimraf node_modules client/node_modules server/node_modules && npm cache clean --force"
+    "lint": "cd client && npm run lint && cd .. && cd server && npm run lint",
+    "lint:fix": "cd client && npm run lint:fix && cd .. && cd server && npm run lint:fix",
+    "test": "cd client && npm run test && cd .. && cd server && npm run test",
+    "clean": "rimraf node_modules client/node_modules server/node_modules && npm cache clean --force",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "client/**/*.{js,jsx}": [
+      "npm run --prefix client lint-staged --"
+    ],
+    "server/**/*.js": [
+      "npm run --prefix server lint-staged --",
+      "npm run --prefix server test-staged --"
+    ]
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^8.2.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.8",
     "rimraf": "^6.1.3"
   }
 }

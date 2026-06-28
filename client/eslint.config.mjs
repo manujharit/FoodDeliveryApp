@@ -62,8 +62,10 @@ export default defineConfig([{
         "prettier/prettier": "error",
         "unused-imports/no-unused-imports": "error",
         "no-unused-vars": "error",
-        "no-console": "warn",
+        "no-console": "error",
         eqeqeq: "error",
+        curly: "error",
+        "no-var": "error",
         "prefer-const": "error",
     },
 }]);

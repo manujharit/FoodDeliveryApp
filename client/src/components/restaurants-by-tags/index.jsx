@@ -72,7 +72,9 @@ const RestaurantByTags = ({ params }) => {
 
   const hasCards = card.length > 0;
   useEffect(() => {
-    if (!loaderRef.current) return;
+    if (!loaderRef.current) {
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -91,7 +93,7 @@ const RestaurantByTags = ({ params }) => {
     };
   }, [hasCards, loadMore]);
 
-  if (card.length === 0)
+  if (card.length === 0) {
     return (
       <div className="flex flex-wrap justify-between items-center">
         {loadArray.map((item, index) => (
@@ -99,6 +101,7 @@ const RestaurantByTags = ({ params }) => {
         ))}
       </div>
     );
+  }
 
   return (
     <div className="flex flex-wrap justify-between items-center">

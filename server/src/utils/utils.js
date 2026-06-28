@@ -28,7 +28,7 @@ const filterData = (data) => {
 };
 
 const filterDataByTags = (data) => {
-  let restaurantData = {};
+  const restaurantData = {};
   restaurantData['count'] = data?.filter(
     (card) =>
       card?.card?.card['@type'] ===

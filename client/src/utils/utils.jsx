@@ -2,7 +2,9 @@ const mergeData = (oldData, newData) => {
   const set = new Set(oldData.map((data) => data.id));
 
   const uniqueData = newData.filter((data) => {
-    if (!set.has(data.id)) return data;
+    if (!set.has(data.id)) {
+      return data;
+    }
   });
 
   return [...oldData, ...uniqueData];
@@ -30,9 +32,15 @@ const parseParamsAndReturnPath = (urlString, title) => {
   const { tags, collection_id, type } = result;
 
   const newParams = new URLSearchParams();
-  if (tags) newParams.append('tags', tags);
-  if (collection_id) newParams.append('collection_id', collection_id);
-  if (type) newParams.append('type', type);
+  if (tags) {
+    newParams.append('tags', tags);
+  }
+  if (collection_id) {
+    newParams.append('collection_id', collection_id);
+  }
+  if (type) {
+    newParams.append('type', type);
+  }
   const capitalizedTitle = title.charAt(0).toUpperCase() + title.slice(1);
   newParams.append('title', capitalizedTitle);
 

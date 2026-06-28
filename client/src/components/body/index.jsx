@@ -8,7 +8,9 @@ import useRestaurantData from '@/hooks/useRestaurantData';
 
 const Body = () => {
   const resData = useRestaurantData();
-  if (!resData || !Object.keys(resData).length) return <HomeShimmer />;
+  if (!resData || !Object.keys(resData).length) {
+    return <HomeShimmer />;
+  }
 
   return (
     <div className="mt-[25%] md:mt-[10%] lg:mt-[12%] xl:mt-[7%] mx-[5%] xl:mx-[13.5%] ">

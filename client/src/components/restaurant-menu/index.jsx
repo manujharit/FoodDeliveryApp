@@ -45,7 +45,9 @@ const RestaurantMenu = () => {
     }
   };
 
-  if (!resMenu) return <Loading />;
+  if (!resMenu) {
+    return <Loading />;
+  }
   return (
     <div className="my-[5%] mx-[25%] ">
       {resMenu['resDetails'] && <RestaurantInfo data={resMenu['resDetails']} />}

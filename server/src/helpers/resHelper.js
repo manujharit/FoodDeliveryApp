@@ -60,7 +60,7 @@ const getUpdatedData = async (data) => {
     }
 
     return [];
-  } catch (err) {
+  } catch {
     return [];
   }
 };
