@@ -82,4 +82,36 @@ const getRestaurantMenuData = async ({ lat, lng, id }) => {
   return {};
 };
 
-export { getRestaurants, getRestaurantMenuData, getUpdates };
+const getSearchSuggestions = async (data) => {
+  if (data.lat && data.lng && data.str) {
+    const url = 'https://www.swiggy.com/dapi/restaurants/search/suggest';
+    const params = {
+      lat: data.lat,
+      lng: data.lng,
+      str: data.str,
+      trackingId: data.trackingId || 'undefined',
+      includeIMItem: data.includeIMItem || 'true',
+    };
+    const headers = {
+      'User-Agent':
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
+    };
+
+    const resData = await axios
+      .get(url, { headers: headers, params: params })
+      .then((res) => res.data)
+      .catch((err) => {
+        throw err;
+      });
+
+    return resData;
+  }
+  return {};
+};
+
+export {
+  getRestaurants,
+  getRestaurantMenuData,
+  getUpdates,
+  getSearchSuggestions,
+};

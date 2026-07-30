@@ -3,6 +3,7 @@ import { clearCart } from '@/redux/cartSlice';
 import { useNavigate } from 'react-router';
 import CartRestaurant from '@/components/cart-restaurant';
 import { Link } from 'react-router';
+import './_cart.scss';
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -18,66 +19,61 @@ const Cart = () => {
   };
 
   return (
-    <div className="my-[5%] mx-[25%] min-h-screen">
-      <div className="flex flex-row justify-between items-center">
-        <h1 className="text-2xl font-bold">Cart</h1>
-        {cart.totalAmount ? (
+    <div className="cart">
+      <div className="cart__header">
+        <h1 className="cart__title">Cart</h1>
+        {cart.totalAmount > 0 && (
           <button
-            className="bg-red-500 hover:bg-red-600 transition-colors text-white my-4 px-2 py-1 rounded-md"
+            className="cart__clear-button"
             onClick={() => dispatch(clearCart())}
           >
             Clear
           </button>
-        ) : (
-          ''
         )}
       </div>
+
       {Object.keys(cart.restaurants).length === 0 ? (
-        <div className="flex flex-col justify-center items-center mt-20">
-          <span className="material-symbols-outlined text-[150px] text-gray-300">
+        <div className="cart__empty">
+          <span className="material-symbols-outlined cart__empty-icon">
             remove_shopping_cart
           </span>
-          <h1 className="mt-4">No items in cart</h1>
-          <h1 className="text-lg mt-4 font-semibold">
+          <h2 className="cart__empty-title">No items in cart</h2>
+          <p className="cart__empty-subtitle">
             Hungry? Order from top restaurants near you!!!{' '}
-            <Link
-              to="/"
-              className="text-blue-500 underline focus:text-purple-500"
-            >
+            <Link to="/" className="cart__empty-link">
               Click here
             </Link>
-          </h1>
+          </p>
         </div>
       ) : (
-        Object.entries(cart.restaurants).map(
-          ([restaurantId, restaurantData], index) => (
-            <CartRestaurant
-              key={index}
-              restaurantId={restaurantId}
-              restaurantData={restaurantData}
-            />
-          )
-        )
+        <div className="cart__list">
+          {Object.entries(cart.restaurants).map(
+            ([restaurantId, restaurantData], index) => (
+              <CartRestaurant
+                key={index}
+                restaurantId={restaurantId}
+                restaurantData={restaurantData}
+              />
+            )
+          )}
+        </div>
       )}
-      {cart.totalAmount ? (
-        <div className="my-4 px-6 flex flex-row justify-between items-center text-xl font-bold">
-          <span>TO PAY</span>
-          <span>₹{cart.totalAmount} /-</span>
-        </div>
-      ) : (
-        ''
-      )}
-      {cart.totalAmount ? (
-        <div className="flex justify-center items-center">
-          <button
-            className="bg-green-600 hover:bg-green-700 transition-colors px-2 py-1 border border-green-700 shadow-md shadow-green-400 active:shadow-none font-semibold rounded-xl text-white text-sm"
-            onClick={() => orderNowHandler()}
-          >
-            Order Now !!!
-          </button>
-        </div>
-      ) : (
-        ''
+
+      {cart.totalAmount > 0 && (
+        <>
+          <div className="cart__summary">
+            <span>TO PAY</span>
+            <span>₹{cart.totalAmount} /-</span>
+          </div>
+          <div className="cart__order-wrapper">
+            <button
+              className="cart__order-button"
+              onClick={() => orderNowHandler()}
+            >
+              Order Now !!!
+            </button>
+          </div>
+        </>
       )}
     </div>
   );

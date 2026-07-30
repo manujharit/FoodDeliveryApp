@@ -1,0 +1,34 @@
+@use "../../styles/variables" as *;
+@use "../../styles/colors" as *;
+@use "../../styles/fonts" as *;
+
+.restaurant-carousel {
+  margin: 1rem;
+
+  &__toggle-btn {
+    padding: 1rem;
+    width: 100%;
+    filter: drop-shadow(0 10px 8px rgb(0 0 0 / 4%)) drop-shadow(0 4px 3px rgb(0 0 0 / 10%));
+    background-color: #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #d1d5db;
+    }
+  }
+
+  &__title {
+    font-weight: bold;
+    color: $black;
+    font-size: $font-size-base;
+  }
+  
+  &__icon {
+    color: $black;
+  }
+}

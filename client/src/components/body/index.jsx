@@ -4,7 +4,9 @@ import WhatsOnMindCard from '@/components/whats-on-mind-card';
 import Carousal from '@/components/carousel';
 import RestaurantList from '@/components/restaurant-list';
 import Explore from '@/components/explore';
+import Separator from '@/components/separator';
 import useRestaurantData from '@/hooks/useRestaurantData';
+import './_body.scss';
 
 const Body = () => {
   const resData = useRestaurantData();
@@ -14,9 +16,9 @@ const Body = () => {
   }
 
   return (
-    <div className="mt-[25%] md:mt-[10%] lg:mt-[12%] xl:mt-[7%] mx-[5%] xl:mx-[13.5%] ">
+    <div className="body">
       {resData['whats_on_your_mind'] && (
-        <div className="border-b-2 border-solid border-gray-200">
+        <>
           <Carousal
             cardTitle={"What's on your mind?"}
             data={resData['whats_on_your_mind']}
@@ -24,16 +26,20 @@ const Body = () => {
             index={2}
             scrollIndex={1}
           />
-        </div>
+          <Separator />
+        </>
       )}
       {resData['top_brands_for_you'] && (
-        <Carousal
-          cardTitle={'Top restaurant chains'}
-          data={resData['top_brands_for_you']}
-          card={RestaurantCard}
-          index={1}
-          scrollIndex={0}
-        />
+        <>
+          <Carousal
+            cardTitle={'Top restaurant chains'}
+            data={resData['top_brands_for_you']}
+            card={RestaurantCard}
+            index={1}
+            scrollIndex={0}
+          />
+          <Separator />
+        </>
       )}
       {resData['restaurant_grid_listing'] && (
         <RestaurantList data={resData['restaurant_grid_listing']} />

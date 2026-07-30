@@ -5,6 +5,7 @@ jest.unstable_mockModule('../clients/swiggyClient.js', () => ({
   getRestaurants: jest.fn(),
   getUpdates: jest.fn(),
   getRestaurantMenuData: jest.fn(),
+  getSearchSuggestions: jest.fn(),
 }));
 
 const { getRestaurantData, getUpdatedData, getRestaurantMenu } =

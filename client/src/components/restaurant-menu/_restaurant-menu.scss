@@ -1,0 +1,16 @@
+@use "../../styles/variables" as *;
+
+.restaurant-menu {
+  margin: 0 auto 2rem;
+  width: 95%;
+  
+  @media (min-width: $screen-tablet) {
+    width: 70%;
+    margin: 0 auto 3rem;
+  }
+
+  @media (min-width: $screen-desktop) {
+    width: 50%;
+    margin: 0 auto 5%;
+  }
+}

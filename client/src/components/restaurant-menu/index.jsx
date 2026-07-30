@@ -7,6 +7,7 @@ import MenuOffersCard from '@/components/menu-offers-card';
 import RestaurantCarousel from '@/components/restaurant-carousel';
 import { useDispatch } from 'react-redux';
 import { addItem, removeItem, updateQuantity } from '@/redux/cartSlice';
+import './_restaurant-menu.scss';
 
 const RestaurantMenu = () => {
   const { id } = useParams();
@@ -51,7 +52,7 @@ const RestaurantMenu = () => {
   }
 
   return (
-    <div className="my-[5%] mx-[25%] ">
+    <div className="restaurant-menu">
       {resMenu['resDetails'] && <RestaurantInfo data={resMenu['resDetails']} />}
       {resMenu['offers'] && (
         <Carousel

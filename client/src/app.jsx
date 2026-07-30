@@ -4,6 +4,7 @@ import { Outlet, useLocation } from 'react-router';
 import { Provider } from 'react-redux';
 import appStore from '@/redux/appStore';
 import { useEffect } from 'react';
+import './_app.scss';
 
 const App = () => {
   const location = useLocation();
@@ -14,9 +15,11 @@ const App = () => {
 
   return (
     <Provider store={appStore}>
-      <div className="">
+      <div className="container">
         <Navbar />
-        <Outlet />
+        <main className="main-content">
+          <Outlet />
+        </main>
         <Footer />
       </div>
     </Provider>

@@ -1,7 +1,11 @@
+import './_location.scss';
+
 const Location = () => {
   return (
-    <label className="text-xs text-blue-800 flex items-center">
-      <span className="material-symbols-outlined text-[15px]">location_on</span>
+    <label className="location">
+      <span className="material-symbols-outlined location__icon">
+        location_on
+      </span>
     </label>
   );
 };

@@ -117,15 +117,39 @@ To run tests individually:
 
 ### 4. Code Quality & Linting 🧹
 
-The project maintains strict code quality standards utilizing ESLint and Prettier.
+The project maintains strict code quality standards utilizing ESLint, Stylelint, and Prettier.
 
-To lint the entire workspace:
+To lint JavaScript/React files across the workspace:
 ```bash
 npm run lint
 ```
-To automatically fix linting and formatting issues:
+To automatically fix JS linting issues:
 ```bash
 npm run lint:fix
 ```
 
+To lint SCSS/CSS files in the client:
+```bash
+npm run stylelint
+```
+To automatically fix SCSS/CSS linting issues:
+```bash
+npm run stylelint:fix
+```
+
 > **Note**: A Husky `pre-commit` hook is actively configured. Attempting to commit code that breaks ESLint rules or fails related test cases will safely abort the commit.
+
+### 5. Cleaning & Reinstalling 🧹
+
+If you need to perform a fresh install, clean `node_modules`, npm cache, and ensure you're on the correct Node version (via `.nvmrc`):
+```bash
+npm run clean
+```
+
+---
+
+## 📬 Contact Information
+
+**Manuj Haritwal**
+- **Email**: manuj.haritwal01@gmail.com
+- **GitHub**: [manujharit](https://github.com/manujharit)

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ExploreCards from '@/components/explore-cards';
+import './_explore-section.scss';
 
 const ExploreSection = ({ data }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -7,20 +8,20 @@ const ExploreSection = ({ data }) => {
   const hasMore = data.brands.length > 5 && !isExpanded;
 
   return (
-    <div className="mt-[5%] w-[100%] ">
-      <label className="text-2xl font-bold text-black">{data.title}</label>
-      <div className="flex mt-[2%] items-center  text-center flex-wrap">
+    <div className="explore-section">
+      <label className="explore-section__title">{data.title}</label>
+      <div className="explore-section__content">
         {displayData.map((brand, index) => (
           <ExploreCards key={index} data={brand} />
         ))}
         {hasMore && (
           <div
-            className=" w-[30%] mx-[1.6%] my-[2%]"
+            className="explore-section__show-more-wrapper"
             onClick={() => setIsExpanded(true)}
           >
-            <label className="relative border flex justify-center items-center h-[50px] w-full text-md shadow font-semibold text-gray-600 hover:text-orange-500 hover:border-orange-500 transition-colors cursor-pointer px-4 text-center">
-              <span className="leading-none">Show More</span>
-              <span className="material-symbols-outlined text-lg absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
+            <label className="explore-section__show-more-btn">
+              <span className="explore-section__show-more-text">Show More</span>
+              <span className="material-symbols-outlined explore-section__show-more-icon">
                 expand_more
               </span>
             </label>

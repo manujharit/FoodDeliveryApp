@@ -1,0 +1,53 @@
+@use "../../styles/variables" as *;
+@use "../../styles/colors" as *;
+@use "../../styles/fonts" as *;
+
+.error-boundary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: transparent;
+  padding: 5rem 2rem;
+
+  &__image {
+    width: 16rem;
+    height: 16rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.025em;
+  }
+
+  &__message {
+    font-size: $font-size-lg;
+    color: #6b7280;
+    margin-bottom: 2rem;
+    text-align: center;
+    max-width: 28rem;
+  }
+
+  &__link {
+    padding: 0.75rem 2rem;
+    background-color: $orange;
+    color: $white;
+    font-weight: bold;
+    border-radius: 9999rem;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+
+    &:hover {
+      background-color: #ea580c;
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 10%), 0 10px 10px -5px rgb(0 0 0 / 4%);
+      transform: translateY(-0.25rem);
+    }
+  }
+}

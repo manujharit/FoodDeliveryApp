@@ -1,0 +1,68 @@
+@use "../../styles/variables" as *;
+@use "../../styles/colors" as *;
+@use "../../styles/fonts" as *;
+
+.menu-item-button {
+  border-radius: 0.75rem;
+  background-color: $white;
+  font-size: $font-size-sm;
+  font-weight: 800;
+  color: $green-dark;
+  width: 4.375rem;
+  height: 2.5rem;
+  border: 0.0625rem solid $white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &--active {
+    border-radius: 0.75rem;
+    background-color: $white;
+    font-size: $font-size-sm;
+    font-weight: 800;
+    color: $green-dark;
+    width: 4.375rem;
+    height: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 0.0625rem solid $green;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 100%;
+    color: $green;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    &--add {
+      text-align: start;
+      padding-left: 0.25rem;
+      border-top-left-radius: 0.75rem;
+      border-bottom-left-radius: 0.75rem;
+    }
+
+    &--sub {
+      padding-right: 0.25rem;
+      border-top-right-radius: 0.75rem;
+      border-bottom-right-radius: 0.75rem;
+    }
+  }
+
+  &__quantity {
+    color: $black;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+  }
+}

@@ -1,17 +1,17 @@
+import './_cart-item-button.scss';
+
 const CartItemButton = ({ info, handleUpdateQuantity }) => {
   return (
-    <div className=" border-2 border-green-400 bg-white text-sm font-extrabold text-green-800 flex flex-row items-center justify-between w-[80px] h-[30px]">
+    <div className="cart-item-button">
       <button
-        className="flex justify-center items-center  w-[30%] h-[100%] text-green-500 text-start  pl-1"
+        className="cart-item-button__btn cart-item-button__btn--add"
         onClick={() => handleUpdateQuantity(info.quantity + 1)}
       >
         +
       </button>
-      <b className="flex justify-center items-center  text-black w-[40%]  text-center h-[100%]">
-        {info.quantity}
-      </b>
+      <b className="cart-item-button__quantity">{info.quantity}</b>
       <button
-        className="flex justify-center items-center  w-[30%] text-green-500 h-[100%] pr-1"
+        className="cart-item-button__btn cart-item-button__btn--remove"
         onClick={() => handleUpdateQuantity(info.quantity - 1)}
       >
         -

@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import Rating from '@/components/rating';
 import Location from '@/components/location';
+import './_restaurant-info.scss';
 
 const RestaurantInfo = ({ data }) => {
   const {
@@ -14,24 +15,19 @@ const RestaurantInfo = ({ data }) => {
   } = data;
 
   return (
-    <div className="flex flex-col">
-      <p className="text-gray-500">
-        <Link
-          to="/"
-          className="text-xs text-gray-500 hover:text-gray-700 hover:underline"
-        >
+    <div className="restaurant-info">
+      <p className="restaurant-info__breadcrumbs">
+        <Link to="/" className="restaurant-info__breadcrumb-link">
           Home
         </Link>{' '}
         {' > '}{' '}
-        <label className="text-xs text-gray-500 hover:text-gray-700 hover:underline">
-          {name}
-        </label>
+        <label className="restaurant-info__breadcrumb-link">{name}</label>
       </p>
-      <label className="text-3xl font-bold text-black mt-[1%]">{name}</label>
-      <div className=" border-b-2 rounded-b-3xl h-60 bg-gradient-to-t from-gray-300 to-white">
-        <div className="bg-white border rounded-3xl w-[95%] h-[85%] m-[2.5%] ">
-          <div className="p-[2%]">
-            <label className="font-semibold flex flex-row">
+      <label className="restaurant-info__name">{name}</label>
+      <div className="restaurant-info__card-bg">
+        <div className="restaurant-info__card">
+          <div className="restaurant-info__card-content">
+            <label className="restaurant-info__rating-cost">
               <Rating
                 rating={avgRatingString + ' (' + totalRatingsString + ')'}
               />{' '}
@@ -41,7 +37,7 @@ const RestaurantInfo = ({ data }) => {
               {cuisines.map((cuisine, index) => (
                 <label key={index}>
                   &nbsp;
-                  <label className="text-orange-500 underline">
+                  <label className="restaurant-info__cuisine-link">
                     {cuisine}
                     {index !== cuisines.length - 1 ? ',' : ''}
                   </label>
@@ -49,26 +45,26 @@ const RestaurantInfo = ({ data }) => {
                 </label>
               ))}
             </label>
-            <div className="flex flex-row ml-[1%]">
-              <div className="flex flex-col font-extrabold text-sm text-gray-400">
+            <div className="restaurant-info__meta">
+              <div className="restaurant-info__timeline">
                 <label>&#183;</label>
                 <label>|</label>
                 <label>&#183;</label>
               </div>
-              <div className=" flex flex-col ml-[2%]">
-                <label>
-                  <label className="text-xs font-bold">Outlet:</label>{' '}
-                  <label className="text-sm font-semibold">{areaName}</label>
+              <div className="restaurant-info__timeline-details">
+                <label className="restaurant-info__outlet">
+                  <span className="restaurant-info__outlet-label">Outlet:</span>{' '}
+                  <span className="restaurant-info__outlet-name">
+                    {areaName}
+                  </span>
                 </label>
-                <label className="text-xs font-bold mt-[15%]">
-                  {sla.slaString}
-                </label>
+                <label className="restaurant-info__sla">{sla.slaString}</label>
               </div>
             </div>
           </div>
-          <div className="border-t-2 py-[1%] px-[2%] mt-[3%] w-[100%] flex flex-row justify-start">
+          <div className="restaurant-info__location">
             <Location />
-            <label className="pl-[1%] font-semibold text-sm text-gray-500">
+            <label className="restaurant-info__distance">
               {sla.lastMileTravelString}
             </label>
           </div>

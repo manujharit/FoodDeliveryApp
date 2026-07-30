@@ -8,6 +8,7 @@ import {
   getRestaurants,
   getRestaurantMenuData,
   getUpdates,
+  getSearchSuggestions,
 } from '#src/clients/swiggyClient.js';
 
 const getRestaurantData = async (data) => {
@@ -106,4 +107,13 @@ const getRestaurantMenu = async (data) => {
   }
 };
 
-export { getRestaurantData, getUpdatedData, getRestaurantMenu };
+const getSearchData = async (data) => {
+  try {
+    const apiData = await getSearchSuggestions(data);
+    return apiData;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export { getRestaurantData, getUpdatedData, getRestaurantMenu, getSearchData };

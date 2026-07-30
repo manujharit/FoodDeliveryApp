@@ -5,6 +5,7 @@ import { fetchUpdateData } from '@/utils/fetchData';
 import { mergeData } from '@/utils/utils';
 import CardShimmer from '@/components/shimmers/card-shimmer';
 import { useSelector } from 'react-redux';
+import './_restaurant-list.scss';
 
 const RestaurantList = ({ data }) => {
   const [card, setCard] = useState(data);
@@ -71,21 +72,19 @@ const RestaurantList = ({ data }) => {
   }, [hasCards, loadMore]);
 
   return (
-    <div className="flex flex-col mt-[3%]">
-      <label className="text-2xl font-bold mb-6">
+    <div className="restaurant-list">
+      <label className="restaurant-list__title">
         Restaurants with online food delivery
       </label>
-      <div className="flex flex-wrap md:justify-between justify-center items-center">
+      <div className="restaurant-list__grid">
         {card.map((card, index) => (
           <RestaurantCard key={index} data={card} />
         ))}
-        {loadMore ? (
-          <span ref={loaderRef}>
+        {loadMore && (
+          <span ref={loaderRef} className="restaurant-list__loader">
             {loading &&
               loadArray.map((item, index) => <CardShimmer key={index} />)}
           </span>
-        ) : (
-          ''
         )}
       </div>
     </div>

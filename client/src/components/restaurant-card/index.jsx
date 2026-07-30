@@ -1,7 +1,9 @@
 import Config from '@/configs/configs';
 import Rating from '@/components/rating';
-const { CDN_URL } = Config;
 import { useNavigate } from 'react-router';
+import './_restaurant-card.scss';
+
+const { CDN_URL } = Config;
 
 const RestaurantCard = ({ data }) => {
   const {
@@ -18,46 +20,48 @@ const RestaurantCard = ({ data }) => {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <div
-        className="min-w-[250px] max-w-[250px] min-h-[280px] max-h-[280px] m-[10px] rounded-2xl transition-all duration-300 shadow-md lg:shadow-none hover:shadow-md"
-        onClick={() => {
-          navigate(`/restaurant/${id}`);
-        }}
-      >
-        <div className="hover:scale-95">
-          <div>
-            {aggregatedDiscountInfoV3 && (
-              <label className="absolute font-extrabold mt-[142px] rounded-b-2xl bg-gradient-to-t from-black to-transparent px-3 w-[250px]  text-white text-lg">
-                {aggregatedDiscountInfoV3?.header +
-                  ' ' +
-                  (aggregatedDiscountInfoV3?.subHeader === undefined
-                    ? ''
-                    : aggregatedDiscountInfoV3?.subHeader)}
-              </label>
-            )}
-            <img
-              className="res-img rounded-2xl h-[170px] w-[100%] shadow-lg shadow-gray-100"
-              src={CDN_URL + cloudinaryImageId}
-              alt="Restaurant Image"
-            />
-          </div>
+    <div
+      className="restaurant-card"
+      onClick={() => {
+        navigate(`/restaurant/${id}`);
+      }}
+    >
+      <div className="restaurant-card__inner">
+        <div className="restaurant-card__image-wrapper">
+          <img
+            className="restaurant-card__img"
+            src={CDN_URL + cloudinaryImageId}
+            alt="Restaurant Image"
+          />
+          {aggregatedDiscountInfoV3 && (
+            <label className="restaurant-card__discount">
+              {aggregatedDiscountInfoV3?.header +
+                ' ' +
+                (aggregatedDiscountInfoV3?.subHeader === undefined
+                  ? ''
+                  : aggregatedDiscountInfoV3?.subHeader)}
+            </label>
+          )}
+        </div>
 
-          <div className="mx-[5%] flex flex-col mb-10">
-            <span className="font-bold text-lg text-gray-800">
-              {name.length <= 20 ? name : `${name.slice(0, 20)}...`}
+        <div className="restaurant-card__content">
+          <span className="restaurant-card__name">
+            {name?.length <= 20 ? name : `${name?.slice(0, 20)}...`}
+          </span>
+          {(avgRating || sla?.slaString) && (
+            <span className="restaurant-card__meta">
+              {avgRating && <Rating rating={avgRating} />}
+              {sla?.slaString}
             </span>
-            <span className="text-md font-semibold text-gray-800 flex flex-row items-center">
-              <Rating rating={avgRating} />
-              {sla.slaString}
-            </span>
-            <span className="text-md text-gray-500">
+          )}
+          {cuisines && cuisines.length > 0 && (
+            <span className="restaurant-card__cuisines">
               {cuisines.join(', ').length <= 25
                 ? cuisines.join(', ')
                 : `${cuisines.join(', ').slice(0, 25)}...`}
             </span>
-            <span className="text-md text-gray-500">{areaName}</span>
-          </div>
+          )}
+          <span className="restaurant-card__area">{areaName}</span>
         </div>
       </div>
     </div>

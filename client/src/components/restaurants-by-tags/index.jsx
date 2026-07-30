@@ -8,6 +8,7 @@ import {
 import { mergeData } from '@/utils/utils';
 import CardShimmer from '@/components/shimmers/card-shimmer';
 import { useSelector } from 'react-redux';
+import './_restaurants-by-tags.scss';
 
 const RestaurantByTags = ({ params }) => {
   const [card, setCard] = useState([]);
@@ -102,7 +103,7 @@ const RestaurantByTags = ({ params }) => {
 
   if (card.length === 0) {
     return (
-      <div className="flex flex-wrap justify-between items-center">
+      <div className="restaurants-by-tags">
         {loadArray.map((item, index) => (
           <CardShimmer key={index} />
         ))}
@@ -111,17 +112,15 @@ const RestaurantByTags = ({ params }) => {
   }
 
   return (
-    <div className="flex flex-wrap justify-between items-center">
+    <div className="restaurants-by-tags">
       {card.map((card, index) => (
         <RestaurantCard key={index} data={card} />
       ))}
-      {loadMore ? (
-        <div ref={loaderRef} style={{ height: '100px', width: '100%' }}>
+      {loadMore && (
+        <div ref={loaderRef} className="restaurants-by-tags__loader">
           {loading &&
             loadArray.map((item, index) => <CardShimmer key={index} />)}
         </div>
-      ) : (
-        ''
       )}
     </div>
   );

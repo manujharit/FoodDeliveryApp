@@ -1,0 +1,23 @@
+@use "../../styles/variables" as *;
+
+.restaurants-by-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  @media (min-width: $screen-mobile) {
+    justify-content: space-between;
+  }
+
+  &__loader {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media (min-width: $screen-mobile) {
+      justify-content: space-between;
+    }
+  }
+}

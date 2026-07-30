@@ -1,0 +1,84 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/colors" as *;
+@use "../../../styles/fonts" as *;
+
+.home-shimmer {
+  margin: 0 auto 2rem;
+  width: 100%;
+  max-width: $max-page-width;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: $screen-tablet) {
+    padding: 0;
+  }
+
+  &__banner {
+    width: 100%;
+    background-color: $slate;
+    padding: 4rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    
+    @media (min-width: $screen-tablet) {
+      padding: 6rem 1rem;
+    }
+  }
+
+  &__spinner-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__spinner {
+    width: 4rem;
+    height: 4rem;
+    border: 0.25rem solid $gray;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: home-shimmer-spin 1s linear infinite;
+  }
+
+  &__text {
+    margin-top: 1rem;
+    font-size: $font-size-lg;
+    font-weight: bold;
+    color: $gray;
+
+    @media (min-width: $screen-tablet) {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  &__cards {
+    margin-top: 3rem;
+    width: 100%;
+  }
+
+  &__viewport {
+    display: flex;
+    overflow-x: hidden;
+    padding-top: 1rem;
+  }
+
+  &__track {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+}
+
+@keyframes home-shimmer-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,16 @@
+@use "../../styles/variables" as *;
+@use "../../styles/fonts" as *;
+
+.whats-on-mind-page {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto 3rem;
+  max-width: $max-page-width;
+  padding: 0 1rem;
+
+  &__title {
+    font-size: $font-size-2xl;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+}

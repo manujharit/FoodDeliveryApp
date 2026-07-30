@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './_menu-item-button.scss';
 
 const MenuItemButton = ({ qty, info, onAddItem, onSubItem }) => {
   const [quantity, setQuantity] = useState(qty);
@@ -16,30 +17,25 @@ const MenuItemButton = ({ qty, info, onAddItem, onSubItem }) => {
 
   if (!quantity) {
     return (
-      <button
-        className=" rounded-xl bg-white text-sm font-extrabold text-green-800 w-[70px] h-[40px]"
-        onClick={handleAdd}
-      >
+      <button className="menu-item-button" onClick={handleAdd}>
         ADD
       </button>
     );
   } else {
     return (
-      <div className=" rounded-xl bg-white border-green-500 text-sm font-extrabold text-green-800 flex flex-row items-center justify-between w-[70px] h-[40px]">
+      <div className="menu-item-button--active">
         <button
-          className="flex items-center justify-center w-[30%] h-[100%] text-green-600 text-start  pl-1 rounded-s-xl"
-          onClick={handleAdd}
-        >
-          +
-        </button>
-        <b className="text-black w-[40%] flex items-center justify-center text-center h-[100%]">
-          {quantity}
-        </b>
-        <button
-          className="flex items-center justify-center w-[30%] text-green-600  h-[100%] pr-1 rounded-e-xl"
+          className="menu-item-button__btn menu-item-button__btn--sub"
           onClick={handleSub}
         >
           -
+        </button>
+        <b className="menu-item-button__quantity">{quantity}</b>
+        <button
+          className="menu-item-button__btn menu-item-button__btn--add"
+          onClick={handleAdd}
+        >
+          +
         </button>
       </div>
     );

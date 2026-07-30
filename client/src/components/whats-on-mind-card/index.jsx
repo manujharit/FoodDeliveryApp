@@ -1,19 +1,25 @@
 import Config from '@/configs/configs';
 import { parseParamsAndReturnPath } from '@/utils/utils';
 import { Link } from 'react-router';
+import './_whats-on-mind-card.scss';
 
 const { CDN_URL } = Config;
 
-const WhatsOnMindCard = ({ data }) => {
+const WhatsOnMindCard = ({ data, isSmall = false }) => {
   const path = parseParamsAndReturnPath(
     data.action.link,
     data?.accessibility?.altText
   );
 
   return (
-    <div className="hover:shadow-lg m-2 snap-start rounded-lg min-w-[150px] mx-4">
+    <div
+      className={`whats-on-mind-card ${isSmall ? 'whats-on-mind-card--small' : 'whats-on-mind-card--large'}`}
+    >
       <Link to={path}>
-        <img src={CDN_URL + data.imageId} className="" />
+        <img
+          src={CDN_URL + data.imageId}
+          className="whats-on-mind-card__image"
+        />
       </Link>
     </div>
   );

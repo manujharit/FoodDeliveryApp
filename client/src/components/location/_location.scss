@@ -1,0 +1,13 @@
+@use "../../styles/colors" as *;
+@use "../../styles/fonts" as *;
+
+.location {
+  font-size: $font-size-xs;
+  color: $blue-dark;
+  display: flex;
+  align-items: center;
+
+  &__icon {
+    font-size: 0.9375rem;
+  }
+}

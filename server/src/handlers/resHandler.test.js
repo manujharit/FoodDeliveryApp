@@ -4,6 +4,7 @@ jest.unstable_mockModule('../helpers/resHelper.js', () => ({
   getRestaurantData: jest.fn(),
   getUpdatedData: jest.fn(),
   getRestaurantMenu: jest.fn(),
+  getSearchData: jest.fn(),
 }));
 
 const { restaurantHandler, updateHandler, restaurantMenuHandler } =

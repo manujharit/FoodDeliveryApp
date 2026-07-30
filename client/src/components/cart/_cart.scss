@@ -1,0 +1,125 @@
+@use "../../styles/variables" as *;
+@use "../../styles/colors" as *;
+@use "../../styles/fonts" as *;
+
+.cart {
+  min-height: 100vh;
+  max-width: $max-page-width;
+  margin: 0 auto 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 2rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: $font-size-2xl;
+    font-weight: bold;
+    color: $black;
+  }
+
+  &__clear-button {
+    background-color: $red;
+    color: $white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.375rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: $red-dark;
+    }
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__empty-icon {
+    font-size: 8rem;
+    color: $black;
+    margin-bottom: 1rem;
+    
+    @media (min-width: $screen-tablet) {
+      font-size: 10rem;
+    }
+  }
+
+  &__empty-title {
+    font-size: $font-size-xl;
+    font-weight: bold;
+    color: $black;
+  }
+
+  &__empty-subtitle {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    text-align: center;
+    color: $black;
+  }
+
+  &__empty-link {
+    color: $blue;
+    text-decoration: underline;
+
+    &:hover, &:focus {
+      color: $blue-dark;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: $font-size-xl;
+    font-weight: bold;
+    color: $black;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+    border-top: 0.0625rem solid $gray-light;
+  }
+
+  &__order-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+  }
+
+  &__order-button {
+    background-color: $green;
+    color: $white;
+    font-weight: 600;
+    font-size: $font-size-sm;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.75rem;
+    border: 0.0625rem solid $green-dark;
+    box-shadow: 0 0.25rem 0.375rem -0.0625rem rgb(22 163 74 / 40%); 
+    transition: background-color 0.2s, box-shadow 0.1s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $green-dark;
+    }
+
+    &:active {
+      box-shadow: none;
+    }
+  }
+}

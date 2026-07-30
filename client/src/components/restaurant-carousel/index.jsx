@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ItemList from '@/components/item-list';
+import './_restaurant-carousel.scss';
 
 const RestaurantCarousel = ({ data, onAddItem, onSubItem }) => {
   const index = data.itemCards.length;
@@ -14,13 +15,15 @@ const RestaurantCarousel = ({ data, onAddItem, onSubItem }) => {
   };
 
   return (
-    <div className="m-4">
+    <div className="restaurant-carousel">
       <button
-        className="p-4 w-full drop-shadow-lg bg-gray-200 flex justify-between"
+        className="restaurant-carousel__toggle-btn"
         onClick={handleDropDown}
       >
-        <span className="font-bold">{data.title}</span>
-        <span>{showItems ? '▲' : '▼'}</span>
+        <span className="restaurant-carousel__title">{data.title}</span>
+        <span className="restaurant-carousel__icon">
+          {showItems ? '▲' : '▼'}
+        </span>
       </button>
       {showItems && (
         <div>

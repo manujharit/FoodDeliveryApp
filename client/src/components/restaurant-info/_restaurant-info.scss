@@ -1,0 +1,132 @@
+@use "../../styles/variables" as *;
+@use "../../styles/colors" as *;
+@use "../../styles/fonts" as *;
+
+.restaurant-info {
+  display: flex;
+  flex-direction: column;
+
+  &__breadcrumbs {
+    color: #6b7280;
+  }
+
+  &__breadcrumb-link {
+    font-size: $font-size-xs;
+    color: #6b7280;
+    text-decoration: none;
+
+    &:hover {
+      color: #374151;
+      text-decoration: underline;
+    }
+  }
+
+  &__name {
+    font-size: $font-size-3xl;
+    font-weight: bold;
+    color: $black;
+    margin-top: 1rem;
+  }
+
+  &__card-bg {
+    border-bottom: 0.125rem solid $gray-light;
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    height: 15rem;
+    background: linear-gradient(to top, #d1d5db, $white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  &__card {
+    background-color: $white;
+    border: 0.0625rem solid $gray-light;
+    border-radius: 1.5rem;
+    width: 95%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__card-content {
+    padding: 1rem;
+  }
+
+  &__rating-cost {
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  &__cuisine-link {
+    color: $orange;
+    text-decoration: underline;
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: row;
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  &__timeline {
+    display: flex;
+    flex-direction: column;
+    font-weight: 800;
+    font-size: $font-size-sm;
+    color: #9ca3af;
+    align-items: center;
+    line-height: 1.2;
+  }
+
+  &__timeline-details {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.5rem;
+    justify-content: space-between;
+  }
+
+  &__outlet {
+    display: flex;
+    gap: 0.25rem;
+    align-items: baseline;
+  }
+
+  &__outlet-label {
+    font-size: $font-size-xs;
+    font-weight: bold;
+  }
+
+  &__outlet-name {
+    font-size: $font-size-sm;
+    font-weight: 600;
+  }
+
+  &__sla {
+    font-size: $font-size-xs;
+    font-weight: bold;
+  }
+
+  &__location {
+    border-top: 0.125rem solid $gray-light;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  &__distance {
+    padding-left: 0.5rem;
+    font-weight: 600;
+    font-size: $font-size-sm;
+    color: #6b7280;
+  }
+}

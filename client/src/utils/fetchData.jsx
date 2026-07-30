@@ -175,10 +175,34 @@ const fetchWhatsOnMindUpdateData = async ({
   return [];
 };
 
+const fetchSearchSuggestions = async (lat, lng, str) => {
+  const url = API_URL + '/search';
+  const params = {
+    lat: lat,
+    lng: lng,
+    str: str,
+  };
+
+  if (lat && lng && str) {
+    const data = await axios
+      .get(url, { params: params })
+      .then((res) => res.data)
+      .catch((err) => {
+        console.log(err);
+        return {};
+      });
+
+    return data;
+  }
+
+  return {};
+};
+
 export {
   fetchData,
   fetchUpdateData,
   fetchRestaurantMenu,
   fetchWhatsOnMindRestaurants,
   fetchWhatsOnMindUpdateData,
+  fetchSearchSuggestions,
 };

@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import CartItemButton from '@/components/cart-item-button';
 import { removeItem, updateQuantity } from '@/redux/cartSlice';
+import './_cart-items.scss';
 
 const CartItems = ({ info, restaurantId }) => {
   const dispatch = useDispatch();
@@ -20,22 +21,19 @@ const CartItems = ({ info, restaurantId }) => {
   };
 
   return (
-    <div className="p-4 shadow drop-shadow-lg flex flex-row h-24">
-      <div className="flex flex-col  px-2 w-[1000px]">
-        <span className="font-bold text-lg">{info.name}</span>
-        <span className="text-md font-semibold">
+    <div className="cart-item">
+      <div className="cart-item__details">
+        <span className="cart-item__name">{info.name}</span>
+        <span className="cart-item__price">
           ₹ {(info.price / 100 || info.defaultPrice / 100) * info.quantity}/-
         </span>
       </div>
-      <div className="flex justify-center items-center">
+      <div className="cart-item__actions">
         <CartItemButton
           info={info}
           handleUpdateQuantity={handleUpdateQuantity}
         />
-        <button
-          className="mx-4 bg-red-600 px-2 py-1 text-xs text-white rounded-md"
-          onClick={handleRemoveItem}
-        >
+        <button className="cart-item__remove-btn" onClick={handleRemoveItem}>
           Remove
         </button>
       </div>
