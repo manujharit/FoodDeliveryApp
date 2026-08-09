@@ -15,10 +15,10 @@ const App = () => {
 
   return (
     <Provider store={appStore}>
-      <div className="container">
+      <div className="app">
         <Navbar />
-        <main className="main-content">
-          <div className="outlet-wrapper">
+        <main className="app__main-content">
+          <div className="app__outlet-wrapper">
             <Outlet />
           </div>
         </main>

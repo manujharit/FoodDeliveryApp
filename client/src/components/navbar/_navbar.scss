@@ -36,14 +36,6 @@
     &:hover {
       transform: scale(0.95);
     }
-    
-    @media (min-width: $screen-mobile) {
-      width: 4rem;
-    }
-
-    @media (min-width: $screen-tablet) {
-      width: 5rem;
-    }
   }
 
   &__menu {
@@ -51,10 +43,6 @@
     display: flex;
     gap: 1rem;
     justify-content: flex-end;
-    
-    @media (min-width: $screen-mobile) {
-      gap: 2rem;
-    }
   }
 
   &__menu-item {
@@ -65,10 +53,6 @@
     font-weight: 600;
     text-decoration: none;
     transition: color 0.2s ease-in-out;
-
-    @media (min-width: $screen-tablet) {
-      display: flex;
-    }
 
     &:hover {
       color: $orange;
@@ -86,10 +70,6 @@
   &__menu-text {
     display: none;
     margin-right: 0.25rem;
-    
-    @media (min-width: $screen-mobile) {
-      display: inline-block;
-    }
   }
 
   &__cart-icon-wrapper {
@@ -134,10 +114,6 @@
     .material-symbols-outlined {
       font-size: $font-size-3xl;
     }
-
-    @media (min-width: $screen-tablet) {
-      display: none;
-    }
   }
 
   &__mobile-menu {
@@ -153,10 +129,6 @@
     position: absolute;
     top: 100%;
     width: 100%;
-    
-    @media (min-width: $screen-tablet) {
-      display: none;
-    }
   }
 
   &__mobile-item {
@@ -174,5 +146,37 @@
 
   &__mobile-icon {
     margin-right: 0.5rem;
+  }
+
+  @media (min-width: $screen-mobile) {
+    &__logo {
+      width: 4rem;
+    }
+
+    &__menu {
+      gap: 2rem;
+    }
+
+    &__menu-text {
+      display: inline-block;
+    }
+  }
+
+  @media (min-width: $screen-tablet) {
+    &__logo {
+      width: 5rem;
+    }
+
+    &__menu-item {
+      display: flex;
+    }
+
+    &__mobile-toggle {
+      display: none;
+    }
+
+    &__mobile-menu {
+      display: none;
+    }
   }
 }

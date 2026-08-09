@@ -6,17 +6,17 @@
   flex-wrap: wrap;
   justify-content: center;
 
-  @media (min-width: $screen-mobile) {
-    justify-content: space-between;
-  }
-
   &__loader {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
+  }
 
-    @media (min-width: $screen-mobile) {
+  @media (min-width: $screen-mobile) {
+    justify-content: space-between;
+
+    &__loader {
       justify-content: space-between;
     }
   }

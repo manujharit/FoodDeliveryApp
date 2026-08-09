@@ -10,10 +10,6 @@
   padding: 0 1rem;
   width: 100%;
 
-  @media (min-width: $screen-tablet) {
-    padding: 0;
-  }
-
   &__header {
     align-items: center;
     display: flex;
@@ -35,11 +31,6 @@
 
     &:focus-within {
       box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
-    }
-
-    @media (min-width: $screen-tablet) {
-      padding: 0.5rem 1rem;
-      width: 38.4rem;
     }
   }
 
@@ -89,5 +80,14 @@
   &__default-view {
     margin-top: 0;
     width: 100%;
+  }
+
+  @media (min-width: $screen-tablet) {
+    padding: 0;
+
+    &__input-wrapper {
+      padding: 0.5rem 1rem;
+      width: 38.4rem;
+    }
   }
 }

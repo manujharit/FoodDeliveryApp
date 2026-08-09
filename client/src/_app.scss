@@ -1,28 +1,30 @@
 @use "./styles/variables" as *;
 
-.container {
-    min-height: 100vh;
-    width: 100%;
-}
+.app {
+  min-height: 100vh;
+  width: 100%;
 
-.main-content {
+  &__main-content {
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 4.5rem); /* approx min height accounting for navbar */
     padding-top: 6rem;
-}
+  }
 
-.outlet-wrapper {
+  &__outlet-wrapper {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     margin-left: auto;
     margin-right: auto;
     width: $max-page-width;
+  }
 
-    @media (max-width: $screen-tablet) {
-        margin-left: 1rem;
-        margin-right: 1rem;
-        width: auto;
+  @media (max-width: $screen-tablet) {
+    &__outlet-wrapper {
+      margin-left: 1rem;
+      margin-right: 1rem;
+      width: auto;
     }
+  }
 }

@@ -14,7 +14,7 @@ This application mirrors a modern food delivery platform, utilizing real-time AP
 - **Integrated Cart System**: Users can add items to their cart, increment/decrement quantities, and review their order. Global state is efficiently managed via **Redux Toolkit**.
 - **Location-Based Data**: The proxy server fetches localized restaurant data based on geographic coordinates (Latitude / Longitude).
 - **Graceful Loading States**: Implements 'Shimmer' UI components to provide users with a polished experience while asynchronous data is fetching.
-- **Responsive UI**: Fully responsive, mobile-first design crafted effortlessly using **Tailwind CSS**.
+- **Responsive UI**: Fully responsive, mobile-first design crafted using **SCSS** following strict **BEM (Block Element Modifier)** methodology.
 
 ---
 
@@ -24,8 +24,7 @@ While the core discovery and cart logic is robust, there are several exciting av
 
 1. **User Authentication**: Implement user signup, login, and JWT-based session management.
 2. **User Profiles & Order History**: Allow users to save their favorite restaurants, multiple delivery addresses, and view past orders.
-3. **Dark Mode Theme**: Leverage Tailwind's native dark mode capabilities for a seamless night-time browsing experience.
-
+3. **Dark Mode Theme**: Leverage SCSS variables to introduce a seamless night-time browsing experience.
 ---
 
 ## 🏗️ Project Structure
@@ -64,10 +63,10 @@ FoodDeliveryApp/
 - **Core Framework**: React 19, React Router v8
 - **Build Tool**: Vite
 - **State Management**: Redux Toolkit & React-Redux
-- **Styling**: Tailwind CSS, PostCSS, Autoprefixer
+- **Styling**: SCSS (Strict BEM Methodology)
 - **Network**: Axios
 - **Testing**: Playwright (E2E)
-- **Linting & Formatting**: ESLint (v9), Prettier
+- **Linting & Formatting**: ESLint (v9), Stylelint, Prettier
 
 ### Backend (`/server`)
 - **Core Framework**: Node.js, Express

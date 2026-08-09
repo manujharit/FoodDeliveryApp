@@ -13,10 +13,6 @@
   padding: 2rem;
   width: 100%;
 
-  @media (max-width: $screen-tablet) {
-    padding: 1rem;
-  }
-
   &__logo-wrapper {
     align-items: center;
     display: flex;
@@ -62,5 +58,9 @@
       font-size: 2.25rem;
       font-variation-settings: 'FILL' 1, 'wght' 500;
     }
+  }
+
+  @media (max-width: $screen-tablet) {
+    padding: 1rem;
   }
 }

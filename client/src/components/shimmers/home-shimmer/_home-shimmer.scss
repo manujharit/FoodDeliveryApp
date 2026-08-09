@@ -8,10 +8,6 @@
   margin-bottom: 2rem;
   width: 100%;
 
-  @media (min-width: $screen-tablet) {
-    padding: 0;
-  }
-
   &__banner {
     align-items: center;
     background-color: $slate;
@@ -22,10 +18,6 @@
     margin-top: 1rem;
     padding: 4rem 1rem;
     width: 100%;
-    
-    @media (min-width: $screen-tablet) {
-      padding: 6rem 1rem;
-    }
   }
 
   &__spinner-wrapper {
@@ -49,10 +41,6 @@
     font-size: $font-size-lg;
     font-weight: bold;
     margin-top: 1rem;
-
-    @media (min-width: $screen-tablet) {
-      font-size: $font-size-2xl;
-    }
   }
 
   &__cards {
@@ -69,6 +57,18 @@
   &__track {
     display: flex;
     transition: transform 0.5s ease;
+  }
+
+  @media (min-width: $screen-tablet) {
+    padding: 0;
+
+    &__banner {
+      padding: 6rem 1rem;
+    }
+
+    &__text {
+      font-size: $font-size-2xl;
+    }
   }
 }
 

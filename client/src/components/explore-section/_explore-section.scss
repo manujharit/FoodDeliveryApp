@@ -23,15 +23,6 @@
   &__show-more-wrapper {
     margin: 0.32rem 0.26rem;
     width: 19.2rem;
-    
-    @media (max-width: $screen-tablet) {
-      width: 28.8rem;
-    }
-  
-    @media (max-width: $screen-mobile) {
-      margin: 0.32rem auto;
-      width: 20rem;
-    }
   }
 
   &__show-more-btn {
@@ -70,5 +61,18 @@
     right: 1rem;
     top: 50%;
     transform: translateY(-50%);
+  }
+
+  @media (max-width: $screen-tablet) {
+    &__show-more-wrapper {
+      width: 28.8rem;
+    }
+  }
+
+  @media (max-width: $screen-mobile) {
+    &__show-more-wrapper {
+      margin: 0.32rem auto;
+      width: 20rem;
+    }
   }
 }
