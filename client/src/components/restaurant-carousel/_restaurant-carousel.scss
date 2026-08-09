@@ -3,13 +3,13 @@
 @use "../../styles/fonts" as *;
 
 .restaurant-carousel {
-  margin: 1rem;
+  margin: 1rem 0;
 
   &__toggle-btn {
     padding: 1rem;
     width: 100%;
     filter: drop-shadow(0 10px 8px rgb(0 0 0 / 4%)) drop-shadow(0 4px 3px rgb(0 0 0 / 10%));
-    background-color: #e5e7eb;
+    background-color: transparent;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -18,7 +18,7 @@
     transition: background-color 0.2s;
 
     &:hover {
-      background-color: #d1d5db;
+      background-color: $white;
     }
   }
 
@@ -30,5 +30,19 @@
   
   &__icon {
     color: $black;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s ease-in-out;
+    
+    &--open {
+      grid-template-rows: 1fr;
+    }
+  }
+
+  &__content-inner {
+    overflow: hidden;
   }
 }

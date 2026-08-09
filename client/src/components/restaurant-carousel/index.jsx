@@ -21,12 +21,14 @@ const RestaurantCarousel = ({ data, onAddItem, onSubItem }) => {
         onClick={handleDropDown}
       >
         <span className="restaurant-carousel__title">{data.title}</span>
-        <span className="restaurant-carousel__icon">
-          {showItems ? '▲' : '▼'}
+        <span className="restaurant-carousel__icon material-symbols-outlined">
+          {showItems ? 'expand_less' : 'expand_more'}
         </span>
       </button>
-      {showItems && (
-        <div>
+      <div
+        className={`restaurant-carousel__content ${showItems ? 'restaurant-carousel__content--open' : ''}`}
+      >
+        <div className="restaurant-carousel__content-inner">
           {data.itemCards.map((card, index) => (
             <ItemList
               key={index}
@@ -36,7 +38,7 @@ const RestaurantCarousel = ({ data, onAddItem, onSubItem }) => {
             />
           ))}
         </div>
-      )}
+      </div>
     </div>
   );
 };

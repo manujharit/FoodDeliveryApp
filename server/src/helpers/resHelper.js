@@ -3,6 +3,7 @@ import {
   filterUpdateData,
   filterMenuData,
   filterDataByTags,
+  findNodesByKeyAndValue,
 } from '#src/utils/utils.js';
 import {
   getRestaurants,
@@ -13,7 +14,8 @@ import {
 
 const getRestaurantData = async (data) => {
   try {
-    const apiData = await getRestaurants(data);
+    const apiResponse = await getRestaurants(data);
+    const apiData = apiResponse?.data?.cards || [];
 
     if (
       Object.keys(apiData).length &&
@@ -21,11 +23,19 @@ const getRestaurantData = async (data) => {
     ) {
       const resData = filterData(apiData);
 
-      return resData;
+      return {
+        ...resData,
+        csrfToken: apiResponse?.csrfToken,
+        pageOffset: apiResponse?.data?.pageOffset,
+      };
     } else if (apiData.length && data.page_type) {
       const resData = filterDataByTags(apiData);
 
-      return resData;
+      return {
+        ...resData,
+        csrfToken: apiResponse?.csrfToken,
+        pageOffset: apiResponse?.data?.pageOffset,
+      };
     }
 
     return {};
@@ -36,19 +46,25 @@ const getRestaurantData = async (data) => {
 
 const getUpdatedData = async (data) => {
   try {
-    const apiData = await getUpdates(data);
+    const apiResponse = await getUpdates(data);
+    const apiData = apiResponse?.data?.cards || apiResponse?.cards || [];
 
     if (Array.isArray(apiData) && apiData.length) {
       const resData = filterUpdateData(apiData);
 
       if (Array.isArray(resData) && resData.length > 0) {
-        return resData;
+        return {
+          restaurants: resData,
+          csrfToken: apiResponse?.csrfToken,
+          pageOffset: apiResponse?.data?.pageOffset || apiResponse?.pageOffset,
+        };
       }
     }
 
-    // Fallback: Since Swiggy's /update API requires dynamic valid tokens which often expire/403,
-    // we mock infinite load by fetching the main list again so the frontend works.
-    const mainApiData = await getRestaurants(data);
+    // Fallback: The /update endpoint is WAF-blocked, so we re-fetch the main
+    // restaurant list and randomize IDs to avoid duplicate filtering on the client.
+    const mainApiResponse = await getRestaurants(data);
+    const mainApiData = mainApiResponse?.data?.cards || [];
 
     if (Object.keys(mainApiData).length) {
       let restaurants = [];
@@ -69,7 +85,11 @@ const getUpdatedData = async (data) => {
         id: r.id + '_' + Math.random().toString(36).substr(2, 9),
       }));
 
-      return restaurants;
+      return {
+        restaurants,
+        csrfToken: mainApiResponse?.csrfToken,
+        pageOffset: mainApiResponse?.data?.pageOffset,
+      };
     }
 
     return [];
@@ -80,14 +100,23 @@ const getUpdatedData = async (data) => {
 
 const getRestaurantMenu = async (data) => {
   try {
-    const apiData = await getRestaurantMenuData(data);
+    const apiResponse = await getRestaurantMenuData(data);
+    const apiData = apiResponse?.data || [];
 
     if (Object.keys(apiData).length) {
       const menuData = {};
 
-      menuData['resDetails'] = apiData?.filter(
-        (card) => card?.card?.relevance?.sectionId === 'POP_UP_CROUTON_MENU'
-      )[0]?.card?.card?.info;
+      const restaurantInfoNode = findNodesByKeyAndValue(
+        apiData,
+        '@type',
+        'type.googleapis.com/swiggy.presentation.food.v2.Restaurant'
+      )[0];
+
+      menuData['resDetails'] =
+        restaurantInfoNode?.info ||
+        apiData?.filter(
+          (card) => card?.card?.relevance?.sectionId === 'POP_UP_CROUTON_MENU'
+        )[0]?.card?.card?.info;
 
       menuData['offers'] = apiData
         ?.filter(

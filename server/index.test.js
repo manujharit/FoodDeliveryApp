@@ -66,7 +66,7 @@ describe('Express Server Routes', () => {
       .post('/update')
       .send({ lat: '12', lng: '34' });
     expect(res.status).toBe(200);
-    expect(res.body).toEqual([{ update: true }]);
+    expect(res.body).toEqual({ restaurants: [{ update: true }] });
   });
 
   it('GET /restaurantmenu should return menu data', async () => {

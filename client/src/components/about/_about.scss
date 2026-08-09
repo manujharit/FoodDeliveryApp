@@ -3,8 +3,7 @@
 @use "../../styles/fonts" as *;
 
 .about {
-  margin: 0 auto 2rem;
-  max-width: $max-page-width;
+  margin-bottom: 2rem;
   color: $orange;
   font-family: inherit;
   display: flex;

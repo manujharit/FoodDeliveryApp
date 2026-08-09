@@ -32,25 +32,14 @@ const parseParamsAndReturnPath = (urlString, title) => {
   }
 
   const { tags, collection_id, type } = result;
-  const newParams = new URLSearchParams();
-
-  if (tags) {
-    newParams.append('tags', tags);
-  }
-
-  if (collection_id) {
-    newParams.append('collection_id', collection_id);
-  }
-
-  if (type) {
-    newParams.append('type', type);
-  }
 
   const capitalizedTitle = title.charAt(0).toUpperCase() + title.slice(1);
 
-  newParams.append('title', capitalizedTitle);
+  const safeTags = tags || 'none';
+  const safeType = type || 'none';
+  const safeTitle = encodeURIComponent(capitalizedTitle);
 
-  return `/whatsonmind?${newParams.toString()}`;
+  return `/whatsonmind/${collection_id}/${safeTags}/${safeType}/${safeTitle}`;
 };
 
 export { mergeData, getResItemQuantity, parseParamsAndReturnPath };

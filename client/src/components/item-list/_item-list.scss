@@ -9,18 +9,22 @@
   flex-direction: row;
   height: 11rem;
   background-color: $white;
+  gap: 0.5rem;
 
   &__details {
     display: flex;
     flex-direction: column;
-    padding: 0 0.5rem;
     flex: 1;
+    min-width: 0;
   }
 
   &__name {
     font-weight: bold;
     font-size: $font-size-lg;
     color: $black;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__price {
@@ -32,6 +36,10 @@
   &__description {
     font-size: $font-size-sm;
     color: #9ca3af;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   &__image-container {

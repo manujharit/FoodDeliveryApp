@@ -3,9 +3,8 @@
 @use "../../../styles/fonts" as *;
 
 .home-shimmer {
-  margin: 0 auto 2rem;
+  margin-bottom: 2rem;
   width: 100%;
-  max-width: $max-page-width;
   display: flex;
   flex-direction: column;
 

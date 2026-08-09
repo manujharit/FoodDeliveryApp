@@ -16,7 +16,12 @@ describe('resHandler', () => {
   let req, res;
 
   beforeEach(() => {
-    req = { query: {}, body: {}, url: '/test' };
+    req = {
+      query: {},
+      body: { lat: '12', lng: '34' },
+      url: '/test',
+      headers: {},
+    };
     res = {
       status: jest.fn().mockReturnThis(),
       json: jest.fn(),

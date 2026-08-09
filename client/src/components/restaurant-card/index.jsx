@@ -33,13 +33,14 @@ const RestaurantCard = ({ data }) => {
             src={CDN_URL + cloudinaryImageId}
             alt="Restaurant Image"
           />
-          {aggregatedDiscountInfoV3 && (
+          {aggregatedDiscountInfoV3 && aggregatedDiscountInfoV3?.header && (
             <label className="restaurant-card__discount">
-              {aggregatedDiscountInfoV3?.header +
-                ' ' +
-                (aggregatedDiscountInfoV3?.subHeader === undefined
-                  ? ''
-                  : aggregatedDiscountInfoV3?.subHeader)}
+              {aggregatedDiscountInfoV3?.header &&
+                aggregatedDiscountInfoV3?.header +
+                  ' ' +
+                  (aggregatedDiscountInfoV3?.subHeader
+                    ? aggregatedDiscountInfoV3?.subHeader
+                    : '')}
             </label>
           )}
         </div>

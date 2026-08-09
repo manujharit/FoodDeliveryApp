@@ -18,7 +18,9 @@ const App = () => {
       <div className="container">
         <Navbar />
         <main className="main-content">
-          <Outlet />
+          <div className="outlet-wrapper">
+            <Outlet />
+          </div>
         </main>
         <Footer />
       </div>

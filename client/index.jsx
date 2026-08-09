@@ -51,7 +51,7 @@ const appRouter = createBrowserRouter([
             ),
           },
           {
-            path: '/whatsonmind/',
+            path: '/whatsonmind/:collection_id/:tags/:type/:title',
             element: (
               <Suspense fallback={<Loading />}>
                 <WhatsOnMindPage />

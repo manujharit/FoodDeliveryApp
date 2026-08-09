@@ -20,18 +20,24 @@ describe('resHelper', () => {
 
   describe('getRestaurantData', () => {
     it('should return desktop web listing data', async () => {
-      getRestaurants.mockResolvedValue([
-        {
-          card: {
-            card: {
-              id: 'restaurant_grid_listing',
-              gridElements: {
-                infoWithStyle: { restaurants: [{ info: { name: 'Res 1' } }] },
+      getRestaurants.mockResolvedValue({
+        data: {
+          cards: [
+            {
+              card: {
+                card: {
+                  id: 'restaurant_grid_listing',
+                  gridElements: {
+                    infoWithStyle: {
+                      restaurants: [{ info: { name: 'Res 1' } }],
+                    },
+                  },
+                },
               },
             },
-          },
+          ],
         },
-      ]);
+      });
 
       const res = await getRestaurantData({ page_type: 'DESKTOP_WEB_LISTING' });
 
@@ -40,17 +46,21 @@ describe('resHelper', () => {
     });
 
     it('should return mobile/tags listing data', async () => {
-      getRestaurants.mockResolvedValue([
-        {
-          card: {
-            card: {
-              '@type':
-                'type.googleapis.com/swiggy.presentation.food.v2.Restaurant',
-              info: { name: 'Res 2' },
+      getRestaurants.mockResolvedValue({
+        data: {
+          cards: [
+            {
+              card: {
+                card: {
+                  '@type':
+                    'type.googleapis.com/swiggy.presentation.food.v2.Restaurant',
+                  info: { name: 'Res 2' },
+                },
+              },
             },
-          },
+          ],
         },
-      ]);
+      });
 
       const res = await getRestaurantData({ page_type: 'MOBILE' });
 
@@ -69,87 +79,99 @@ describe('resHelper', () => {
 
   describe('getUpdatedData', () => {
     it('should return updated data directly if API returns valid updates', async () => {
-      getUpdates.mockResolvedValue([{ card: { card: { info: { id: 1 } } } }]);
+      getUpdates.mockResolvedValue({
+        data: { cards: [{ card: { card: { info: { id: 1 } } } }] },
+      });
 
       const res = await getUpdatedData({});
 
-      expect(res).toEqual([{ id: 1 }]);
+      expect(res.restaurants).toEqual([{ id: 1 }]);
     });
 
     it('should fallback to main API if update API returns empty', async () => {
-      getUpdates.mockResolvedValue([]);
-      getRestaurants.mockResolvedValue([
-        {
-          card: {
-            card: {
-              id: 'restaurant_grid_listing',
-              gridElements: {
-                infoWithStyle: { restaurants: [{ info: { id: 99 } }] },
+      getUpdates.mockResolvedValue({ data: { cards: [] } });
+      getRestaurants.mockResolvedValue({
+        data: {
+          cards: [
+            {
+              card: {
+                card: {
+                  id: 'restaurant_grid_listing',
+                  gridElements: {
+                    infoWithStyle: { restaurants: [{ info: { id: 99 } }] },
+                  },
+                },
               },
             },
-          },
+          ],
         },
-      ]);
+      });
 
       const res = await getUpdatedData({});
 
-      expect(res.length).toBe(1);
+      expect(res.restaurants.length).toBe(1);
       // It should randomize the ID
-      expect(res[0].id).not.toBe(99);
-      expect(String(res[0].id).startsWith('99_')).toBe(true);
+      expect(res.restaurants[0].id).not.toBe(99);
+      expect(String(res.restaurants[0].id).startsWith('99_')).toBe(true);
     });
 
     it('should fallback to main API for collections if update API returns empty', async () => {
-      getUpdates.mockResolvedValue([]);
-      getRestaurants.mockResolvedValue([
-        {
-          card: {
-            card: {
-              '@type':
-                'type.googleapis.com/swiggy.presentation.food.v2.Restaurant',
-              info: { id: 88 },
+      getUpdates.mockResolvedValue({ data: { cards: [] } });
+      getRestaurants.mockResolvedValue({
+        data: {
+          cards: [
+            {
+              card: {
+                card: {
+                  '@type':
+                    'type.googleapis.com/swiggy.presentation.food.v2.Restaurant',
+                  info: { id: 88 },
+                },
+              },
             },
-          },
+          ],
         },
-      ]);
+      });
 
       const res = await getUpdatedData({ collection: '123' });
 
-      expect(res.length).toBe(1);
-      expect(String(res[0].id).startsWith('88_')).toBe(true);
+      expect(res.restaurants.length).toBe(1);
+      expect(String(res.restaurants[0].id).startsWith('88_')).toBe(true);
     });
   });
 
   describe('getRestaurantMenu', () => {
     it('should extract menu details', async () => {
-      getRestaurantMenuData.mockResolvedValue([
-        {
-          card: {
-            relevance: { sectionId: 'POP_UP_CROUTON_MENU' },
-            card: { info: { name: 'Res Details' } },
+      getRestaurantMenuData.mockResolvedValue({
+        data: [
+          {
+            card: {
+              relevance: { sectionId: 'POP_UP_CROUTON_MENU' },
+              card: { info: { name: 'Res Details' } },
+            },
           },
-        },
-        {
-          groupedCard: {
-            cardGroupMap: {
-              REGULAR: {
-                cards: [
-                  {
-                    card: {
+          {
+            groupedCard: {
+              cardGroupMap: {
+                REGULAR: {
+                  cards: [
+                    {
                       card: {
-                        '@type':
-                          'type.googleapis.com/swiggy.presentation.food.v2.ItemCategory',
-                        title: 'Category 1',
-                        itemCards: [],
+                        card: {
+                          '@type':
+                            'type.googleapis.com/swiggy.presentation.food.v2.ItemCategory',
+                          title: 'Category 1',
+                          itemCards: [],
+                        },
                       },
                     },
-                  },
-                ],
+                  ],
+                },
               },
             },
           },
-        },
-      ]);
+        ],
+      });
 
       const res = await getRestaurantMenu({});
 
@@ -159,7 +181,7 @@ describe('resHelper', () => {
     });
 
     it('should return empty object if API returns empty', async () => {
-      getRestaurantMenuData.mockResolvedValue([]);
+      getRestaurantMenuData.mockResolvedValue({ data: [] });
 
       const res = await getRestaurantMenu({});
 

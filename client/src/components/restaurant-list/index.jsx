@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import RestaurantCard from '@/components/restaurant-card';
 import { fetchUpdateData } from '@/utils/fetchData';
 import { mergeData } from '@/utils/utils';
 import CardShimmer from '@/components/shimmers/card-shimmer';
+import InfiniteScroll from '@/components/infinite-scroll';
 import { useSelector } from 'react-redux';
 import './_restaurant-list.scss';
 
@@ -12,7 +13,6 @@ const RestaurantList = ({ data }) => {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [loadMore, setLoadMore] = useState(true);
-  const loaderRef = useRef(null);
   const loadArray = Array.from({ length: 12 }, (_, index) => index + 1);
   const { lat, lng } = useSelector((state) => state.location.coords);
 
@@ -40,36 +40,9 @@ const RestaurantList = ({ data }) => {
     fetchData();
   }, [page, lat, lng]);
 
-  const loadingRef = useRef(loading);
-
-  useEffect(() => {
-    loadingRef.current = loading;
-  }, [loading]);
-
-  const hasCards = card.length > 0;
-
-  useEffect(() => {
-    if (!loaderRef.current) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !loadingRef.current) {
-            setPage((prevPage) => prevPage + 1);
-          }
-        });
-      },
-      { rootMargin: '0px 0px 200px 0px' }
-    );
-
-    observer.observe(loaderRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [hasCards, loadMore]);
+  const loadMoreData = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
 
   return (
     <div className="restaurant-list">
@@ -77,15 +50,19 @@ const RestaurantList = ({ data }) => {
         Restaurants with online food delivery
       </label>
       <div className="restaurant-list__grid">
-        {card.map((card, index) => (
-          <RestaurantCard key={index} data={card} />
-        ))}
-        {loadMore && (
-          <span ref={loaderRef} className="restaurant-list__loader">
-            {loading &&
-              loadArray.map((item, index) => <CardShimmer key={index} />)}
-          </span>
-        )}
+        <InfiniteScroll
+          action={loadMoreData}
+          hasMore={loadMore}
+          loading={loading}
+          loadingComponent={loadArray.map((item, index) => (
+            <CardShimmer key={index} />
+          ))}
+          loaderClassName="restaurant-list__loader"
+        >
+          {card.map((card, index) => (
+            <RestaurantCard key={index} data={card} />
+          ))}
+        </InfiniteScroll>
       </div>
     </div>
   );

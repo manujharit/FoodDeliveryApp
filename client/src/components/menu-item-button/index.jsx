@@ -1,21 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './_menu-item-button.scss';
 
 const MenuItemButton = ({ qty, info, onAddItem, onSubItem }) => {
-  const [quantity, setQuantity] = useState(qty);
-
   const handleAdd = () => {
-    const newQuantity = quantity + 1;
-    setQuantity(newQuantity);
     onAddItem(info);
   };
   const handleSub = () => {
-    const newQuantity = quantity - 1;
-    setQuantity(newQuantity);
+    const newQuantity = qty - 1;
     onSubItem(info, newQuantity);
   };
 
-  if (!quantity) {
+  if (!qty) {
     return (
       <button className="menu-item-button" onClick={handleAdd}>
         ADD
@@ -30,7 +25,7 @@ const MenuItemButton = ({ qty, info, onAddItem, onSubItem }) => {
         >
           -
         </button>
-        <b className="menu-item-button__quantity">{quantity}</b>
+        <b className="menu-item-button__quantity">{qty}</b>
         <button
           className="menu-item-button__btn menu-item-button__btn--add"
           onClick={handleAdd}

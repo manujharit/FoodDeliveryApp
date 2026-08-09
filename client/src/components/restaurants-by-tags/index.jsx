@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import RestaurantCard from '@/components/restaurant-card';
 import {
   fetchWhatsOnMindRestaurants,
@@ -7,6 +7,7 @@ import {
 } from '@/utils/fetchData';
 import { mergeData } from '@/utils/utils';
 import CardShimmer from '@/components/shimmers/card-shimmer';
+import InfiniteScroll from '@/components/infinite-scroll';
 import { useSelector } from 'react-redux';
 import './_restaurants-by-tags.scss';
 
@@ -17,7 +18,11 @@ const RestaurantByTags = ({ params }) => {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [loadMore, setLoadMore] = useState(true);
-  const loaderRef = useRef(null);
+
+  const [csrfToken, setCsrfToken] = useState('');
+  const [nextOffset, setNextOffset] = useState('');
+  const [widgetOffset, setWidgetOffset] = useState(null);
+
   const loadArray = Array.from({ length: 12 }, (_, index) => index + 1);
   const { lat, lng } = useSelector((state) => state.location.coords);
 
@@ -26,6 +31,10 @@ const RestaurantByTags = ({ params }) => {
   }
 
   useEffect(() => {
+    if (!lat || !lng) {
+      return;
+    }
+
     const fetchData = async () => {
       setLoading(true);
 
@@ -43,6 +52,9 @@ const RestaurantByTags = ({ params }) => {
             setError(true);
           } else {
             setCard(newData.restaurants);
+            setCsrfToken(newData.csrfToken || '');
+            setNextOffset(newData.pageOffset?.nextOffset || '');
+            setWidgetOffset(newData.pageOffset?.widgetOffset || null);
           }
         } else if (page > 0) {
           const newData = await fetchWhatsOnMindUpdateData({
@@ -52,9 +64,18 @@ const RestaurantByTags = ({ params }) => {
             tags,
             type,
             count: page * 10,
+            csrfToken,
+            nextOffset,
+            widgetOffset,
           });
 
-          if (newData.length) {
+          if (newData.restaurants && newData.restaurants.length) {
+            setCard((prev) => mergeData(prev, newData.restaurants));
+            setCsrfToken(newData.csrfToken || '');
+            setNextOffset(newData.pageOffset?.nextOffset || '');
+            setWidgetOffset(newData.pageOffset?.widgetOffset || null);
+          } else if (Array.isArray(newData) && newData.length) {
+            // Fallback if it didn't return tokens
             setCard((prev) => mergeData(prev, newData));
           } else {
             setLoadMore(false);
@@ -70,36 +91,9 @@ const RestaurantByTags = ({ params }) => {
     fetchData();
   }, [page, collection_id, lat, lng, tags, type]);
 
-  const loadingRef = useRef(loading);
-
-  useEffect(() => {
-    loadingRef.current = loading;
-  }, [loading]);
-
-  const hasCards = card.length > 0;
-
-  useEffect(() => {
-    if (!loaderRef.current) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !loadingRef.current) {
-            setPage((prevPage) => prevPage + 1);
-          }
-        });
-      },
-      { rootMargin: '0px 0px 200px 0px' }
-    );
-
-    observer.observe(loaderRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [hasCards, loadMore]);
+  const loadMoreData = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
 
   if (card.length === 0) {
     return (
@@ -113,15 +107,19 @@ const RestaurantByTags = ({ params }) => {
 
   return (
     <div className="restaurants-by-tags">
-      {card.map((card, index) => (
-        <RestaurantCard key={index} data={card} />
-      ))}
-      {loadMore && (
-        <div ref={loaderRef} className="restaurants-by-tags__loader">
-          {loading &&
-            loadArray.map((item, index) => <CardShimmer key={index} />)}
-        </div>
-      )}
+      <InfiniteScroll
+        action={loadMoreData}
+        hasMore={loadMore}
+        loading={loading}
+        loadingComponent={loadArray.map((item, index) => (
+          <CardShimmer key={index} />
+        ))}
+        loaderClassName="restaurants-by-tags__loader"
+      >
+        {card.map((card, index) => (
+          <RestaurantCard key={index} data={card} />
+        ))}
+      </InfiniteScroll>
     </div>
   );
 };

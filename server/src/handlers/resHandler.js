@@ -19,9 +19,12 @@ const restaurantHandler = async (req, res) => {
 
 const updateHandler = async (req, res) => {
   try {
-    const data = await getUpdatedData(req.body);
+    // Server manages cookies internally via the cookie jar — no need for
+    // the client to send x-swiggy-cookie anymore.
+    const data = req.body;
+    const result = await getUpdatedData(data);
 
-    res.status(200).json(data);
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).json({
       errorMessage: err.message,
@@ -31,9 +34,11 @@ const updateHandler = async (req, res) => {
 
 const restaurantMenuHandler = async (req, res) => {
   try {
-    const data = await getRestaurantMenu(req.query);
+    // Server manages cookies internally — no x-swiggy-cookie needed.
+    const data = req.query;
+    const result = await getRestaurantMenu(data);
 
-    res.status(200).json(data);
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).json({
       errorMessage: err,
@@ -43,9 +48,11 @@ const restaurantMenuHandler = async (req, res) => {
 
 const searchHandler = async (req, res) => {
   try {
-    const data = await getSearchData(req.query);
+    // Server manages cookies internally — no x-swiggy-cookie needed.
+    const data = req.query;
+    const result = await getSearchData(data);
 
-    res.status(200).json(data);
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).json({
       errorMessage: err.message,

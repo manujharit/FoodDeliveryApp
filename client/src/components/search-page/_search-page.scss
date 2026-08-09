@@ -3,9 +3,8 @@
 @use "../../styles/fonts" as *;
 
 .search-page {
-  margin: 0 auto 2rem;
+  margin-bottom: 2rem;
   width: 100%;
-  max-width: $max-page-width;
   min-height: 100vh;
   padding: 0 1rem;
   display: flex;
@@ -39,7 +38,7 @@
     }
 
     @media (min-width: $screen-tablet) {
-      width: 60%;
+      width: 38.4rem;
       padding: 0.5rem 1rem;
     }
   }

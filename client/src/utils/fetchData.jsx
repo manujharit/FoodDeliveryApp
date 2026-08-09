@@ -12,16 +12,12 @@ const fetchData = async (lat, lng) => {
   };
 
   if ((lat, lng)) {
-    const data = await axios
-      .get(url, { params: params })
-      .then((res) => res.data)
-      .catch((err) => {
-        console.log(err);
+    const res = await axios.get(url, { params: params }).catch((err) => {
+      console.log(err);
+      return { data: {} };
+    });
 
-        return {};
-      });
-
-    return data;
+    return res.data;
   }
   return {};
 };
@@ -54,7 +50,13 @@ const fetchUpdateData = async (count, { lat, lng }) => {
     try {
       const res = await axios.post(url, body);
 
-      if (res.data && Array.isArray(res.data) && res.data.length > 0) {
+      if (
+        res.data?.restaurants &&
+        Array.isArray(res.data.restaurants) &&
+        res.data.restaurants.length > 0
+      ) {
+        return res.data.restaurants;
+      } else if (res.data && Array.isArray(res.data) && res.data.length > 0) {
         return res.data;
       }
 
@@ -77,15 +79,12 @@ const fetchRestaurantMenu = async (id, { lat, lng }) => {
   };
 
   if (lat && lng) {
-    const data = await axios
-      .get(url, { params: params })
-      .then((res) => res.data)
-      .catch((err) => {
-        console.log(err);
-        return {};
-      });
+    const res = await axios.get(url, { params: params }).catch((err) => {
+      console.log(err);
+      return { data: {} };
+    });
 
-    return data;
+    return res.data;
   }
 
   return {};
@@ -112,15 +111,12 @@ const fetchWhatsOnMindRestaurants = async ({
   };
 
   if (lat && lng && collection_id) {
-    const data = await axios
-      .get(url, { params: params })
-      .then((res) => res.data)
-      .catch((err) => {
-        console.log(err);
-        return {};
-      });
+    const res = await axios.get(url, { params: params }).catch((err) => {
+      console.log(err);
+      return { data: {} };
+    });
 
-    return data;
+    return res.data;
   }
 
   return {};
@@ -133,25 +129,33 @@ const fetchWhatsOnMindUpdateData = async ({
   tags,
   type,
   count,
+  csrfToken,
+  nextOffset,
+  widgetOffset,
 }) => {
   const url = API_URL + '/update';
+
+  const defaultWidgetOffset = {
+    NewListingView_category_bar_chicletranking_TwoRows: '',
+    NewListingView_category_bar_chicletranking_TwoRows_Rendition: '',
+    Restaurant_Group_WebView_SEO_PB_Theme: '',
+    collectionV5RestaurantListWidget_SimRestoRelevance_food_seo: `${count + 9}`,
+    inlineFacetFilter: '',
+    restaurantCountWidget: '',
+  };
+
   const body = {
-    lat: lat,
-    lng: lng,
+    lat: Number(lat).toFixed(5),
+    lng: Number(lng).toFixed(5),
     collection: collection_id,
     tags: tags,
     sortBy: '',
     filters: '',
     type: type,
-    nextOffset: 'CJ9gEOMTKID4g5HD6qnSQjCnGzgC',
-    widgetOffset: {
-      restaurantCountWidget: '',
-      collectionV5RestaurantListWidget: `${count}`,
-      inlineFacetFilter: '',
-      [`${tags}_Flexipage_Themes1_StackedWidget`]: '',
-    },
+    nextOffset: nextOffset || 'CJhlELQ4KICQ3d/xh67gAzCnEzgD',
+    widgetOffset: widgetOffset || defaultWidgetOffset,
     page_type: null,
-    _csrf: 'VSIfTlSrzgBl-DoVEXaxruKEiUJiGlcq9EQD_dNI',
+    _csrf: csrfToken || 'QCKjm6JYxQ7n-93VT7WchYT-lzDugaeAI6G1sFDs',
   };
 
   setTimeout(() => {}, 200);
@@ -160,7 +164,7 @@ const fetchWhatsOnMindUpdateData = async ({
     try {
       const res = await axios.post(url, body);
 
-      if (res.data && Array.isArray(res.data) && res.data.length > 0) {
+      if (res.data) {
         return res.data;
       }
 
@@ -184,15 +188,12 @@ const fetchSearchSuggestions = async (lat, lng, str) => {
   };
 
   if (lat && lng && str) {
-    const data = await axios
-      .get(url, { params: params })
-      .then((res) => res.data)
-      .catch((err) => {
-        console.log(err);
-        return {};
-      });
+    const res = await axios.get(url, { params: params }).catch((err) => {
+      console.log(err);
+      return { data: {} };
+    });
 
-    return data;
+    return res.data;
   }
 
   return {};

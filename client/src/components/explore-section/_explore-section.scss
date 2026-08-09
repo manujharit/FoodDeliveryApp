@@ -21,16 +21,16 @@
   }
 
   &__show-more-wrapper {
-    width: 30%;
-    margin: 2% 1.6%;
+    width: 19.2rem;
+    margin: 0.32rem 0.26rem;
     
     @media (max-width: $screen-tablet) {
-      width: 45%;
+      width: 28.8rem;
     }
   
     @media (max-width: $screen-mobile) {
-      width: 95%;
-      margin: 2% auto;
+      width: 20rem;
+      margin: 0.32rem auto;
     }
   }
 

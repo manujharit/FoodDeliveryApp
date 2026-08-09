@@ -4,9 +4,7 @@
 .whats-on-mind-page {
   display: flex;
   flex-direction: column;
-  margin: 0 auto 3rem;
-  max-width: $max-page-width;
-  padding: 0 1rem;
+  margin-bottom: 3rem;
 
   &__title {
     font-size: $font-size-2xl;
