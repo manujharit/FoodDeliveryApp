@@ -1,10 +1,6 @@
 import express from 'express';
-import {
-  restaurantHandler,
-  updateHandler,
-  restaurantMenuHandler,
-  searchHandler,
-} from '#src/handlers/resHandler.js';
+import { restaurantHandler, updateHandler, restaurantMenuHandler, searchHandler } from '#src/handlers/resHandler.js';
+
 const router = express.Router();
 
 router.get('/data', restaurantHandler);

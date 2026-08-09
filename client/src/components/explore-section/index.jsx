@@ -15,15 +15,10 @@ const ExploreSection = ({ data }) => {
           <ExploreCards key={index} data={brand} />
         ))}
         {hasMore && (
-          <div
-            className="explore-section__show-more-wrapper"
-            onClick={() => setIsExpanded(true)}
-          >
+          <div className="explore-section__show-more-wrapper" onClick={() => setIsExpanded(true)}>
             <label className="explore-section__show-more-btn">
               <span className="explore-section__show-more-text">Show More</span>
-              <span className="material-symbols-outlined explore-section__show-more-icon">
-                expand_more
-              </span>
+              <span className="material-symbols-outlined explore-section__show-more-icon">expand_more</span>
             </label>
           </div>
         )}

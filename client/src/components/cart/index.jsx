@@ -11,9 +11,7 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const orderNowHandler = () => {
-    alert(
-      `Order Placed!!! Thank You from ordering with us. Total Amount:₹${cart.totalAmount} /-`
-    );
+    alert(`Order Placed!!! Thank You from ordering with us. Total Amount:₹${cart.totalAmount} /-`);
     dispatch(clearCart());
     navigate('/');
   };
@@ -23,10 +21,7 @@ const Cart = () => {
       <div className="cart__header">
         <h1 className="cart__title">Cart</h1>
         {cart.totalAmount > 0 && (
-          <button
-            className="cart__clear-button"
-            onClick={() => dispatch(clearCart())}
-          >
+          <button className="cart__clear-button" onClick={() => dispatch(clearCart())}>
             Clear
           </button>
         )}
@@ -34,9 +29,7 @@ const Cart = () => {
 
       {Object.keys(cart.restaurants).length === 0 ? (
         <div className="cart__empty">
-          <span className="material-symbols-outlined cart__empty-icon">
-            remove_shopping_cart
-          </span>
+          <span className="material-symbols-outlined cart__empty-icon">remove_shopping_cart</span>
           <h2 className="cart__empty-title">No items in cart</h2>
           <p className="cart__empty-subtitle">
             Hungry? Order from top restaurants near you!!!{' '}
@@ -47,15 +40,9 @@ const Cart = () => {
         </div>
       ) : (
         <div className="cart__list">
-          {Object.entries(cart.restaurants).map(
-            ([restaurantId, restaurantData], index) => (
-              <CartRestaurant
-                key={index}
-                restaurantId={restaurantId}
-                restaurantData={restaurantData}
-              />
-            )
-          )}
+          {Object.entries(cart.restaurants).map(([restaurantId, restaurantData], index) => (
+            <CartRestaurant key={index} restaurantId={restaurantId} restaurantData={restaurantData} />
+          ))}
         </div>
       )}
 
@@ -66,10 +53,7 @@ const Cart = () => {
             <span>₹{cart.totalAmount} /-</span>
           </div>
           <div className="cart__order-wrapper">
-            <button
-              className="cart__order-button"
-              onClick={() => orderNowHandler()}
-            >
+            <button className="cart__order-button" onClick={() => orderNowHandler()}>
               Order Now !!!
             </button>
           </div>

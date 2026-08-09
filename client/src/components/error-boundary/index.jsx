@@ -8,17 +8,10 @@ const ErrorBoundary = () => {
 
   return (
     <div className="error-boundary">
-      <img
-        src={ovenImage}
-        alt="Oven power cut"
-        className="error-boundary__image"
-      />
-      <h1 className="error-boundary__title">
-        {isNoDataError ? 'Uh-oh!' : 'Oops! Something went wrong.'}
-      </h1>
+      <img src={ovenImage} alt="Oven power cut" className="error-boundary__image" />
+      <h1 className="error-boundary__title">{isNoDataError ? 'Uh-oh!' : 'Oops! Something went wrong.'}</h1>
       <p className="error-boundary__message">
-        {error?.message ||
-          "We couldn't fetch the data for this page. Please try again later."}
+        {error?.message || "We couldn't fetch the data for this page. Please try again later."}
       </p>
       <Link to="/" className="error-boundary__link">
         Back to Home

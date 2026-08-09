@@ -1,10 +1,7 @@
 /* eslint-disable no-console */
 import { useState, useEffect } from 'react';
 import RestaurantCard from '@/components/restaurant-card';
-import {
-  fetchWhatsOnMindRestaurants,
-  fetchWhatsOnMindUpdateData,
-} from '@/utils/fetchData';
+import { fetchWhatsOnMindRestaurants, fetchWhatsOnMindUpdateData } from '@/utils/fetchData';
 import { mergeData } from '@/utils/utils';
 import CardShimmer from '@/components/shimmers/card-shimmer';
 import InfiniteScroll from '@/components/infinite-scroll';
@@ -18,11 +15,9 @@ const RestaurantByTags = ({ params }) => {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [loadMore, setLoadMore] = useState(true);
-
   const [csrfToken, setCsrfToken] = useState('');
   const [nextOffset, setNextOffset] = useState('');
   const [widgetOffset, setWidgetOffset] = useState(null);
-
   const loadArray = Array.from({ length: 12 }, (_, index) => index + 1);
   const { lat, lng } = useSelector((state) => state.location.coords);
 
@@ -89,6 +84,7 @@ const RestaurantByTags = ({ params }) => {
     };
 
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, collection_id, lat, lng, tags, type]);
 
   const loadMoreData = () => {

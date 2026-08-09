@@ -8,10 +8,8 @@ jest.unstable_mockModule('../clients/swiggyClient.js', () => ({
   getSearchSuggestions: jest.fn(),
 }));
 
-const { getRestaurantData, getUpdatedData, getRestaurantMenu } =
-  await import('./resHelper.js');
-const { getRestaurants, getUpdates, getRestaurantMenuData } =
-  await import('../clients/swiggyClient.js');
+const { getRestaurantData, getUpdatedData, getRestaurantMenu } = await import('./resHelper.js');
+const { getRestaurants, getUpdates, getRestaurantMenuData } = await import('../clients/swiggyClient.js');
 
 describe('resHelper', () => {
   afterEach(() => {
@@ -52,8 +50,7 @@ describe('resHelper', () => {
             {
               card: {
                 card: {
-                  '@type':
-                    'type.googleapis.com/swiggy.presentation.food.v2.Restaurant',
+                  '@type': 'type.googleapis.com/swiggy.presentation.food.v2.Restaurant',
                   info: { name: 'Res 2' },
                 },
               },
@@ -90,6 +87,7 @@ describe('resHelper', () => {
 
     it('should fallback to main API if update API returns empty', async () => {
       getUpdates.mockResolvedValue({ data: { cards: [] } });
+
       getRestaurants.mockResolvedValue({
         data: {
           cards: [
@@ -117,14 +115,14 @@ describe('resHelper', () => {
 
     it('should fallback to main API for collections if update API returns empty', async () => {
       getUpdates.mockResolvedValue({ data: { cards: [] } });
+
       getRestaurants.mockResolvedValue({
         data: {
           cards: [
             {
               card: {
                 card: {
-                  '@type':
-                    'type.googleapis.com/swiggy.presentation.food.v2.Restaurant',
+                  '@type': 'type.googleapis.com/swiggy.presentation.food.v2.Restaurant',
                   info: { id: 88 },
                 },
               },
@@ -158,8 +156,7 @@ describe('resHelper', () => {
                     {
                       card: {
                         card: {
-                          '@type':
-                            'type.googleapis.com/swiggy.presentation.food.v2.ItemCategory',
+                          '@type': 'type.googleapis.com/swiggy.presentation.food.v2.ItemCategory',
                           title: 'Category 1',
                           itemCards: [],
                         },

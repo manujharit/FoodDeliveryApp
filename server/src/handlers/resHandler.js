@@ -1,9 +1,4 @@
-import {
-  getRestaurantData,
-  getUpdatedData,
-  getRestaurantMenu,
-  getSearchData,
-} from '#src/helpers/resHelper.js';
+import { getRestaurantData, getUpdatedData, getRestaurantMenu, getSearchData } from '#src/helpers/resHelper.js';
 
 const restaurantHandler = async (req, res) => {
   try {
@@ -19,8 +14,10 @@ const restaurantHandler = async (req, res) => {
 
 const updateHandler = async (req, res) => {
   try {
-    // Server manages cookies internally via the cookie jar — no need for
-    // the client to send x-swiggy-cookie anymore.
+    /*
+     * Server manages cookies internally via the cookie jar — no need for
+     * the client to send x-swiggy-cookie anymore.
+     */
     const data = req.body;
     const result = await getUpdatedData(data);
 
@@ -60,9 +57,4 @@ const searchHandler = async (req, res) => {
   }
 };
 
-export {
-  restaurantHandler,
-  updateHandler,
-  restaurantMenuHandler,
-  searchHandler,
-};
+export { restaurantHandler, updateHandler, restaurantMenuHandler, searchHandler };

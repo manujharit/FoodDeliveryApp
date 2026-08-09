@@ -3,39 +3,39 @@
 @use "../../styles/fonts" as *;
 
 .footer {
+  align-items: center;
   background-color: $orange-dark;
-  width: 100%;
+  color: $white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 1rem;
-  color: $white;
+  justify-content: center;
   padding: 2rem;
+  width: 100%;
 
   @media (max-width: $screen-tablet) {
     padding: 1rem;
   }
 
   &__logo-wrapper {
+    align-items: center;
     display: flex;
     justify-content: center;
-    align-items: center;
   }
 
   &__logo {
     height: 5rem;
-    width: 8rem;
     object-fit: contain;
+    width: 8rem;
   }
 
   &__content {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     gap: 1rem;
+    justify-content: center;
+    text-align: center;
   }
 
   &__copyright {
@@ -43,15 +43,15 @@
   }
 
   &__social-links {
+    align-items: center;
     display: flex;
     flex-direction: row;
-    align-items: center;
     gap: 1rem;
   }
 
   &__social-link {
-    display: block;
     color: inherit;
+    display: block;
     transition: color 0.2s ease-in-out;
 
     &:hover {

@@ -6,16 +6,16 @@
   margin: 1rem 0;
 
   &__toggle-btn {
-    padding: 1rem;
-    width: 100%;
-    filter: drop-shadow(0 10px 8px rgb(0 0 0 / 4%)) drop-shadow(0 4px 3px rgb(0 0 0 / 10%));
-    background-color: transparent;
-    display: flex;
-    justify-content: space-between;
     align-items: center;
+    background-color: transparent;
     border: none;
     cursor: pointer;
+    display: flex;
+    filter: drop-shadow(0 10px 8px rgb(0 0 0 / 4%)) drop-shadow(0 4px 3px rgb(0 0 0 / 10%));
+    justify-content: space-between;
+    padding: 1rem;
     transition: background-color 0.2s;
+    width: 100%;
 
     &:hover {
       background-color: $white;
@@ -23,9 +23,9 @@
   }
 
   &__title {
-    font-weight: bold;
     color: $black;
     font-size: $font-size-base;
+    font-weight: bold;
   }
   
   &__icon {

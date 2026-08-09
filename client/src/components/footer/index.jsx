@@ -11,9 +11,7 @@ const Footer = () => {
         <img src={BrandLogo} alt="Brand Logo Black" className="footer__logo" />
       </div>
       <div className="footer__content">
-        <p className="footer__copyright">
-          © Designed and Developed By Manuj Haritwal.
-        </p>
+        <p className="footer__copyright">© Designed and Developed By Manuj Haritwal.</p>
         <div className="footer__social-links">
           <a
             className="footer__social-link"

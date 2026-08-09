@@ -3,53 +3,53 @@
 @use "../../styles/fonts" as *;
 
 .search-page {
-  margin-bottom: 2rem;
-  width: 100%;
-  min-height: 100vh;
-  padding: 0 1rem;
   display: flex;
   flex-direction: column;
+  margin-bottom: 2rem;
+  min-height: 100vh;
+  padding: 0 1rem;
+  width: 100%;
 
   @media (min-width: $screen-tablet) {
     padding: 0;
   }
 
   &__header {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 100%;
     margin-bottom: 0.5rem;
+    width: 100%;
   }
 
   &__input-wrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+    background-color: $white;
     border: 0.0625rem solid $gray;
     border-radius: 0.5rem;
-    background-color: $white;
-    padding: 0.5rem 1rem;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem 1rem;
     transition: box-shadow 0.2s;
+    width: 100%;
 
     &:focus-within {
       box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
     }
 
     @media (min-width: $screen-tablet) {
-      width: 38.4rem;
       padding: 0.5rem 1rem;
+      width: 38.4rem;
     }
   }
 
   &__input {
-    width: 100%;
     background-color: transparent;
-    outline: none;
-    font-size: $font-size-lg;
-    color: $black;
     border: none;
+    color: $black;
+    font-size: $font-size-lg;
+    outline: none;
+    width: 100%;
     
     &::placeholder {
       color: $gray;
@@ -57,13 +57,13 @@
   }
 
   &__btn {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    color: $gray;
     background: transparent;
     border: none;
+    color: $gray;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
 
     .material-symbols-outlined {
       font-size: 1.875rem;
@@ -73,21 +73,21 @@
   &__results {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 1rem;
+    justify-content: center;
   }
 
   &__no-results {
-    width: 100%;
-    text-align: center;
-    margin-top: 2.5rem;
     color: $gray;
     font-size: $font-size-xl;
     font-weight: 600;
+    margin-top: 2.5rem;
+    text-align: center;
+    width: 100%;
   }
 
   &__default-view {
-    width: 100%;
     margin-top: 0;
+    width: 100%;
   }
 }

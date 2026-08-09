@@ -3,14 +3,14 @@
 @use "../../styles/fonts" as *;
 
 .menu-offers-card {
-  min-width: 21.875rem;
-  max-width: 21.875rem;
-  min-height: 5rem;
-  max-height: 5rem;
-  margin: 1.25rem 0.625rem;
-  padding: 0.625rem;
   border: 0.0625rem solid $gray-light;
   border-radius: 1rem;
+  margin: 1.25rem 0.625rem;
+  max-height: 5rem;
+  max-width: 21.875rem;
+  min-height: 5rem;
+  min-width: 21.875rem;
+  padding: 0.625rem;
   transition: all 0.3s ease;
   
   &:hover {
@@ -24,8 +24,8 @@
   }
 
   &__image {
-    width: 3.5rem;
     margin-right: 0.625rem;
+    width: 3.5rem;
   }
 
   &__details {
@@ -34,14 +34,14 @@
   }
 
   &__header {
+    color: $black;
     font-size: $font-size-lg;
     font-weight: bold;
-    color: $black;
   }
 
   &__coupon {
-    font-size: $font-size-base;
     color: #4b5563;
+    font-size: $font-size-base;
     font-weight: 600;
   }
 }

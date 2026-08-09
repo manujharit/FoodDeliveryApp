@@ -6,23 +6,23 @@
 }
 
 .main-content {
-    padding-top: 6rem;
-    min-height: calc(100vh - 4.5rem); /* approx min height accounting for navbar */
     display: flex;
     flex-direction: column;
+    min-height: calc(100vh - 4.5rem); /* approx min height accounting for navbar */
+    padding-top: 6rem;
 }
 
 .outlet-wrapper {
-    width: $max-page-width;
-    margin-left: auto;
-    margin-right: auto;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    margin-left: auto;
+    margin-right: auto;
+    width: $max-page-width;
 
     @media (max-width: $screen-tablet) {
-        width: auto;
         margin-left: 1rem;
         margin-right: 1rem;
+        width: auto;
     }
 }

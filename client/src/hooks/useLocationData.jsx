@@ -29,6 +29,7 @@ const useLocationData = () => {
 
     getLocation();
   }, [dispatch]);
+
   return true;
 };
 

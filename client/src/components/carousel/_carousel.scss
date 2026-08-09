@@ -5,48 +5,48 @@
 .carousel {
   display: flex;
   flex-direction: column;
-  width: 100%;
   row-gap: 1rem;
+  width: 100%;
 
   &__title {
+    color: $black;
     display: block;
     font-size: $font-size-2xl;
     font-weight: bold;
-    color: $black;
   }
 
   &__viewport {
     display: flex;
-    overflow: hidden;
     height: fit-content;
+    overflow: hidden;
   }
 
   &__track {
-    display: flex;
-    transition: transform 0.5s ease;
     column-gap: 0.5rem;
+    display: flex;
     height: 100%;
     padding-bottom: 1rem;
+    transition: transform 0.5s ease;
   }
 
   &__controls {
     display: flex;
-    justify-content: center;
     gap: 1rem;
+    justify-content: center;
   }
 
   &__nav-button {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    height: 2.5rem;
-    width: 2.5rem;
     background-color: $orange-dark;
-    color: $white;
-    border-radius: 9999rem;
     border: none;
+    border-radius: 9999rem;
+    color: $white;
     cursor: pointer;
+    display: flex;
+    height: 2.5rem;
+    justify-content: center;
     transition: transform 0.2s ease, background-color 0.2s ease;
+    width: 2.5rem;
 
     &:hover {
       background-color: $orange;

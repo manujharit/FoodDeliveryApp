@@ -1,9 +1,4 @@
-import {
-  filterData,
-  filterUpdateData,
-  filterMenuData,
-  filterDataByTags,
-} from './utils.js';
+import { filterData, filterUpdateData, filterMenuData, filterDataByTags } from './utils.js';
 
 describe('utils', () => {
   describe('filterData', () => {
@@ -47,15 +42,12 @@ describe('utils', () => {
           },
         },
       ];
-
       const result = filterData(mockData);
 
       expect(result.whats_on_your_mind).toEqual([{ id: 1 }]);
       expect(result.top_brands_for_you).toEqual([{ name: 'Brand A' }]);
       expect(result.restaurant_grid_listing).toEqual([{ name: 'Res A' }]);
-      expect(result.restaurant_near_me_links).toEqual([
-        { title: 'Near Me', brands: ['B1'] },
-      ]);
+      expect(result.restaurant_near_me_links).toEqual([{ title: 'Near Me', brands: ['B1'] }]);
     });
 
     it('should handle empty or malformed data safely', () => {
@@ -80,8 +72,7 @@ describe('utils', () => {
         {
           card: {
             card: {
-              '@type':
-                'type.googleapis.com/swiggy.gandalf.widgets.v2.InlineViewFilterSortWidget',
+              '@type': 'type.googleapis.com/swiggy.gandalf.widgets.v2.InlineViewFilterSortWidget',
               restaurantCount: 10,
             },
           },
@@ -97,14 +88,12 @@ describe('utils', () => {
         {
           card: {
             card: {
-              '@type':
-                'type.googleapis.com/swiggy.presentation.food.v2.Restaurant',
+              '@type': 'type.googleapis.com/swiggy.presentation.food.v2.Restaurant',
               info: { name: 'Res T' },
             },
           },
         },
       ];
-
       const result = filterDataByTags(mockData);
 
       expect(result.count).toBe(10);
@@ -164,8 +153,7 @@ describe('utils', () => {
                   {
                     card: {
                       card: {
-                        '@type':
-                          'type.googleapis.com/swiggy.presentation.food.v2.ItemCategory',
+                        '@type': 'type.googleapis.com/swiggy.presentation.food.v2.ItemCategory',
                         title: 'Category A',
                         itemCards: [{ id: 1 }],
                       },
@@ -178,9 +166,7 @@ describe('utils', () => {
         },
       ];
 
-      expect(filterMenuData(mockData)).toEqual([
-        { title: 'Category A', itemCards: [{ id: 1 }] },
-      ]);
+      expect(filterMenuData(mockData)).toEqual([{ title: 'Category A', itemCards: [{ id: 1 }] }]);
     });
   });
 });

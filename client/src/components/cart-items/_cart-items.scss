@@ -3,23 +3,23 @@
 @use "../../styles/fonts" as *;
 
 .cart-item {
-  padding: 1rem;
+  background-color: $white;
   box-shadow: 0 0.25rem 0.375rem -0.0625rem rgb(0 0 0 / 10%), 0 0.125rem 0.25rem -0.0625rem rgb(0 0 0 / 6%);
   display: flex;
   flex-direction: row;
   height: 6rem;
-  background-color: $white;
+  padding: 1rem;
 
   &__details {
     display: flex;
+    flex: 1;
     flex-direction: column;
     padding: 0 0.5rem;
-    flex: 1;
   }
 
   &__name {
-    font-weight: bold;
     font-size: $font-size-lg;
+    font-weight: bold;
   }
 
   &__price {
@@ -28,20 +28,20 @@
   }
 
   &__actions {
+    align-items: center;
     display: flex;
     justify-content: center;
-    align-items: center;
   }
 
   &__remove-btn {
-    margin: 0 1rem;
     background-color: $red;
-    padding: 0.25rem 0.5rem;
-    font-size: $font-size-xs;
-    color: $white;
-    border-radius: 0.375rem;
     border: none;
+    border-radius: 0.375rem;
+    color: $white;
     cursor: pointer;
+    font-size: $font-size-xs;
+    margin: 0 1rem;
+    padding: 0.25rem 0.5rem;
     transition: background-color 0.2s;
 
     &:hover {

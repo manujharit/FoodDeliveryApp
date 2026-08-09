@@ -5,22 +5,14 @@ import {
   filterDataByTags,
   findNodesByKeyAndValue,
 } from '#src/utils/utils.js';
-import {
-  getRestaurants,
-  getRestaurantMenuData,
-  getUpdates,
-  getSearchSuggestions,
-} from '#src/clients/swiggyClient.js';
+import { getRestaurants, getRestaurantMenuData, getUpdates, getSearchSuggestions } from '#src/clients/swiggyClient.js';
 
 const getRestaurantData = async (data) => {
   try {
     const apiResponse = await getRestaurants(data);
     const apiData = apiResponse?.data?.cards || [];
 
-    if (
-      Object.keys(apiData).length &&
-      data.page_type === 'DESKTOP_WEB_LISTING'
-    ) {
+    if (Object.keys(apiData).length && data.page_type === 'DESKTOP_WEB_LISTING') {
       const resData = filterData(apiData);
 
       return {
@@ -61,8 +53,6 @@ const getUpdatedData = async (data) => {
       }
     }
 
-    // Fallback: The /update endpoint is WAF-blocked, so we re-fetch the main
-    // restaurant list and randomize IDs to avoid duplicate filtering on the client.
     const mainApiResponse = await getRestaurants(data);
     const mainApiData = mainApiResponse?.data?.cards || [];
 
@@ -114,19 +104,14 @@ const getRestaurantMenu = async (data) => {
 
       menuData['resDetails'] =
         restaurantInfoNode?.info ||
-        apiData?.filter(
-          (card) => card?.card?.relevance?.sectionId === 'POP_UP_CROUTON_MENU'
-        )[0]?.card?.card?.info;
+        apiData?.filter((card) => card?.card?.relevance?.sectionId === 'POP_UP_CROUTON_MENU')[0]?.card?.card?.info;
 
       menuData['offers'] = apiData
-        ?.filter(
-          (card) => card?.card?.card?.id === 'offerCollectionWidget_UX4'
-        )[0]
-        ?.card?.card?.gridElements?.infoWithStyle?.offers?.map(
-          (data) => data.info
-        );
+        ?.filter((card) => card?.card?.card?.id === 'offerCollectionWidget_UX4')[0]
+        ?.card?.card?.gridElements?.infoWithStyle?.offers?.map((data) => data.info);
 
       menuData['menuData'] = filterMenuData(apiData);
+
       return menuData;
     }
 
@@ -139,6 +124,7 @@ const getRestaurantMenu = async (data) => {
 const getSearchData = async (data) => {
   try {
     const apiData = await getSearchSuggestions(data);
+
     return apiData;
   } catch (err) {
     throw err;

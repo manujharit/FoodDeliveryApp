@@ -4,15 +4,7 @@ import Location from '@/components/location';
 import './_restaurant-info.scss';
 
 const RestaurantInfo = ({ data }) => {
-  const {
-    name,
-    cuisines,
-    areaName,
-    avgRatingString,
-    totalRatingsString,
-    sla,
-    costForTwoMessage,
-  } = data;
+  const { name, cuisines, areaName, avgRatingString, totalRatingsString, sla, costForTwoMessage } = data;
 
   return (
     <div className="restaurant-info">
@@ -20,18 +12,14 @@ const RestaurantInfo = ({ data }) => {
         <Link to="/" className="restaurant-info__breadcrumb-link">
           Home
         </Link>{' '}
-        {' > '}{' '}
-        <label className="restaurant-info__breadcrumb-link">{name}</label>
+        {' > '} <label className="restaurant-info__breadcrumb-link">{name}</label>
       </p>
       <label className="restaurant-info__name">{name}</label>
       <div className="restaurant-info__card-bg">
         <div className="restaurant-info__card">
           <div className="restaurant-info__card-content">
             <label className="restaurant-info__rating-cost">
-              <Rating
-                rating={avgRatingString + ' (' + totalRatingsString + ')'}
-              />{' '}
-              {costForTwoMessage}
+              <Rating rating={avgRatingString + ' (' + totalRatingsString + ')'} /> {costForTwoMessage}
             </label>
             <label>
               {cuisines.map((cuisine, index) => (
@@ -54,9 +42,7 @@ const RestaurantInfo = ({ data }) => {
               <div className="restaurant-info__timeline-details">
                 <label className="restaurant-info__outlet">
                   <span className="restaurant-info__outlet-label">Outlet:</span>{' '}
-                  <span className="restaurant-info__outlet-name">
-                    {areaName}
-                  </span>
+                  <span className="restaurant-info__outlet-name">{areaName}</span>
                 </label>
                 <label className="restaurant-info__sla">{sla.slaString}</label>
               </div>
@@ -64,9 +50,7 @@ const RestaurantInfo = ({ data }) => {
           </div>
           <div className="restaurant-info__location">
             <Location />
-            <label className="restaurant-info__distance">
-              {sla.lastMileTravelString}
-            </label>
+            <label className="restaurant-info__distance">{sla.lastMileTravelString}</label>
           </div>
         </div>
       </div>

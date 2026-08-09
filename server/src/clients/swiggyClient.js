@@ -1,17 +1,7 @@
 import axios from 'axios';
 
-// ─── Server-side cookie jar ───
-// Swiggy sets session cookies (tid, _guest_tid, __SW, _device_id, _sid) on the
-// first API response. The browser stores these and sends them on every subsequent
-// request. We replicate this by maintaining an in-memory cookie jar on the server.
 const cookieJar = {};
 
-/**
- * Parse Set-Cookie headers into { name: value } pairs.
- * Strips metadata (Max-Age, Path, Domain, HttpOnly, Secure, Expires, SameSite).
- * Skips cookies whose value is empty (Swiggy sends `tid=;` to clear cookies
- * before setting a new `tid=<jwt>`).
- */
 const parseCookies = (setCookieHeaders) => {
   if (!Array.isArray(setCookieHeaders)) {
     return {};
@@ -20,52 +10,41 @@ const parseCookies = (setCookieHeaders) => {
   for (const header of setCookieHeaders) {
     const nameValue = header.split(';')[0]; // "name=value"
     const eqIdx = nameValue.indexOf('=');
+
     if (eqIdx === -1) {
       continue;
     }
     const name = nameValue.substring(0, eqIdx).trim();
     const value = nameValue.substring(eqIdx + 1).trim();
+
     if (value.length > 0) {
       parsed[name] = value;
     }
   }
+
   return parsed;
 };
 
-/**
- * Merge new cookies into the jar and return the jar as a Cookie header string.
- */
 const updateCookieJar = (setCookieHeaders) => {
   const newCookies = parseCookies(setCookieHeaders);
+
   Object.assign(cookieJar, newCookies);
+
   return Object.entries(cookieJar)
     .map(([k, v]) => `${k}=${v}`)
     .join('; ');
 };
 
-/**
- * Get the current cookie jar as a Cookie header string.
- */
 const getCookieHeader = () => {
   return Object.entries(cookieJar)
     .map(([k, v]) => `${k}=${v}`)
     .join('; ');
 };
 
-/**
- * Detect if a response was blocked by AWS WAF challenge.
- * Swiggy's WAF returns 202 with `x-amzn-waf-action: challenge` and empty body.
- */
 const isWafBlocked = (response) => {
-  return (
-    response?.status === 202 &&
-    response?.headers?.['x-amzn-waf-action'] === 'challenge'
-  );
+  return response?.status === 202 && response?.headers?.['x-amzn-waf-action'] === 'challenge';
 };
 
-/**
- * Common browser-like headers for all Swiggy requests.
- */
 const getBaseHeaders = () => ({
   'User-Agent':
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36',
@@ -81,17 +60,15 @@ const getRestaurants = async (data) => {
   if (data.lat.length && data.lng.length) {
     const url = 'https://www.swiggy.com/dapi/restaurants/list/v5';
     const params = data;
+
     const headers = {
       ...getBaseHeaders(),
       Cookie: getCookieHeader(),
     };
 
-    const apiResponse = await axios
-      .get(url, { headers: headers, params: params })
-      .catch((err) => {
-        throw err;
-      });
-
+    const apiResponse = await axios.get(url, { headers: headers, params: params }).catch((err) => {
+      throw err;
+    });
     // Update the server-side cookie jar with response cookies
     const cookie = updateCookieJar(apiResponse.headers['set-cookie']);
 
@@ -107,6 +84,7 @@ const getRestaurants = async (data) => {
 const getUpdates = async (data) => {
   if (data.lat && data.lng) {
     const url = 'https://www.swiggy.com/dapi/restaurants/list/update';
+
     const headers = {
       ...getBaseHeaders(),
       Cookie: getCookieHeader(),
@@ -123,6 +101,7 @@ const getUpdates = async (data) => {
       if (isWafBlocked(res)) {
         // eslint-disable-next-line no-console
         console.warn('Swiggy /update endpoint is WAF-blocked, falling back');
+
         return {};
       }
 
@@ -135,6 +114,7 @@ const getUpdates = async (data) => {
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error('Swiggy Update API Error:', err.message);
+
       return {};
     }
   }
@@ -155,10 +135,7 @@ const getRestaurantMenuData = async ({ lat, lng, id }) => {
     };
 
     // Try /dapi/menu/pl first (may be WAF-blocked), then fall back to /mapi/menu/pl
-    const endpoints = [
-      'https://www.swiggy.com/dapi/menu/pl',
-      'https://www.swiggy.com/mapi/menu/pl',
-    ];
+    const endpoints = ['https://www.swiggy.com/dapi/menu/pl', 'https://www.swiggy.com/mapi/menu/pl'];
 
     for (const url of endpoints) {
       try {
@@ -205,6 +182,7 @@ const getRestaurantMenuData = async ({ lat, lng, id }) => {
 const getSearchSuggestions = async (data) => {
   if (data.lat && data.lng && data.str) {
     const url = 'https://www.swiggy.com/dapi/restaurants/search/suggest';
+
     const params = {
       lat: data.lat,
       lng: data.lng,
@@ -212,16 +190,15 @@ const getSearchSuggestions = async (data) => {
       trackingId: data.trackingId || 'undefined',
       includeIMItem: data.includeIMItem || 'true',
     };
+
     const headers = {
       ...getBaseHeaders(),
       Cookie: getCookieHeader(),
     };
 
-    const apiResponse = await axios
-      .get(url, { headers: headers, params: params })
-      .catch((err) => {
-        throw err;
-      });
+    const apiResponse = await axios.get(url, { headers: headers, params: params }).catch((err) => {
+      throw err;
+    });
 
     const cookie = updateCookieJar(apiResponse.headers['set-cookie']);
 
@@ -230,6 +207,7 @@ const getSearchSuggestions = async (data) => {
       cookie,
     };
   }
+
   return {};
 };
 
@@ -240,10 +218,4 @@ export const _testing = {
   getCookieHeader,
   isWafBlocked,
 };
-
-export {
-  getRestaurants,
-  getRestaurantMenuData,
-  getUpdates,
-  getSearchSuggestions,
-};
+export { getRestaurants, getRestaurantMenuData, getUpdates, getSearchSuggestions };

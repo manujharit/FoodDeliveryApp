@@ -41,12 +41,8 @@ const Body = () => {
           <Separator />
         </>
       )}
-      {resData['restaurant_grid_listing'] && (
-        <RestaurantList data={resData['restaurant_grid_listing']} />
-      )}
-      {resData['restaurant_near_me_links'] && (
-        <Explore data={resData['restaurant_near_me_links']} />
-      )}
+      {resData['restaurant_grid_listing'] && <RestaurantList data={resData['restaurant_grid_listing']} />}
+      {resData['restaurant_near_me_links'] && <Explore data={resData['restaurant_near_me_links']} />}
     </div>
   );
 };

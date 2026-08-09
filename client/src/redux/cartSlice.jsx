@@ -33,16 +33,11 @@ const cartSlice = createSlice({
     removeItem: (state, action) => {
       const { restaurantId, itemId } = action.payload;
 
-      if (
-        state.restaurants[restaurantId] &&
-        state.restaurants[restaurantId].items[itemId]
-      ) {
+      if (state.restaurants[restaurantId] && state.restaurants[restaurantId].items[itemId]) {
         const item = state.restaurants[restaurantId].items[itemId];
 
-        state.totalAmount -=
-          (item.price / 100 || item.defaultPrice / 100) * item.quantity;
+        state.totalAmount -= (item.price / 100 || item.defaultPrice / 100) * item.quantity;
         state.totalQuantity -= item.quantity;
-
         delete state.restaurants[restaurantId].items[itemId];
 
         if (Object.keys(state.restaurants[restaurantId].items).length === 0) {
@@ -53,10 +48,7 @@ const cartSlice = createSlice({
     updateQuantity: (state, action) => {
       const { restaurantId, itemId, quantity } = action.payload;
 
-      if (
-        state.restaurants[restaurantId] &&
-        state.restaurants[restaurantId].items[itemId]
-      ) {
+      if (state.restaurants[restaurantId] && state.restaurants[restaurantId].items[itemId]) {
         const item = state.restaurants[restaurantId].items[itemId];
         const previousQuantity = item.quantity;
 
@@ -88,7 +80,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, updateQuantity, setRestaurant, clearCart } =
-  cartSlice.actions;
-
+export const { addItem, removeItem, updateQuantity, setRestaurant, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;

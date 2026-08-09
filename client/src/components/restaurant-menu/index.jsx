@@ -66,12 +66,7 @@ const RestaurantMenu = () => {
       {resMenu['top_picks'] && <Loading />}
       {resMenu['menuData'] &&
         resMenu['menuData'].map((data, index) => (
-          <RestaurantCarousel
-            key={index}
-            data={data}
-            onAddItem={handleAddItem}
-            onSubItem={handleUpdateItem}
-          />
+          <RestaurantCarousel key={index} data={data} onAddItem={handleAddItem} onSubItem={handleUpdateItem} />
         ))}
     </div>
   );

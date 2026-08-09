@@ -32,9 +32,7 @@ const parseParamsAndReturnPath = (urlString, title) => {
   }
 
   const { tags, collection_id, type } = result;
-
   const capitalizedTitle = title.charAt(0).toUpperCase() + title.slice(1);
-
   const safeTags = tags || 'none';
   const safeType = type || 'none';
   const safeTitle = encodeURIComponent(capitalizedTitle);

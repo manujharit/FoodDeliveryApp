@@ -14,9 +14,7 @@ const CartItems = ({ info, restaurantId }) => {
     if (newQuantity <= 0) {
       handleRemoveItem();
     } else {
-      dispatch(
-        updateQuantity({ restaurantId, itemId: info.id, quantity: newQuantity })
-      );
+      dispatch(updateQuantity({ restaurantId, itemId: info.id, quantity: newQuantity }));
     }
   };
 
@@ -24,15 +22,10 @@ const CartItems = ({ info, restaurantId }) => {
     <div className="cart-item">
       <div className="cart-item__details">
         <span className="cart-item__name">{info.name}</span>
-        <span className="cart-item__price">
-          ₹ {(info.price / 100 || info.defaultPrice / 100) * info.quantity}/-
-        </span>
+        <span className="cart-item__price">₹ {(info.price / 100 || info.defaultPrice / 100) * info.quantity}/-</span>
       </div>
       <div className="cart-item__actions">
-        <CartItemButton
-          info={info}
-          handleUpdateQuantity={handleUpdateQuantity}
-        />
+        <CartItemButton info={info} handleUpdateQuantity={handleUpdateQuantity} />
         <button className="cart-item__remove-btn" onClick={handleRemoveItem}>
           Remove
         </button>

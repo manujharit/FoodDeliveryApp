@@ -3,19 +3,19 @@
 @use "../../styles/fonts" as *;
 
 .about {
-  margin-bottom: 2rem;
   color: $orange;
-  font-family: inherit;
   display: flex;
   flex-direction: column;
+  font-family: inherit;
   gap: 1rem;
+  margin-bottom: 2rem;
 
   &__title {
-    font-size: $font-size-3xl;
-    font-weight: bold;
+    align-items: baseline;
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
+    font-size: $font-size-3xl;
+    font-weight: bold;
     gap: 0.5rem;
   }
 
@@ -25,12 +25,12 @@
 
   &__source-link {
     color: $blue; /* Standard link blue */
-    text-decoration: none;
     margin: 0 0.125rem;
+    text-decoration: none;
     
     &:hover {
-      text-decoration: underline;
       color: $blue-dark; /* Darker blue on hover */
+      text-decoration: underline;
     }
   }
 
@@ -56,12 +56,12 @@
   }
 
   &__list {
-    font-size: $font-size-base;
-    list-style-type: disc;
-    padding-left: 2.5rem;
     color: $black;
+    font-size: $font-size-base;
     font-weight: 600;
     line-height: 1.5;
+    list-style-type: disc;
+    padding-left: 2.5rem;
   }
 
   &__list-item {
@@ -91,9 +91,9 @@
     padding: 0 1rem;
     
     &__title {
-      font-size: $font-size-xl;
-      flex-direction: column;
       align-items: flex-start;
+      flex-direction: column;
+      font-size: $font-size-xl;
       gap: 0.25rem;
     }
     

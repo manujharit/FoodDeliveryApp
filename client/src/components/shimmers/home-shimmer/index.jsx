@@ -7,18 +7,12 @@ const HomeShimmer = () => {
       <div className="home-shimmer__banner">
         <div className="home-shimmer__spinner-wrapper">
           <div className="home-shimmer__spinner"></div>
-          <p className="home-shimmer__text">
-            Looking for great food near you ...
-          </p>
+          <p className="home-shimmer__text">Looking for great food near you ...</p>
         </div>
       </div>
-
       <div className="home-shimmer__cards">
         <div className="home-shimmer__viewport">
-          <div
-            className="home-shimmer__track"
-            style={{ transform: `translateX(-100%)` }}
-          >
+          <div className="home-shimmer__track" style={{ transform: `translateX(-100%)` }}>
             <CardShimmer />
             <CardShimmer />
             <CardShimmer />

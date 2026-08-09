@@ -1,8 +1,8 @@
 @use "../../styles/colors" as *;
 
 .separator {
-  width: 100%;
   border: none;
   border-top: 0.125rem solid $gray-light;
   margin: 0;
+  width: 100%;
 }

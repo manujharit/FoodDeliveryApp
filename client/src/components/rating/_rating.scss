@@ -1,13 +1,13 @@
 @use "../../styles/colors" as *;
 
 .rating {
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
 
   &__icon {
-    font-size: 1.25rem;
     color: $green;
+    font-size: 1.25rem;
     font-variation-settings: 'FILL' 1;
   }
 }

@@ -46,9 +46,7 @@ const RestaurantList = ({ data }) => {
 
   return (
     <div className="restaurant-list">
-      <label className="restaurant-list__title">
-        Restaurants with online food delivery
-      </label>
+      <label className="restaurant-list__title">Restaurants with online food delivery</label>
       <div className="restaurant-list__grid">
         <InfiniteScroll
           action={loadMoreData}

@@ -3,18 +3,18 @@
 @use "../../../styles/fonts" as *;
 
 .card-shimmer {
-  min-width: 15.625rem;
+  border-radius: 1rem;
+  margin: 0.625rem;
+  max-height: 16.875rem;
   max-width: 15.625rem;
   min-height: 16.875rem;
-  max-height: 16.875rem;
-  margin: 0.625rem;
-  border-radius: 1rem;
+  min-width: 15.625rem;
   transition: all 0.3s ease;
 
   &__img {
+    background-color: $gray-lightest;
+    border-radius: 1rem;
     height: 11.25rem;
     width: 100%;
-    border-radius: 1rem;
-    background-color: $gray-lightest;
   }
 }

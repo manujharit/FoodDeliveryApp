@@ -1,13 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const InfiniteScroll = ({
-  action,
-  hasMore,
-  loading,
-  loadingComponent,
-  children,
-  loaderClassName = '',
-}) => {
+const InfiniteScroll = ({ action, hasMore, loading, loadingComponent, children, loaderClassName = '' }) => {
   const loaderRef = useRef(null);
   const loadingRef = useRef(loading);
 

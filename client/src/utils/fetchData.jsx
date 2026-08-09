@@ -1,9 +1,11 @@
 /* eslint-disable no-console */
 import axios from 'axios';
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 const fetchData = async (lat, lng) => {
   const url = API_URL + '/data';
+
   const params = {
     lat: lat,
     lng: lng,
@@ -14,16 +16,19 @@ const fetchData = async (lat, lng) => {
   if ((lat, lng)) {
     const res = await axios.get(url, { params: params }).catch((err) => {
       console.log(err);
+
       return { data: {} };
     });
 
     return res.data;
   }
+
   return {};
 };
 
 const fetchUpdateData = async (count, { lat, lng }) => {
   const url = API_URL + '/update';
+
   const body = {
     lat: `${lat}`,
     lng: `${lng}`,
@@ -50,11 +55,7 @@ const fetchUpdateData = async (count, { lat, lng }) => {
     try {
       const res = await axios.post(url, body);
 
-      if (
-        res.data?.restaurants &&
-        Array.isArray(res.data.restaurants) &&
-        res.data.restaurants.length > 0
-      ) {
+      if (res.data?.restaurants && Array.isArray(res.data.restaurants) && res.data.restaurants.length > 0) {
         return res.data.restaurants;
       } else if (res.data && Array.isArray(res.data) && res.data.length > 0) {
         return res.data;
@@ -63,6 +64,7 @@ const fetchUpdateData = async (count, { lat, lng }) => {
       return [];
     } catch (err) {
       console.error(err);
+
       return [];
     }
   }
@@ -72,6 +74,7 @@ const fetchUpdateData = async (count, { lat, lng }) => {
 
 const fetchRestaurantMenu = async (id, { lat, lng }) => {
   const url = API_URL + '/restaurantMenu';
+
   const params = {
     lat: lat,
     lng: lng,
@@ -81,6 +84,7 @@ const fetchRestaurantMenu = async (id, { lat, lng }) => {
   if (lat && lng) {
     const res = await axios.get(url, { params: params }).catch((err) => {
       console.log(err);
+
       return { data: {} };
     });
 
@@ -90,14 +94,9 @@ const fetchRestaurantMenu = async (id, { lat, lng }) => {
   return {};
 };
 
-const fetchWhatsOnMindRestaurants = async ({
-  lat,
-  lng,
-  collection_id,
-  tags,
-  type,
-}) => {
+const fetchWhatsOnMindRestaurants = async ({ lat, lng, collection_id, tags, type }) => {
   const url = API_URL + '/data';
+
   const params = {
     lat: lat,
     lng: lng,
@@ -113,6 +112,7 @@ const fetchWhatsOnMindRestaurants = async ({
   if (lat && lng && collection_id) {
     const res = await axios.get(url, { params: params }).catch((err) => {
       console.log(err);
+
       return { data: {} };
     });
 
@@ -181,6 +181,7 @@ const fetchWhatsOnMindUpdateData = async ({
 
 const fetchSearchSuggestions = async (lat, lng, str) => {
   const url = API_URL + '/search';
+
   const params = {
     lat: lat,
     lng: lng,
@@ -190,6 +191,7 @@ const fetchSearchSuggestions = async (lat, lng, str) => {
   if (lat && lng && str) {
     const res = await axios.get(url, { params: params }).catch((err) => {
       console.log(err);
+
       return { data: {} };
     });
 

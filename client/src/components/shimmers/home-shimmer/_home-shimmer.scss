@@ -3,25 +3,25 @@
 @use "../../../styles/fonts" as *;
 
 .home-shimmer {
-  margin-bottom: 2rem;
-  width: 100%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 2rem;
+  width: 100%;
 
   @media (min-width: $screen-tablet) {
     padding: 0;
   }
 
   &__banner {
-    width: 100%;
+    align-items: center;
     background-color: $slate;
-    padding: 4rem 1rem;
+    border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    border-radius: 0.5rem;
     margin-top: 1rem;
+    padding: 4rem 1rem;
+    width: 100%;
     
     @media (min-width: $screen-tablet) {
       padding: 6rem 1rem;
@@ -29,26 +29,26 @@
   }
 
   &__spinner-wrapper {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
   }
 
   &__spinner {
-    width: 4rem;
-    height: 4rem;
+    animation: home-shimmer-spin 1s linear infinite;
     border: 0.25rem solid $gray;
     border-radius: 50%;
     border-top-color: transparent;
-    animation: home-shimmer-spin 1s linear infinite;
+    height: 4rem;
+    width: 4rem;
   }
 
   &__text {
-    margin-top: 1rem;
+    color: $gray;
     font-size: $font-size-lg;
     font-weight: bold;
-    color: $gray;
+    margin-top: 1rem;
 
     @media (min-width: $screen-tablet) {
       font-size: $font-size-2xl;

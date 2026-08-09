@@ -3,25 +3,25 @@
 @use "../../styles/fonts" as *;
 
 .explore-card {
-  border: 0.0625rem solid $gray-light;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 3.125rem;
-  width: 19.2rem;
-  margin: 0.32rem 0.26rem;
-  font-size: $font-size-base;
+  border: 0.0625rem solid $gray-light;
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
-  font-weight: 600;
   color: #4b5563;
+  display: flex;
+  font-size: $font-size-base;
+  font-weight: 600;
+  height: 3.125rem;
+  justify-content: center;
+  margin: 0.32rem 0.26rem;
   text-decoration: none;
+  width: 19.2rem;
 
   @media (max-width: $screen-tablet) {
     width: 28.8rem;
   }
 
   @media (max-width: $screen-mobile) {
-    width: 20rem;
     margin: 0.32rem auto;
+    width: 20rem;
   }
 }

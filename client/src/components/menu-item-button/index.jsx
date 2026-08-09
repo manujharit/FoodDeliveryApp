@@ -5,8 +5,10 @@ const MenuItemButton = ({ qty, info, onAddItem, onSubItem }) => {
   const handleAdd = () => {
     onAddItem(info);
   };
+
   const handleSub = () => {
     const newQuantity = qty - 1;
+
     onSubItem(info, newQuantity);
   };
 
@@ -19,17 +21,11 @@ const MenuItemButton = ({ qty, info, onAddItem, onSubItem }) => {
   } else {
     return (
       <div className="menu-item-button--active">
-        <button
-          className="menu-item-button__btn menu-item-button__btn--sub"
-          onClick={handleSub}
-        >
+        <button className="menu-item-button__btn menu-item-button__btn--sub" onClick={handleSub}>
           -
         </button>
         <b className="menu-item-button__quantity">{qty}</b>
-        <button
-          className="menu-item-button__btn menu-item-button__btn--add"
-          onClick={handleAdd}
-        >
+        <button className="menu-item-button__btn menu-item-button__btn--add" onClick={handleAdd}>
           +
         </button>
       </div>

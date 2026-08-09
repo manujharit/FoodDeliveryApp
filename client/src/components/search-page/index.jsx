@@ -17,7 +17,9 @@ const SearchPage = () => {
 
   const handleQueryChange = (e) => {
     const val = e.target.value;
+
     setQuery(val);
+
     if (val.trim()) {
       setIsLoading(true);
     } else {
@@ -33,11 +35,13 @@ const SearchPage = () => {
 
     const fetchResults = async () => {
       const data = await fetchSearchSuggestions(lat, lng, query);
+
       if (data?.data?.suggestions) {
         setResults(data.data.suggestions);
       } else {
         setResults([]);
       }
+
       setIsLoading(false);
     };
 
@@ -52,6 +56,7 @@ const SearchPage = () => {
 
   const mapToRestaurantCard = (suggestion, index) => {
     let metadataObj = {};
+
     try {
       if (suggestion.metadata) {
         metadataObj = JSON.parse(suggestion.metadata);
@@ -61,10 +66,7 @@ const SearchPage = () => {
     }
 
     return {
-      id:
-        metadataObj?.data?.primaryRestaurantId ||
-        suggestion.restaurantId ||
-        `fallback-id-${index}`,
+      id: metadataObj?.data?.primaryRestaurantId || suggestion.restaurantId || `fallback-id-${index}`,
       cloudinaryImageId: suggestion.cloudinaryId,
       name: suggestion.text,
       areaName: suggestion.tagToDisplay || '',
@@ -88,31 +90,23 @@ const SearchPage = () => {
           </button>
         </div>
       </div>
-
       {isLoading ? (
         <Loading />
       ) : (
         <div className="search-page__results">
           {results.length > 0 ? (
             results.map((suggestion, index) => (
-              <RestaurantCard
-                key={index}
-                data={mapToRestaurantCard(suggestion, index)}
-              />
+              <RestaurantCard key={index} data={mapToRestaurantCard(suggestion, index)} />
             ))
           ) : query ? (
-            <div className="search-page__no-results">
-              No results found for &quot;{query}&quot;
-            </div>
+            <div className="search-page__no-results">No results found for &quot;{query}&quot;</div>
           ) : (
             <div className="search-page__default-view">
               {resData && resData['whats_on_your_mind'] && (
                 <Carousal
                   cardTitle={''}
                   data={resData['whats_on_your_mind']}
-                  card={({ data }) => (
-                    <WhatsOnMindCard data={data} isSmall={true} />
-                  )}
+                  card={({ data }) => <WhatsOnMindCard data={data} isSmall={true} />}
                   index={2}
                   scrollIndex={1}
                 />

@@ -2,10 +2,10 @@
 @use "../../styles/fonts" as *;
 
 .location {
-  font-size: $font-size-xs;
+  align-items: center;
   color: $blue-dark;
   display: flex;
-  align-items: center;
+  font-size: $font-size-xs;
 
   &__icon {
     font-size: 0.9375rem;

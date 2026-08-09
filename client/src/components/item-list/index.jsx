@@ -16,25 +16,14 @@ const ItemList = ({ info, onAddItem, onSubItem }) => {
     <div className="item-list">
       <div className="item-list__details">
         <span className="item-list__name">{info.name}</span>
-        <span className="item-list__price">
-          ₹ {info.price / 100 || info.defaultPrice / 100}/-
-        </span>
+        <span className="item-list__price">₹ {info.price / 100 || info.defaultPrice / 100}/-</span>
         <p className="item-list__description">{info.description}</p>
       </div>
       <div className="item-list__image-container">
         <div className="item-list__button-wrapper">
-          <MenuItemButton
-            qty={qty}
-            info={info}
-            onAddItem={onAddItem}
-            onSubItem={onSubItem}
-          />
+          <MenuItemButton qty={qty} info={info} onAddItem={onAddItem} onSubItem={onSubItem} />
         </div>
-        <img
-          src={CDN_URL + info.imageId}
-          className="item-list__image"
-          alt="Food Item"
-        />
+        <img src={CDN_URL + info.imageId} className="item-list__image" alt="Food Item" />
       </div>
     </div>
   );

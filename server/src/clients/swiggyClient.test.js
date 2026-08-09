@@ -1,10 +1,6 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import {
-  getRestaurants,
-  getUpdates,
-  getRestaurantMenuData,
-} from './swiggyClient.js';
+import { getRestaurants, getUpdates, getRestaurantMenuData } from './swiggyClient.js';
 
 describe('swiggyClient', () => {
   let mock;
@@ -40,18 +36,15 @@ describe('swiggyClient', () => {
 
     it('should throw error on API failure', async () => {
       mock.onGet('https://www.swiggy.com/dapi/restaurants/list/v5').reply(500);
-
       await expect(getRestaurants({ lat: '12', lng: '34' })).rejects.toThrow();
     });
   });
 
   describe('getUpdates', () => {
     it('should return nested cards data', async () => {
-      mock
-        .onPost('https://www.swiggy.com/dapi/restaurants/list/update')
-        .reply(200, {
-          data: { cards: [{ update: true }] },
-        });
+      mock.onPost('https://www.swiggy.com/dapi/restaurants/list/update').reply(200, {
+        data: { cards: [{ update: true }] },
+      });
 
       const data = await getUpdates({ lat: '12', lng: '34' });
 
@@ -59,11 +52,9 @@ describe('swiggyClient', () => {
     });
 
     it('should return flat cards data', async () => {
-      mock
-        .onPost('https://www.swiggy.com/dapi/restaurants/list/update')
-        .reply(200, {
-          cards: [{ update: true }],
-        });
+      mock.onPost('https://www.swiggy.com/dapi/restaurants/list/update').reply(200, {
+        cards: [{ update: true }],
+      });
 
       const data = await getUpdates({ lat: '12', lng: '34' });
 
@@ -87,9 +78,7 @@ describe('swiggyClient', () => {
     });
 
     it('should handle API failure gracefully and return empty object', async () => {
-      mock
-        .onPost('https://www.swiggy.com/dapi/restaurants/list/update')
-        .reply(500);
+      mock.onPost('https://www.swiggy.com/dapi/restaurants/list/update').reply(500);
 
       const data = await getUpdates({ lat: '12', lng: '34' });
 
@@ -114,9 +103,8 @@ describe('swiggyClient', () => {
     });
 
     it('should fall back to /mapi/menu/pl when /dapi is WAF-blocked', async () => {
-      mock
-        .onGet('https://www.swiggy.com/dapi/menu/pl')
-        .reply(202, '', { 'x-amzn-waf-action': 'challenge' });
+      mock.onGet('https://www.swiggy.com/dapi/menu/pl').reply(202, '', { 'x-amzn-waf-action': 'challenge' });
+
       mock.onGet('https://www.swiggy.com/mapi/menu/pl').reply(200, {
         data: { cards: [{ menu: 'fallback' }] },
       });

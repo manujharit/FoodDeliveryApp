@@ -67,5 +67,19 @@ export default defineConfig([{
         curly: "error",
         "no-var": "error",
         "prefer-const": "error",
+        "padding-line-between-statements": [
+            "error",
+            { "blankLine": "always", "prev": "import", "next": "*" },
+            { "blankLine": "any", "prev": "import", "next": "import" },
+            { "blankLine": "always", "prev": "*", "next": "if" },
+            { "blankLine": "always", "prev": "*", "next": "return" },
+            { "blankLine": "never", "prev": "expression", "next": "expression" },
+            { "blankLine": "always", "prev": "*", "next": "multiline-expression" },
+            { "blankLine": "always", "prev": "multiline-expression", "next": "*" },
+            { "blankLine": "always", "prev": "*", "next": ["multiline-const", "multiline-let", "multiline-var"] },
+            { "blankLine": "never", "prev": ["singleline-const", "singleline-let", "singleline-var"], "next": ["singleline-const", "singleline-let", "singleline-var"] }
+        ],
+        "max-len": ["error", { "code": 120 }],
+        "multiline-comment-style": ["error", "starred-block"]
     },
 }]);

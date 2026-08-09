@@ -3,46 +3,46 @@
 @use "../../styles/fonts" as *;
 
 .error-boundary {
+  align-items: center;
+  background-color: transparent;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: transparent;
   padding: 5rem 2rem;
 
   &__image {
-    width: 16rem;
     height: 16rem;
     margin-bottom: 1.5rem;
+    width: 16rem;
   }
 
   &__title {
+    color: #1f2937;
     font-size: 2.25rem;
     font-weight: 800;
-    color: #1f2937;
-    margin-bottom: 0.75rem;
     letter-spacing: -0.025em;
+    margin-bottom: 0.75rem;
   }
 
   &__message {
-    font-size: $font-size-lg;
     color: #6b7280;
+    font-size: $font-size-lg;
     margin-bottom: 2rem;
-    text-align: center;
     max-width: 28rem;
+    text-align: center;
   }
 
   &__link {
-    padding: 0.75rem 2rem;
     background-color: $orange;
-    color: $white;
-    font-weight: bold;
     border-radius: 9999rem;
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%);
-    transition: all 0.3s ease;
-    text-decoration: none;
+    color: $white;
     display: inline-block;
+    font-weight: bold;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
 
     &:hover {
       background-color: #ea580c;
